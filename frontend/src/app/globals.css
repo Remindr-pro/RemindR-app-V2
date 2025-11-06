@@ -11,7 +11,7 @@
 }
 
 :root {
-  --background: #f5f5f5;
+  --background: #fafafa;
   --foreground: #222323;
   --tango: "Tango", sans-serif;
   --inclusive: "Inclusive", sans-serif;
@@ -25,8 +25,8 @@
   --color-foreground: var(--foreground);
 
   --color-*: initial;
-  --color-light: #efefef;
-  --color-gray-1: #f5f5f5;
+  --color-light: #ffffff;
+  --color-gray-1: #fafafa;
   --color-gray-2: #d1d5db;
   --color-gray-3: #9ca3af;
   --color-gray-4: #374151;
