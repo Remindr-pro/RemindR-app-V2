@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 
 interface ButtonProps {
   href: string;
-  variant?: "green" | "dark";
+  variant?: "green" | "dark" | "light";
   children: ReactNode;
   className?: string;
   onClick?: () => void;
@@ -22,6 +22,7 @@ export default function Button({
   const variantClasses = {
     green: "bg-greenMain text-light hover:bg-greenMain-2 active:bg-greenMain-2",
     dark: "bg-dark text-light hover:bg-gray-4 active:bg-gray-4",
+    light: "bg-light text-dark hover:bg-gray-2 active:bg-gray-2",
   };
 
   const combinedClasses = `${baseClasses} ${variantClasses[variant]} ${className}`;
