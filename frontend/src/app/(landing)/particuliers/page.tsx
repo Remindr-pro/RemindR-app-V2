@@ -2,6 +2,7 @@ import Button from "@/app/components/Button";
 import Preview from "@/app/components/Preview";
 import PreventionCollapse from "@/app/components/PreventionCollapse";
 import FeedbackGrid from "@/app/components/FeedbackGrid";
+import FAQ from "@/app/components/FAQ";
 
 const feedbacks = [
   {
@@ -143,6 +144,23 @@ export default function ParticuliersPage() {
 
           <FeedbackGrid feedbacks={feedbacks} />
         </div>
+      </section>
+
+      {/* === Section FAQ === */}
+      <section className="min-h-screen flex flex-col items-center justify-center gap-20 py-24">
+        <div className="max-w-7xl mx-auto flex flex-col gap-16 text-center">
+          <h2 className="text-3xl md:text-6xl font-inclusive font-bold">
+            Une <span className="text-greenMain">question</span> ? Nous y
+            répondons.
+          </h2>
+          <p className="max-w-2xl mx-auto text-base md:text-lg font-inclusive font-regular">
+            En cas de doute, vous pouvez aussi nous contacter. Nous valorisons
+            la transparence et la clarté des informations que nous vous
+            fournissons.
+          </p>
+        </div>
+
+        <FAQ />
       </section>
     </>
   );
