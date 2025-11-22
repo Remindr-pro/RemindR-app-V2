@@ -3,6 +3,7 @@ import Preview from "@/app/components/Preview";
 import PreventionCollapse from "@/app/components/PreventionCollapse";
 import FeedbackGrid from "@/app/components/FeedbackGrid";
 import FAQ from "@/app/components/FAQ";
+import Companies from "@/app/components/Companies";
 
 const feedbacks = [
   {
@@ -161,6 +162,22 @@ export default function ParticuliersPage() {
         </div>
 
         <FAQ />
+      </section>
+
+      {/* === Section Companies === */}
+      <section className="min-h-screen flex flex-col items-center justify-center gap-20 py-24">
+        <div className="max-w-3xl w-full mx-auto flex flex-col gap-16 text-center">
+          <h2 className="text-3xl md:text-6xl font-inclusive font-bold">
+            Des sources <span className="text-greenMain">fiables</span> pour une
+            santé au top.
+          </h2>
+          <p className="max-w-2xl mx-auto text-base md:text-lg font-inclusive font-regular">
+            Toutes nos recommandations et rappels automatiques sont basés sur
+            les recommandations officielles des organismes de santé.
+          </p>
+        </div>
+
+        <Companies />
       </section>
     </>
   );
