@@ -1,5 +1,6 @@
 import Button from "@/app/components/Button";
 import Preview from "@/app/components/Preview";
+import PreventionCollapse from "@/app/components/PreventionCollapse";
 
 export default function ParticuliersPage() {
   return (
@@ -27,6 +28,24 @@ export default function ParticuliersPage() {
       {/* === Section Preview === */}
       <section className="min-h-screen flex flex-col items-center justify-center py-0 md:py-24">
         <Preview />
+      </section>
+
+      {/* === Section Prevention === */}
+      <section className="min-h-screen flex items-center justify-center md:py-24 px-5 lg:px-0">
+        <div className="w-full max-w-7xl mx-auto flex flex-col gap-16">
+          <div className="w-full lg:w-1/2">
+            <h2 className="text-3xl md:text-6xl font-inclusive font-bold text-dark mb-4">
+              La santé <span className="text-greenMain">regroupée</span> pour
+              toute la famille.
+            </h2>
+            <p className="text-base md:text-lg font-inclusive font-medium text-dark">
+              Tout est réuni au même endroit pour prendre soin de vous, et de
+              ceux que vous aimez. Tout en simplicité et avec sérénité.
+            </p>
+          </div>
+
+          <PreventionCollapse />
+        </div>
       </section>
     </>
   );
