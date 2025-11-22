@@ -1,4 +1,5 @@
 import Button from "@/app/components/Button";
+import Preview from "@/app/components/Preview";
 
 export default function ParticuliersPage() {
   return (
@@ -14,13 +15,18 @@ export default function ParticuliersPage() {
           suivi pour toute la famille, et l’esprit enfin léger.
         </p>
         <div className="flex flex-col md:flex-row items-center justify-center gap-4">
-          <Button href="/particuliers/inscription" variant="green">
+          <Button href="/particuliers/inscription" variant="dark">
             Je crée mon compte
           </Button>
-          <Button href="/particuliers/connexion" variant="dark">
+          <Button href="/particuliers/connexion" variant="green">
             Je me connecte
           </Button>
         </div>
+      </section>
+
+      {/* === Section Preview === */}
+      <section className="min-h-screen flex flex-col items-center justify-center py-0 md:py-24">
+        <Preview />
       </section>
     </>
   );
