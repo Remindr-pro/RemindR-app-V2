@@ -1,3 +1,5 @@
+import ArticlePin from "@/app/components/ArticlePin";
+
 export default function MagazinePage() {
   return (
     <>
@@ -12,6 +14,16 @@ export default function MagazinePage() {
             claires, basées sur les recommandations officielles.
           </p>
         </div>
+
+        {/* === Article Pin === */}
+        <ArticlePin
+          category="Prévention au quotidien"
+          imageSrc="/images/articles/article-octobre-rose.jpg"
+          imageAlt="Article Octobre Rose"
+          title="Octobre Rose : dépister tôt pour mieux se protéger"
+          date="01 octobre 2025"
+          description="Les gestes simples recommandés pour anticiper et agir face au cancer du sein."
+        />
       </section>
     </>
   );
