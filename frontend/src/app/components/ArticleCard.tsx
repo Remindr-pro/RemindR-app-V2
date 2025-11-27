@@ -27,10 +27,10 @@ export default function ArticleCard({
         />
       </div>
       {/* Overlay Gradient */}
-      <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-transparent" />
+      <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/50 to-black/30 transition-all duration-300 group-hover:from-black/90 group-hover:via-black/70 group-hover:to-black/50" />
 
       {/* Content */}
-      <div className="absolute inset-0 flex flex-col justify-end p-3 md:p-4 lg:p-5">
+      <div className="absolute inset-0 flex flex-col justify-center items-center p-3 md:p-4 lg:p-5">
         {/* Category Tag */}
         <div className="mb-2 md:mb-3">
           <Button
