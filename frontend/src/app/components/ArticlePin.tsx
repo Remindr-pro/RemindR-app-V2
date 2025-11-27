@@ -8,7 +8,7 @@ interface ArticlePinProps {
   imageAlt: string;
   title: string;
   date: string;
-  description: string;
+  description?: string;
 }
 
 export default function ArticlePin({
@@ -60,7 +60,7 @@ export default function ArticlePin({
               {title}
             </h2>
             <p className="text-sm md:text-base lg:text-lg font-inclusive font-medium text-light/95 md:text-light/90 leading-snug">
-              {date} / {description}
+              {description ? `${date} / ${description}` : date}
             </p>
           </div>
         </div>
