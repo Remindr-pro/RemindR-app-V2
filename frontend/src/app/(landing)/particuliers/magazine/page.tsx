@@ -77,11 +77,9 @@ export default function MagazinePage() {
             </p>
           </div>
 
-          {/* Articles grids masonry */}
           <div className="w-full">
             <ArticlesCarousel articles={articles} />
           </div>
-          {/* Articles grids masonry end */}
         </div>
       </section>
     </>
