@@ -1,6 +1,7 @@
 import Button from "@/app/components/Button";
 import Companies from "@/app/components/Companies";
 import FeatureCard from "@/app/components/FeatureCard";
+import StepCard from "@/app/components/StepCard";
 
 export default function ProfessionnelsPage() {
   const features = [
@@ -78,6 +79,48 @@ export default function ProfessionnelsPage() {
               Demander une démo
             </Button>
           </div>
+        </div>
+      </section>
+
+      {/* === Section Presentation === */}
+      <section className="min-h-screen flex flex-col items-center justify-center gap-20 py-24 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto flex flex-col gap-10 text-center">
+          <h2 className="text-3xl md:text-5xl font-inclusive font-bold">
+            Comment nous <span className="text-greenMain">fonctionnons</span>.
+          </h2>
+          <p className="max-w-2xl mx-auto text-base md:text-lg font-inclusive font-regular">
+            Nous avons développé un outil unique pour centraliser vos actions,
+            comprendre vos adhérents et renforcer l’impact de votre stratégie de
+            prévention.
+          </p>
+        </div>
+
+        {/* Étapes */}
+        <div className="w-full max-w-7xl mx-auto flex flex-col gap-16 md:gap-24">
+          <StepCard
+            number={1}
+            title="Analyse intelligente & segmentation santé personnalisée."
+            description="Remindr dresse automatiquement un portrait santé global pour chaque adhérent : âge, situation, habitudes de vie, besoins déclarés... Cette analyse permet d'identifier les priorités de prévention et d'activer les bons contenus au bon moment."
+          />
+          <StepCard
+            number={2}
+            title="Recommandations & rappels automatiques."
+            description="La plateforme envoie aux adhérents des rappels adaptés : vaccins, examens, dépistages, conseils nutrition/sommeil, moments clés de croissance (puberté, entrée à l'école...), bien-être mental, hygiène de vie... Toutes les recommandations sont fiables, vérifiées, et personnalisées selon les profils."
+          />
+          <StepCard
+            number={3}
+            title="Tableau de bord B2B : vos KPIs, vos actions, votre impact"
+            description="Suivez en temps réel l'engagement de vos adhérents, mesurez l'impact de vos campagnes de prévention, et pilotez votre stratégie santé grâce à des indicateurs clés personnalisés. Visualisez vos actions et leur efficacité pour optimiser continuellement votre approche de la prévention."
+          />
+        </div>
+
+        <div className="flex flex-col md:flex-row items-center justify-center gap-4">
+          <Button href="/professionnels/inscription" variant="dark">
+            Télécharger la documentation
+          </Button>
+          <Button href="/professionnels/contact" variant="green">
+            Contacter un commercial
+          </Button>
         </div>
       </section>
 
