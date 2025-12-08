@@ -104,7 +104,7 @@ export default function ParticuliersPage() {
       <section className="min-h-screen flex items-center justify-center py-24">
         <div className="w-full max-w-7xl mx-auto flex flex-col gap-16">
           <div className="w-full lg:w-1/2">
-            <h2 className="text-3xl md:text-6xl font-inclusive font-bold text-dark mb-4">
+            <h2 className="text-3xl md:text-5xl font-inclusive font-bold text-dark mb-4">
               La santé <span className="text-greenMain">regroupée</span> pour
               toute la famille.
             </h2>
@@ -122,7 +122,7 @@ export default function ParticuliersPage() {
       <section className="min-h-screen flex items-center justify-center py-24">
         <div className="w-full max-w-7xl mx-auto flex flex-col gap-16">
           <div className="w-full lg:w-1/2">
-            <h2 className="text-3xl md:text-6xl font-inclusive font-bold text-dark mb-4">
+            <h2 className="text-3xl md:text-5xl font-inclusive font-bold text-dark mb-4">
               Ils ont choisi de se
               <span className="text-greenMain"> simplifier</span> la santé.
             </h2>
@@ -142,7 +142,7 @@ export default function ParticuliersPage() {
       {/* === Section FAQ === */}
       <section className="min-h-screen flex flex-col items-center justify-center gap-20 py-24">
         <div className="max-w-7xl mx-auto flex flex-col gap-16 text-center">
-          <h2 className="text-3xl md:text-6xl font-inclusive font-bold">
+          <h2 className="text-3xl md:text-5xl font-inclusive font-bold">
             Une <span className="text-greenMain">question</span> ? Nous y
             répondons.
           </h2>
@@ -159,7 +159,7 @@ export default function ParticuliersPage() {
       {/* === Section Companies === */}
       <section className="min-h-screen flex flex-col items-center justify-center gap-20 py-24">
         <div className="max-w-3xl w-full mx-auto flex flex-col gap-16 text-center">
-          <h2 className="text-3xl md:text-6xl font-inclusive font-bold">
+          <h2 className="text-3xl md:text-5xl font-inclusive font-bold">
             Des sources <span className="text-greenMain">fiables</span> pour une
             santé au top.
           </h2>
