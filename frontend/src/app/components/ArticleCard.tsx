@@ -1,5 +1,5 @@
 import Image from "next/image";
-import IconCalendar from "./icons/Calendar";
+import IconCalendar from "./atoms/icons/Calendar";
 
 export type ArticleVariant = "spotlight" | "advice";
 export type ArticlePosition = "vertical" | "horizontal";

@@ -1,5 +1,5 @@
 import Button from "@/app/components/Button";
-import IconPin from "@/app/components/icons/Pin";
+import IconPin from "@/app/components/atoms/icons/Pin";
 import Image from "next/image";
 
 interface ArticlePinProps {
