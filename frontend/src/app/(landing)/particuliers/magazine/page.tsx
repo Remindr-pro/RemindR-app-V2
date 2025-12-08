@@ -129,7 +129,7 @@ export default function MagazinePage() {
       <section className="min-h-screen flex items-center justify-center py-24">
         <div className="w-full max-w-7xl mx-auto flex flex-col gap-16">
           <div className="w-full lg:w-1/2">
-            <h2 className="text-3xl md:text-6xl font-inclusive font-bold text-dark mb-4">
+            <h2 className="text-3xl md:text-5xl font-inclusive font-bold text-dark mb-4">
               À la <span className="text-greenMain">une</span> <br /> cette
               semaine.
             </h2>
@@ -151,7 +151,7 @@ export default function MagazinePage() {
       <section className="min-h-screen flex items-center justify-center py-24">
         <div className="w-full max-w-7xl mx-auto flex flex-col gap-16">
           <div className="w-full lg:w-1/2">
-            <h2 className="text-3xl md:text-6xl font-inclusive font-bold text-dark mb-4">
+            <h2 className="text-3xl md:text-5xl font-inclusive font-bold text-dark mb-4">
               Explorer nos <span className="text-greenMain">conseils</span>{" "}
               santé.
             </h2>
