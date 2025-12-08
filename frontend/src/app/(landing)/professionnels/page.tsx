@@ -1,7 +1,28 @@
 import Button from "@/app/components/Button";
 import Companies from "@/app/components/Companies";
+import FeatureCard from "@/app/components/FeatureCard";
 
 export default function ProfessionnelsPage() {
+  const features = [
+    {
+      image: "/images/icons/pepicons-print_bell-circle.png",
+      title: "Rappels automatisés",
+      description:
+        "Basés sur les recommandations officielles. Adaptés à l'âge, au contexte familial et au mode de vie.",
+    },
+    {
+      image: "/images/icons/pepicons-print_grid-circle.png",
+      title: " Dashboard B2B clair & pilotable",
+      description:
+        "KPIs personnalisés, segmentation par profil, impact mesurable en temps réel.",
+    },
+    {
+      image: "/images/icons/pepicons-print_letter-circle.png",
+      title: "Communication ciblée & instantanée",
+      description:
+        "Envoyez des messages, alertes et campagnes directement dans l’espace adhérent.",
+    },
+  ];
   return (
     <>
       {/* === Section Hero === */}
@@ -29,6 +50,34 @@ export default function ProfessionnelsPage() {
         <div className="w-full h-full flex flex-col items-center justify-center gap-4 sm:gap-6 px-4 sm:px-6 lg:px-8">
           {/* Image */}
           <div className="bg-light border-6 md:border-8 border-gray-2 w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[660px] rounded-lg sm:rounded-xl overflow-hidden flex items-center justify-center shadow-md transition-all duration-300"></div>
+        </div>
+      </section>
+
+      {/* === Section Explaination === */}
+      <section className="min-h-screen flex flex-col items-center justify-center py-0 md:py-24">
+        <div className="w-full h-full flex flex-col items-center justify-center gap-4 sm:gap-6 px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl md:text-5xl font-inclusive font-bold text-center">
+            Une solution pensée pour la{" "}
+            <span className="text-greenMain">prévention santé</span>… et la{" "}
+            <span className="text-greenMain">performance</span> de votre
+            mutuelle.
+          </h2>
+
+          <div className="flex flex-wrap gap-4 w-full justify-center my-10">
+            {features.map((feature, index) => (
+              <FeatureCard
+                key={index}
+                image={feature.image}
+                title={feature.title}
+                description={feature.description}
+              />
+            ))}
+          </div>
+          <div>
+            <Button variant="green" href="/professionnels/contact">
+              Demander une démo
+            </Button>
+          </div>
         </div>
       </section>
 
