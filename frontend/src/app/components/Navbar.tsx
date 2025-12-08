@@ -34,29 +34,35 @@ export default function Navbar() {
             {/* Desktop Navigation Links */}
             <div className="hidden lg:flex items-center space-x-10">
               <Link
-                href="/professionnels#comment-ca-fonctionne"
+                href="/professionnels#pourquoi-remindr"
                 className="text-dark hover:text-greenMain transition-colors text-base font-medium"
                 style={{ fontFamily: "var(--font-inclusive)" }}
               >
-                Comment ça fonctionne ?
+                Pourquoi Remindr ?
               </Link>
               <Link
-                href="/professionnels#faq"
+                href="/professionnels#nos-fonctionnalites"
                 className="text-dark hover:text-greenMain transition-colors text-base font-medium"
                 style={{ fontFamily: "var(--font-inclusive)" }}
               >
-                FAQ
+                Nos fonctionnalités
+              </Link>
+              <Link
+                href="/professionnels#nos-sources"
+                className="text-dark hover:text-greenMain transition-colors text-base font-medium"
+                style={{ fontFamily: "var(--font-inclusive)" }}
+              >
+                Nos sources
               </Link>
             </div>
 
             {/* Desktop CTA Button */}
-            <div className="hidden lg:flex items-center">
-              <Button
-                href="/professionnels#devis"
-                variant="green"
-                className="px-8"
-              >
-                Demander votre devis personnalisé
+            <div className="hidden lg:flex items-center space-x-3">
+              <Button href="/particuliers/demo" variant="green">
+                Demander une démo
+              </Button>
+              <Button href="/particuliers/inscription" variant="dark">
+                Contacter un commercial
               </Button>
             </div>
 
@@ -89,28 +95,45 @@ export default function Navbar() {
             <div className="lg:hidden py-4 border-t border-gray-2">
               <div className="flex flex-col space-y-4">
                 <Link
-                  href="/professionnels#comment-ca-fonctionne"
+                  href="/professionnels#pourquoi-remindr"
                   className="text-dark hover:text-greenMain transition-colors text-base font-medium py-2"
                   onClick={() => setIsMobileMenuOpen(false)}
                   style={{ fontFamily: "var(--font-inclusive)" }}
                 >
-                  Comment ça fonctionne ?
+                  Pourquoi Remindr ?
                 </Link>
                 <Link
-                  href="/professionnels#faq"
+                  href="/professionnels#nos-fonctionnalites"
                   className="text-dark hover:text-greenMain transition-colors text-base font-medium py-2"
                   onClick={() => setIsMobileMenuOpen(false)}
                   style={{ fontFamily: "var(--font-inclusive)" }}
                 >
-                  FAQ
+                  Nos fonctionnalités
                 </Link>
+                <Link
+                  href="/professionnels#nos-sources"
+                  className="text-dark hover:text-greenMain transition-colors text-base font-medium py-2"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  style={{ fontFamily: "var(--font-inclusive)" }}
+                >
+                  Nos sources
+                </Link>
+              </div>
+
+              <div className="flex flex-col space-y-2 mt-4 pt-4 border-t border-gray-2">
                 <Button
-                  href="/professionnels#devis"
+                  href="/professionnels/demo"
                   variant="green"
-                  className="mt-2"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  Demander votre devis personnalisé
+                  Demander une démo
+                </Button>
+                <Button
+                  href="/professionnels/contact"
+                  variant="dark"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Contacter un commercial
                 </Button>
               </div>
             </div>
