@@ -16,7 +16,7 @@ export default function LandingLayout({
   const getBannerConfig = () => {
     if (pathname?.includes("/particuliers/magazine")) {
       return {
-        content: (
+        title: (
           <>
             Je souhaite prendre soin de mes
             <br /> proches et de moi de façon
@@ -33,17 +33,30 @@ export default function LandingLayout({
       };
     } else if (pathname?.includes("/professionnels")) {
       return {
-        content: (
+        title: (
           <>
-            Un pas simple vers <br /> une meilleure prévention.
+            Prêt à renforcer votre stratégie de <br />
+            prévention ?
           </>
         ),
-        button: "Découvrir la solution Remindr",
+        content: (
+          <p className="flex flex-col text-left items-start justify-start gap-4 text-base md:text-lg font-inclusive font-medium max-w-2xl">
+            <span>
+              Remindr accompagne déjà des familles… et peut transformer
+              l&apos;engagement de vos adhérents.
+            </span>
+            <span>
+              Programmez une démonstration personnalisée pour découvrir tout le
+              potentiel de la plateforme.
+            </span>
+          </p>
+        ),
+        button: "Réserver votre démo dès aujourd’hui",
         buttonLink: "/professionnels/contact",
       };
     } else if (pathname?.includes("/particuliers")) {
       return {
-        content: (
+        title: (
           <>
             Un pas simple vers <br /> une meilleure prévention.
           </>
@@ -54,7 +67,7 @@ export default function LandingLayout({
     } else {
       // Valeur par défaut
       return {
-        content: (
+        title: (
           <>
             Un pas simple vers <br /> une meilleure prévention.
           </>
@@ -75,6 +88,7 @@ export default function LandingLayout({
       </main>
 
       <BannerCta
+        title={bannerConfig.title}
         content={bannerConfig.content}
         button={bannerConfig.button}
         buttonLink={bannerConfig.buttonLink}
