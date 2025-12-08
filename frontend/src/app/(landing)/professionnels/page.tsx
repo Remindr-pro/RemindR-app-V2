@@ -1,4 +1,5 @@
 import Button from "@/app/components/Button";
+import Companies from "@/app/components/Companies";
 
 export default function ProfessionnelsPage() {
   return (
@@ -29,6 +30,22 @@ export default function ProfessionnelsPage() {
           {/* Image */}
           <div className="bg-light border-6 md:border-8 border-gray-2 w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[660px] rounded-lg sm:rounded-xl overflow-hidden flex items-center justify-center shadow-md transition-all duration-300"></div>
         </div>
+      </section>
+
+      {/* === Section Companies === */}
+      <section className="min-h-screen flex flex-col items-center justify-center gap-20 py-24">
+        <div className="max-w-3xl w-full mx-auto flex flex-col gap-16 text-center">
+          <h2 className="text-3xl md:text-6xl font-inclusive font-bold">
+            Des sources <span className="text-greenMain">fiables</span> pour une
+            santé au top.
+          </h2>
+          <p className="max-w-2xl mx-auto text-base md:text-lg font-inclusive font-regular">
+            Toutes nos recommandations et rappels automatiques sont basés sur
+            les recommandations officielles des organismes de santé.
+          </p>
+        </div>
+
+        <Companies />
       </section>
     </>
   );
