@@ -1,5 +1,6 @@
 import ArticlePin from "@/app/components/ArticlePin";
 import ArticlesCarousel from "@/app/components/ArticlesCarousel";
+import ArticlesGrid from "@/app/components/ArticlesGrid";
 import { ArticleCardProps } from "@/app/components/ArticleCard";
 
 const articles: ArticleCardProps[] = [
@@ -32,6 +33,69 @@ const articles: ArticleCardProps[] = [
     category: "Prévention au quotidien",
     title: "Vos droits santé simplifiés",
     date: "15 octobre 2025",
+  },
+];
+
+const allArticles: ArticleCardProps[] = [
+  {
+    image: "/images/articles/article-semaine-1.jpg",
+    category: "Prévention au quotidien",
+    title: "Check-up de rentrée : ce qu'il ne faut pas oublier",
+    date: "1 septembre 2025",
+  },
+  {
+    image: "/images/articles/articles-semaine-2.jpg",
+    category: "Prévention au quotidien",
+    title: "Les bons gestes pour renforcer l'immunité en hiver",
+    date: "1 novembre 2025",
+  },
+  {
+    image: "/images/articles/article-semaine-3.jpg",
+    category: "Prendre soin des siens",
+    title: "Prévenir les chutes à domicile : astuces et recommandations",
+    date: "26 octobre 2025",
+  },
+  {
+    image: "/images/articles/article-semaine-4.jpg",
+    category: "Prendre soin des siens",
+    title: "Bien vieillir à domicile : conseils pour les aidants",
+    date: "24 octobre 2025",
+  },
+  {
+    image: "/images/articles/article-semaine-5.jpg",
+    category: "Bien-être global",
+    title: "Prévenir l'anxiété grâce à de petits rituels quotidiens",
+    date: "23 octobre 2025",
+  },
+  {
+    image: "/images/articles/article-semaine-1.jpg",
+    category: "Prévention au quotidien",
+    title: "Prévention et nutrition : ajuster son assiette selon les saisons",
+    date: "25 octobre 2025",
+  },
+  {
+    image: "/images/articles/article-semaine-2.jpg",
+    category: "Comprendre & agir",
+    title: "Décryptage : dépistage du cancer du col de l'utérus",
+    date: "22 octobre 2025",
+  },
+  {
+    image: "/images/articles/article-semaine-3.jpg",
+    category: "Vos droits et démarches",
+    title: "Comment transmettre facilement vos factures à votre mutuelle",
+    date: "21 octobre 2025",
+  },
+  {
+    image: "/images/articles/article-semaine-4.jpg",
+    category: "Prévention au quotidien",
+    title: "Ces rappels santé qu'on oublie (et qui comptent vraiment)",
+    date: "20 octobre 2025",
+  },
+  {
+    image: "/images/articles/article-semaine-5.jpg",
+    category: "Bien-être global",
+    title: "L'importance du sommeil pour petits et grands",
+    date: "18 octobre 2025",
   },
 ];
 
@@ -79,6 +143,27 @@ export default function MagazinePage() {
 
           <div className="w-full">
             <ArticlesCarousel articles={articles} />
+          </div>
+        </div>
+      </section>
+
+      {/* === Section prevention === */}
+      <section className="min-h-screen flex items-center justify-center py-24">
+        <div className="w-full max-w-7xl mx-auto flex flex-col gap-16">
+          <div className="w-full lg:w-1/2">
+            <h2 className="text-3xl md:text-6xl font-inclusive font-bold text-dark mb-4">
+              Explorer nos <span className="text-greenMain">conseils</span>{" "}
+              santé.
+            </h2>
+            <p className="text-base md:text-lg font-inclusive font-medium text-dark">
+              Tout est réuni au même endroit pour prendre soin de vous, et de
+              ceux que vous aimez. Tout en simplicité et avec sérénité.
+            </p>
+          </div>
+
+          {/* Grid articles */}
+          <div className="w-full">
+            <ArticlesGrid articles={allArticles} />
           </div>
         </div>
       </section>

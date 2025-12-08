@@ -1,12 +1,17 @@
 import Image from "next/image";
-import Button from "./Button";
 import IconCalendar from "./icons/Calendar";
+
+export type ArticleVariant = "spotlight" | "advice";
+export type ArticlePosition = "vertical" | "horizontal";
 
 export interface ArticleCardProps {
   image: string;
   category: string;
   title: string;
   date: string;
+  variant?: ArticleVariant;
+  position?: ArticlePosition;
+  isForward?: boolean;
 }
 
 export default function ArticleCard({
@@ -14,10 +19,81 @@ export default function ArticleCard({
   category,
   title,
   date,
+  variant = "advice",
+  position = "vertical",
+  isForward = false,
 }: ArticleCardProps) {
+  // Styles conditionnels selon les props
+  const containerClasses = [
+    "relative rounded-xl md:rounded-2xl overflow-hidden h-full w-full group cursor-pointer",
+    position === "horizontal" && "flex flex-row",
+    variant === "spotlight"
+      ? "shadow-lg"
+      : isForward
+      ? "shadow-xl"
+      : "shadow-md",
+    isForward &&
+      variant === "spotlight" &&
+      "ring-2 ring-greenMain ring-offset-2",
+    position === "vertical"
+      ? "min-h-[240px] sm:min-h-[280px] md:min-h-0"
+      : "min-h-[200px] md:min-h-[250px]",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  const imageContainerClasses = [
+    "relative",
+    position === "horizontal" ? "w-1/2 min-w-[200px]" : "w-full h-full min-h-0",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  const contentClasses = [
+    "absolute inset-0",
+    position === "horizontal"
+      ? "flex flex-row items-center justify-start p-4 md:p-6 lg:p-8"
+      : isForward && variant === "advice"
+      ? "flex flex-col justify-start items-start text-left"
+      : "flex flex-col justify-center items-center p-3 md:p-4 lg:p-5",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  const overlayClasses = [
+    "absolute inset-0 transition-all duration-300",
+    position === "horizontal"
+      ? "bg-gradient-to-r from-black/80 via-black/60 to-black/40 group-hover:from-black/90 group-hover:via-black/70 group-hover:to-black/50"
+      : isForward && variant === "advice"
+      ? "bg-gradient-to-t from-black/75 via-black/55 to-black/35 group-hover:from-black/85 group-hover:via-black/65 group-hover:to-black/45"
+      : "bg-gradient-to-t from-black/70 via-black/50 to-black/30 group-hover:from-black/90 group-hover:via-black/70 group-hover:to-black/50",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  const categoryTagClasses = [
+    variant === "spotlight"
+      ? "bg-greenMain border border-greenMain-2 text-light"
+      : "bg-light border border-gray-3 text-dark",
+    "rounded-lg px-2 py-1 md:px-3 md:py-1.5 text-xs md:text-sm font-inclusive font-medium",
+    position === "horizontal" ? "mb-3" : "mb-2 md:mb-3",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  const titleClasses = [
+    "text-light font-inclusive font-bold leading-tight",
+    position === "horizontal"
+      ? "text-lg md:text-xl lg:text-2xl mb-3"
+      : "text-base md:text-xl lg:text-2xl mb-2 md:mb-3",
+    variant === "spotlight" && "text-xl md:text-2xl lg:text-3xl",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
   return (
-    <div className="relative rounded-xl md:rounded-2xl overflow-hidden h-full w-full min-h-[240px] sm:min-h-[280px] md:min-h-0 group cursor-pointer">
-      <div className="relative w-full h-full min-h-0">
+    <div className={containerClasses}>
+      <div className={imageContainerClasses}>
         <Image
           src={image}
           alt={title}
@@ -27,30 +103,50 @@ export default function ArticleCard({
         />
       </div>
       {/* Overlay Gradient */}
-      <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/50 to-black/30 transition-all duration-300 group-hover:from-black/90 group-hover:via-black/70 group-hover:to-black/50" />
+      <div className={overlayClasses} />
 
       {/* Content */}
-      <div className="absolute inset-0 flex flex-col justify-center items-center p-3 md:p-4 lg:p-5">
-        {/* Category Tag */}
-        <div className="mb-2 md:mb-3">
-          <Button
-            variant="light"
-            className="px-2 py-1 md:px-3 md:py-1.5 text-xs md:text-sm"
+      <div className={contentClasses}>
+        {/* Category Tag - Top Left */}
+        {position === "vertical" && isForward && variant === "advice" ? (
+          <>
+            <div className="absolute top-3 md:top-4 left-3 md:left-4">
+              <span className={categoryTagClasses}>{category}</span>
+            </div>
+            {/* Title and Date - Bottom Left */}
+            <div className="absolute bottom-0 left-0 right-0 flex flex-col items-start justify-end p-3 md:p-4 lg:p-5">
+              <h3 className={titleClasses}>{title}</h3>
+              <div className="flex items-center gap-2 text-light text-xs md:text-sm font-inclusive font-medium">
+                <IconCalendar size={14} fill="text-light" />
+                <span>{date}</span>
+              </div>
+            </div>
+          </>
+        ) : (
+          <div
+            className={`flex flex-col ${
+              position === "horizontal"
+                ? "items-start max-w-md"
+                : "items-center"
+            }`}
           >
-            {category}
-          </Button>
-        </div>
+            {/* Category Tag */}
+            <div
+              className={position === "horizontal" ? "mb-3" : "mb-2 md:mb-3"}
+            >
+              <span className={categoryTagClasses}>{category}</span>
+            </div>
 
-        {/* Title */}
-        <h3 className="text-light text-base md:text-xl lg:text-2xl font-inclusive font-bold mb-2 md:mb-3 leading-tight">
-          {title}
-        </h3>
+            {/* Title */}
+            <h3 className={titleClasses}>{title}</h3>
 
-        {/* Date */}
-        <div className="flex items-center gap-2 text-light text-xs md:text-sm font-inclusive font-medium">
-          <IconCalendar size={14} fill="text-light" />
-          <span>{date}</span>
-        </div>
+            {/* Date */}
+            <div className="flex items-center gap-2 text-light text-xs md:text-sm font-inclusive font-medium">
+              <IconCalendar size={14} fill="text-light" />
+              <span>{date}</span>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
