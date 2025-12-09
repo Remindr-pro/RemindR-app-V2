@@ -1,10 +1,9 @@
+import ConnexionCards from "@/app/components/organisms/ConnexionCards";
+
 export default function ConnexionPage() {
   return (
-    <div className="w-full max-w-md">
-      <h1 className="text-3xl font-inclusive font-bold text-dark text-center mb-8">
-        Connexion
-      </h1>
-      {/* Contenu de la page de connexion */}
+    <div className="w-full flex flex-col items-center justify-center">
+      <ConnexionCards />
     </div>
   );
 }
