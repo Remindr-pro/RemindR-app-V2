@@ -1,7 +1,7 @@
-import ArticlePin from "@/app/components/ArticlePin";
-import ArticlesCarousel from "@/app/components/ArticlesCarousel";
-import ArticlesGrid from "@/app/components/ArticlesGrid";
-import { ArticleCardProps } from "@/app/components/ArticleCard";
+import ArticlePin from "@/app/components/molecules/ArticlePin";
+import ArticlesCarousel from "@/app/components/organisms/ArticlesCarousel";
+import ArticlesGrid from "@/app/components/organisms/ArticlesGrid";
+import { ArticleCardProps } from "@/app/components/molecules/ArticleCard";
 
 const articles: ArticleCardProps[] = [
   {

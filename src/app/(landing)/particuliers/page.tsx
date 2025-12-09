@@ -1,9 +1,9 @@
-import Button from "@/app/components/Button";
-import Preview from "@/app/components/Preview";
-import PreventionCollapse from "@/app/components/PreventionCollapse";
-import FeedbackGrid from "@/app/components/FeedbackGrid";
-import FAQ from "@/app/components/FAQ";
-import Companies from "@/app/components/Companies";
+import Button from "@/app/components/atoms/Button";
+import Preview from "@/app/components/organisms/Preview";
+import PreventionCollapse from "@/app/components/organisms/PreventionCollapse";
+import FeedbackGrid from "@/app/components/organisms/FeedbackGrid";
+import FAQ from "@/app/components/organisms/FAQ";
+import Companies from "@/app/components/organisms/Companies";
 
 const feedbacks = [
   {

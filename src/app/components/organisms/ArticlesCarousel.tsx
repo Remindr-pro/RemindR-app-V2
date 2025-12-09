@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import ArticleCard, { ArticleCardProps } from "./ArticleCard";
-import ArticlePin from "./ArticlePin";
+import ArticleCard, { ArticleCardProps } from "../molecules/ArticleCard";
+import ArticlePin from "../molecules/ArticlePin";
 
 interface ArticlesCarouselProps {
   articles: ArticleCardProps[];
@@ -238,30 +238,6 @@ export default function ArticlesCarousel({ articles }: ArticlesCarouselProps) {
     }, 8000);
   };
 
-  // const goToNext = () => {
-  //   setCurrentIndex((prev) => (prev === totalSlides - 1 ? 0 : prev + 1));
-  //   // Pause auto-slide when user manually navigates
-  //   setIsPaused(true);
-  //   if (pauseTimeoutRef.current) {
-  //     clearTimeout(pauseTimeoutRef.current);
-  //   }
-  //   pauseTimeoutRef.current = setTimeout(() => {
-  //     setIsPaused(false);
-  //   }, 8000);
-  // };
-
-  // const goToPrevious = () => {
-  //   setCurrentIndex((prev) => (prev === 0 ? totalSlides - 1 : prev - 1));
-  //   // Pause auto-slide when user manually navigates
-  //   setIsPaused(true);
-  //   if (pauseTimeoutRef.current) {
-  //     clearTimeout(pauseTimeoutRef.current);
-  //   }
-  //   pauseTimeoutRef.current = setTimeout(() => {
-  //     setIsPaused(false);
-  //   }, 8000);
-  // };
-
   // Auto-slide functionality
   useEffect(() => {
     // Only auto-slide if there's more than one slide
@@ -369,50 +345,6 @@ export default function ArticlesCarousel({ articles }: ArticlesCarouselProps) {
             })}
           </div>
         </div>
-
-        {/* Navigation Buttons - positioned relative to carousel grid */}
-        {/* <button
-          onClick={goToPrevious}
-          className="absolute left-0 md:-left-12 top-1/2 -translate-y-1/2 bg-light rounded-full p-2 md:p-3 shadow-md hover:shadow-lg transition-shadow z-10 hidden md:flex items-center justify-center pointer-events-auto"
-          aria-label="Article précédent"
-        >
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M15 18L9 12L15 6"
-              stroke="#1aa484"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </button>
-        <button
-          onClick={goToNext}
-          className="absolute right-0 md:-right-12 top-1/2 -translate-y-1/2 bg-light rounded-full p-2 md:p-3 shadow-md hover:shadow-lg transition-shadow z-10 hidden md:flex items-center justify-center pointer-events-auto"
-          aria-label="Article suivant"
-        >
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M9 18L15 12L9 6"
-              stroke="#1aa484"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </button> */}
       </div>
 
       {/* Pagination Dots */}

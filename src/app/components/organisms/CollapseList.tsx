@@ -1,34 +1,34 @@
 "use client";
 
-import FAQCollapseItem from "./FAQCollapseItem";
+import CollapseItem from "../molecules/CollapseItem";
 
-interface FAQCollapseItemData {
+interface CollapseItemData {
   title: string;
   content?: string;
 }
 
-interface FAQCollapseListProps {
-  items: FAQCollapseItemData[];
+interface CollapseListProps {
+  items: CollapseItemData[];
   openIndex?: number;
   onItemToggle?: (index: number) => void;
 }
 
-export default function FAQCollapseList({
+export default function CollapseList({
   items,
   openIndex,
   onItemToggle,
-}: FAQCollapseListProps) {
+}: CollapseListProps) {
   return (
     <div className="w-full">
       {items.map((item, index) => (
-        <FAQCollapseItem
+        <CollapseItem
           key={index}
           title={item.title}
           isOpen={openIndex === index}
           onToggle={() => onItemToggle?.(index)}
         >
           {item.content && <p>{item.content}</p>}
-        </FAQCollapseItem>
+        </CollapseItem>
       ))}
     </div>
   );

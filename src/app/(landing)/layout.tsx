@@ -1,9 +1,9 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
-import BannerCta from "../components/Banner-cta";
+import Navbar from "../components/organisms/Navbar";
+import Footer from "../components/organisms/Footer";
+import BannerCta from "../components/organisms/BannerCta";
 
 export default function LandingLayout({
   children,

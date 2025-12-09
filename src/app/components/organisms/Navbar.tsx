@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
-import Button from "./Button";
+import Button from "../atoms/Button";
 
 export default function Navbar() {
   const pathname = usePathname();

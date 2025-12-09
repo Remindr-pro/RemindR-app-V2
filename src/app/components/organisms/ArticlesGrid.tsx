@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import ArticleCard, { ArticleCardProps } from "./ArticleCard";
-import Button from "./Button";
+import ArticleCard, { ArticleCardProps } from "../molecules/ArticleCard";
+import Button from "../atoms/Button";
 
 interface ArticlesGridProps {
   articles: ArticleCardProps[];

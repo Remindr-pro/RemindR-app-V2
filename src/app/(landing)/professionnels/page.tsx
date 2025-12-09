@@ -1,7 +1,7 @@
-import Button from "@/app/components/Button";
-import Companies from "@/app/components/Companies";
-import FeatureCard from "@/app/components/FeatureCard";
-import StepCard from "@/app/components/StepCard";
+import Button from "@/app/components/atoms/Button";
+import Companies from "@/app/components/organisms/Companies";
+import FeatureCard from "@/app/components/molecules/FeatureCard";
+import StepCard from "@/app/components/molecules/StepCard";
 
 export default function ProfessionnelsPage() {
   const features = [

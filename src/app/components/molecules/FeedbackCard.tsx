@@ -1,3 +1,5 @@
+import AvatarIcon from "../atoms/icons/Avatar";
+
 interface FeedbackCardProps {
   name: string;
   age: number;
@@ -6,33 +8,6 @@ interface FeedbackCardProps {
   memberSince: string;
   avatar?: string;
 }
-
-const AvatarIcon = () => (
-  <svg
-    width="48"
-    height="48"
-    viewBox="0 0 48 48"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    className="w-12 h-12"
-  >
-    <circle
-      cx="24"
-      cy="18"
-      r="8"
-      stroke="#222323"
-      strokeWidth="2"
-      fill="none"
-    />
-    <path
-      d="M8 40 C8 32, 15 26, 24 26 C33 26, 40 32, 40 40"
-      stroke="#222323"
-      strokeWidth="2"
-      fill="none"
-      strokeLinecap="round"
-    />
-  </svg>
-);
 
 export default function FeedbackCard({
   name,
