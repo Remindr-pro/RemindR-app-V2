@@ -21,6 +21,7 @@ export default function Input({
   placeholder,
   showPasswordToggle = false,
   className = "",
+  disabled,
   ...props
 }: InputProps) {
   const [showPassword, setShowPassword] = useState(false);
@@ -31,7 +32,11 @@ export default function Input({
   return (
     <div className={`w-full ${className}`}>
       {label && (
-        <label className="block text-dark font-inclusive text-base mb-1">
+        <label
+          className={`block text-dark font-inclusive text-base mb-1 ${
+            disabled ? "opacity-60" : ""
+          }`}
+        >
           {label}
         </label>
       )}
@@ -42,6 +47,7 @@ export default function Input({
         <input
           type={inputType}
           placeholder={placeholder}
+          disabled={disabled}
           className={`
             w-full px-4 py-3 rounded-lg border border-gray-3 bg-light text-dark
             font-inclusive text-base
@@ -49,6 +55,7 @@ export default function Input({
             focus:outline-none focus:ring-2 focus:ring-greenMain focus:border-transparent
             transition-all duration-200
             ${shouldShowToggle ? "pr-12" : ""}
+            ${disabled ? "opacity-60 cursor-not-allowed bg-gray-2" : ""}
           `}
           {...props}
         />
