@@ -8,6 +8,7 @@ interface ButtonProps {
   className?: string;
   onClick?: () => void;
   isActive?: boolean;
+  type?: "button" | "submit" | "reset";
 }
 
 export default function Button({
@@ -17,6 +18,7 @@ export default function Button({
   className = "",
   onClick,
   isActive = false,
+  type = "button",
 }: ButtonProps) {
   const baseClasses =
     "px-6 py-3 rounded-lg font-medium text-base whitespace-nowrap transition-all duration-200 text-center inline-flex items-center justify-center hover:shadow-md active:scale-[0.98]";
@@ -76,6 +78,7 @@ export default function Button({
     </Link>
   ) : (
     <button
+      type={type}
       className={combinedClasses}
       onClick={onClick}
       style={{ fontFamily: "var(--font-inclusive)" }}
