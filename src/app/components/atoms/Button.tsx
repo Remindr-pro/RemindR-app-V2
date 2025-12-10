@@ -9,6 +9,7 @@ interface ButtonProps {
   onClick?: () => void;
   isActive?: boolean;
   type?: "button" | "submit" | "reset";
+  disabled?: boolean;
 }
 
 export default function Button({
@@ -19,6 +20,7 @@ export default function Button({
   onClick,
   isActive = false,
   type = "button",
+  disabled = false,
 }: ButtonProps) {
   const baseClasses =
     "px-6 py-3 rounded-lg font-medium text-base whitespace-nowrap transition-all duration-200 text-center inline-flex items-center justify-center hover:shadow-md active:scale-[0.98]";
@@ -65,7 +67,11 @@ export default function Button({
     return `${bgClass} ${config.text} ${config.border} ${config.hover} ${config.active}`;
   };
 
-  const combinedClasses = `${baseClasses} ${getVariantClasses()} ${className}`;
+  const disabledClasses = disabled
+    ? "opacity-60 cursor-not-allowed hover:shadow-none active:scale-100"
+    : "";
+
+  const combinedClasses = `${baseClasses} ${getVariantClasses()} ${disabledClasses} ${className}`;
 
   return href ? (
     <Link
@@ -81,6 +87,7 @@ export default function Button({
       type={type}
       className={combinedClasses}
       onClick={onClick}
+      disabled={disabled}
       style={{ fontFamily: "var(--font-inclusive)" }}
     >
       {children}
