@@ -76,7 +76,9 @@ export default function ActivationsLayout({
           {config.description}
         </p>
 
-        <div className="w-full">{children}</div>
+        <div className="w-full flex flex-col items-center justify-center">
+          {children}
+        </div>
       </div>
     </div>
   );
