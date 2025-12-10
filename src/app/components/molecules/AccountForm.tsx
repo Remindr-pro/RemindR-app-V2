@@ -4,7 +4,7 @@ import { useState, FormEvent, useMemo } from "react";
 import Input from "../atoms/Input";
 import Button from "../atoms/Button";
 
-interface CompteFormProps {
+interface AccountFormProps {
   onSubmit?: (data: {
     identifier: string;
     password: string;
@@ -15,12 +15,12 @@ interface CompteFormProps {
   buttonHref?: string;
 }
 
-export default function CompteForm({
+export default function AccountForm({
   onSubmit,
   onButtonClick,
   buttonType = "submit",
   buttonHref,
-}: CompteFormProps) {
+}: AccountFormProps) {
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");

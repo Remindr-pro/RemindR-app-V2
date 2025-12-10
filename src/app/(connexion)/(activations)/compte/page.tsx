@@ -1,6 +1,6 @@
 "use client";
 
-import CompteForm from "@/app/components/molecules/CompteForm";
+import AccountForm from "@/app/components/molecules/AccountForm";
 
 export default function ComptePage() {
   const handleSubmit = (data: {
@@ -14,7 +14,7 @@ export default function ComptePage() {
 
   return (
     <div className="w-full max-w-md flex flex-col items-center justify-center gap-2 font-inclusive">
-      <CompteForm onSubmit={handleSubmit} />
+      <AccountForm onSubmit={handleSubmit} />
     </div>
   );
 }
