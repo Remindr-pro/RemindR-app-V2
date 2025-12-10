@@ -19,9 +19,9 @@ const pageConfigs: Record<string, PageConfig> = {
   },
   "/identification": {
     step: 1,
-    title: "Identification",
+    title: "Je vérifie mon identité",
     description:
-      "Identifiez-vous pour accéder à votre espace de prévention personnalisé.",
+      "Cette étape nous permet de nous assurer que cet accès vous est bien destiné et que les infos de Santé care sont correctes.",
   },
   "/verification": {
     step: 2,
@@ -65,7 +65,7 @@ export default function ActivationsLayout({
 
   return (
     <div className="bg-gray-1 w-full">
-      <div className="w-full max-w-md mx-auto flex flex-col items-center">
+      <div className="w-full max-w-md md:max-w-3xl mx-auto flex flex-col items-center">
         <StepIndicator currentStep={config.step} />
 
         <h1 className="text-3xl md:text-5xl font-inclusive font-bold text-dark text-center mb-4 px-4">
