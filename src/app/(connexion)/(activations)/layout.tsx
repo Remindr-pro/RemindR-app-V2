@@ -28,6 +28,11 @@ const pageConfigs: Record<string, PageConfig> = {
     title: "Mon code provisoire",
     description: "Je choisis le mode de vérification sécurisé de mon identité.",
   },
+  "/verification/code": {
+    step: 2,
+    title: "Mon code provisoire",
+    description: "Je saisis le code à 6 chiffres reçu au 06 ** ** **45.",
+  },
   "/activation": {
     step: 3,
     title: "J’active mon compte",
