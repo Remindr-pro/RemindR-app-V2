@@ -74,12 +74,12 @@ export default function IdentificationForm({
         onChange={(e) => setEmail(e.target.value)}
       />
 
-      <div className="pt-2">
+      <div className="pt-2 text-center">
         {buttonHref ? (
           <Button
             variant="green"
             href={buttonHref}
-            className="w-full"
+            className="w-full md:w-max"
             onClick={onButtonClick}
           >
             Continuer
@@ -88,7 +88,7 @@ export default function IdentificationForm({
           <Button
             variant="green"
             type={buttonType}
-            className="w-full"
+            className="w-full md:w-max"
             onClick={onButtonClick}
           >
             Continuer
