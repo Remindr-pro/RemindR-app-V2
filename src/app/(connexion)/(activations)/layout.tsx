@@ -60,13 +60,27 @@ export default function ActivationsLayout({
 }) {
   const pathname = usePathname();
 
-  // Extraire le chemin relatif depuis le pathname complet
-  // Le pathname peut être: /bienvenue, /activations/bienvenue, /connexion/activations/bienvenue, etc.
-  const relativePath = pathname
-    ? `/${pathname.split("/").pop() || "bienvenue"}`
-    : "/bienvenue";
+  const relativePath = pathname || "/bienvenue";
 
-  const config = pageConfigs[relativePath] || pageConfigs["/bienvenue"];
+  let config: PageConfig | undefined;
+
+  config = pageConfigs[relativePath];
+
+  if (!config && relativePath !== "/") {
+    const parts = relativePath.split("/").filter(Boolean);
+
+    for (let i = parts.length - 1; i >= 0; i--) {
+      const testPath = "/" + parts.slice(0, i + 1).join("/");
+
+      config = pageConfigs[testPath];
+
+      if (config) break;
+    }
+  }
+
+  if (!config) {
+    config = pageConfigs["/bienvenue"];
+  }
 
   return (
     <div className="bg-gray-1 w-full">

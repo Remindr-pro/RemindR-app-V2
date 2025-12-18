@@ -16,13 +16,11 @@ export default function StepIndicator({ currentStep }: StepIndicatorProps) {
       return "future";
     }
 
-    const activeStepNumber = currentStep;
-
-    if (stepNumber < activeStepNumber) {
+    if (stepNumber < currentStep) {
       return "completed";
     }
 
-    if (stepNumber === activeStepNumber) {
+    if (stepNumber === currentStep) {
       return "active";
     }
 
