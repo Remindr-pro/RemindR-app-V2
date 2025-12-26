@@ -10,14 +10,14 @@ const TopBar = () => {
     switch (pathName) {
       case "/dashboard":
         return "Tableau de bord";
-      case "/calendrier":
+      case "/dashboard/calendrier":
         return "Calendrier";
-      case "/mes-proches-et-moi":
+      case "/dashboard/mes-proches-et-moi":
         return "Mes proches & moi";
-      case "/mon-magazine":
-        return "Mon magazine";
+      case "/dashboard/mon-magazine":
+        return "Mon magazine prévention santé";
       default:
-        return "Remindr";
+        return "Mon compte";
     }
   }, [pathName]);
 
