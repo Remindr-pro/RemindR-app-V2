@@ -27,12 +27,15 @@ const AccountMenu: React.FC<AccountMenuProps> = ({ items, pathname }) => {
   const { Icon: ParentIcon } = parent || ({} as AccountMenuItem);
 
   const isChildActive = children.some(
-    (item) => pathname === item.href || pathname.startsWith(`${item.href}/`)
+    (item) =>
+      pathname === item.href ||
+      (pathname && pathname.startsWith(`${item.href}/`))
   );
 
   const isParentActive =
     parent != null &&
-    (pathname === parent.href || pathname.startsWith(`${parent.href}/`));
+    (pathname === parent.href ||
+      (pathname && pathname.startsWith(`${parent.href}/`)));
 
   const [open, setOpen] = useState<boolean>(isParentActive || isChildActive);
 
@@ -78,7 +81,8 @@ const AccountMenu: React.FC<AccountMenuProps> = ({ items, pathname }) => {
           {children.map((item) => {
             const { Icon } = item;
             const isActive =
-              pathname === item.href || pathname.startsWith(`${item.href}/`);
+              pathname === item.href ||
+              (pathname && pathname.startsWith(`${item.href}/`));
 
             return (
               <li key={item.href}>

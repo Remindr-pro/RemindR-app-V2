@@ -89,7 +89,10 @@ const SideBar = () => {
             {navItems.map((item) => {
               const { Icon } = item;
               const isActive =
-                pathname === item.href || pathname?.startsWith(`${item.href}/`);
+                item.href === "/dashboard"
+                  ? pathname === "/dashboard" || pathname === "/dashboard/"
+                  : pathname === item.href ||
+                    pathname?.startsWith(`${item.href}/`);
 
               return (
                 <li key={item.href}>
