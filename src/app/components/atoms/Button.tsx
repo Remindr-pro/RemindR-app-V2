@@ -10,6 +10,9 @@ interface ButtonProps {
   isActive?: boolean;
   type?: "button" | "submit" | "reset";
   disabled?: boolean;
+  icon?: ReactNode;
+  roundedFull?: boolean;
+  size?: "sm" | "default";
 }
 
 export default function Button({
@@ -21,9 +24,14 @@ export default function Button({
   isActive = false,
   type = "button",
   disabled = false,
+  icon,
+  roundedFull = false,
+  size = "default",
 }: ButtonProps) {
-  const baseClasses =
-    "px-6 py-3 rounded-lg font-medium text-base whitespace-nowrap transition-all duration-200 text-center inline-flex items-center justify-center hover:shadow-md active:scale-[0.98]";
+  const roundedClass = roundedFull ? "rounded-full" : "rounded-lg";
+  const sizeClasses =
+    size === "sm" ? "px-4 py-2 text-sm" : "px-6 py-3 text-base";
+  const baseClasses = `${sizeClasses} ${roundedClass} font-medium whitespace-nowrap transition-all duration-200 text-center inline-flex items-center justify-center gap-2 hover:shadow-md active:scale-[0.98]`;
 
   const getVariantClasses = () => {
     const variantConfig = {
@@ -73,6 +81,13 @@ export default function Button({
 
   const combinedClasses = `${baseClasses} ${getVariantClasses()} ${disabledClasses} ${className}`;
 
+  const content = (
+    <>
+      {icon && <span className="flex items-center">{icon}</span>}
+      {children}
+    </>
+  );
+
   return href ? (
     <Link
       href={href}
@@ -80,7 +95,7 @@ export default function Button({
       onClick={onClick}
       style={{ fontFamily: "var(--font-inclusive)" }}
     >
-      {children}
+      {content}
     </Link>
   ) : (
     <button
@@ -90,7 +105,7 @@ export default function Button({
       disabled={disabled}
       style={{ fontFamily: "var(--font-inclusive)" }}
     >
-      {children}
+      {content}
     </button>
   );
 }
