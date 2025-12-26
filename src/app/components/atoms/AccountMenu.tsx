@@ -67,12 +67,14 @@ const AccountMenu: React.FC<AccountMenuProps> = ({ items, pathname }) => {
           <span className="font-inclusive">{parent.label}</span>
         </div>
 
-        <IconChevron
-          size={16}
-          className={`ml-2 transition-transform duration-150 ${
-            open ? "rotate-180" : "rotate-0"
-          }`}
-        />
+        <span className="shrink-0">
+          <IconChevron
+            size={16}
+            className={`ml-2 transition-transform duration-150 ${
+              open ? "rotate-180" : "rotate-0"
+            }`}
+          />
+        </span>
       </button>
 
       {/* Sous-menu */}
@@ -99,14 +101,16 @@ const AccountMenu: React.FC<AccountMenuProps> = ({ items, pathname }) => {
                       isActive ? "bg-greenMain" : "bg-transparent"
                     }`}
                   />
-                  <Icon
-                    size={18}
-                    fill={
-                      isActive
-                        ? "fill-greenMain"
-                        : "fill-[#B4B4B4] group-hover:fill-greenMain"
-                    }
-                  />
+                  <span className="flex-shrink-0">
+                    <Icon
+                      size={18}
+                      fill={
+                        isActive
+                          ? "fill-greenMain"
+                          : "fill-[#B4B4B4] group-hover:fill-greenMain"
+                      }
+                    />
+                  </span>
                   <span className="font-inclusive">{item.label}</span>
                 </Link>
               </li>

@@ -109,14 +109,16 @@ const SideBar = () => {
                         isActive ? "bg-greenMain" : "bg-transparent"
                       }`}
                     />
-                    <Icon
-                      size={18}
-                      fill={
-                        isActive
-                          ? "fill-greenMain"
-                          : "fill-[#B4B4B4] group-hover:fill-greenMain"
-                      }
-                    />
+                    <span className="shrink-0">
+                      <Icon
+                        size={18}
+                        fill={
+                          isActive
+                            ? "fill-greenMain"
+                            : "fill-[#B4B4B4] group-hover:fill-greenMain"
+                        }
+                      />
+                    </span>
                     <span className="font-inclusive">{item.label}</span>
                   </Link>
                 </li>
