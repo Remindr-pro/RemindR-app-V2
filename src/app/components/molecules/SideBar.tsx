@@ -123,9 +123,7 @@ const SideBar = () => {
 
           <div className="h-px bg-gray-2" />
 
-          {/* ici menu deroulant mon compte */}
           <AccountMenu items={navItemsAccount} pathname={pathname} />
-          {/* fin menu deroulant mon compte */}
         </nav>
 
         {/* Bannière pub */}

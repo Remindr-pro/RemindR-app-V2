@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import IconChevron from "./icons/Chevron";
 
 type IconComponent = (props: {
   size?: number;
@@ -43,14 +44,14 @@ const AccountMenu: React.FC<AccountMenuProps> = ({ items, pathname }) => {
       <button
         type="button"
         onClick={() => setOpen((prev) => !prev)}
-        className={`group relative flex w-full items-center justify-between rounded-sm py-3 pl-4 pr-3 text-sm transition-all duration-150 ease-in cursor-pointer ${
+        className={`group relative flex w-full items-center justify-between rounded-sm py-3 pl-4 pr-5 text-sm transition-all duration-150 ease-in whitespace-nowrap cursor-pointer ${
           isParentActive || isChildActive
-            ? "text-greenMain"
+            ? "bg-gray-1 text-greenMain"
             : "text-[#7E7E7E] hover:bg-gray-1"
         }`}
       >
         <div className="flex items-center gap-3">
-          <span className="flex h-8 w-8 items-center justify-center bg-light text-[15px]">
+          <span className="flex h-8 w-8 items-center justify-center text-[15px]">
             <ParentIcon
               size={18}
               fill={
@@ -63,14 +64,12 @@ const AccountMenu: React.FC<AccountMenuProps> = ({ items, pathname }) => {
           <span className="font-inclusive">{parent.label}</span>
         </div>
 
-        <span
-          className={`ml-2 text-xs transition-transform duration-150 ${
+        <IconChevron
+          size={16}
+          className={`ml-2 transition-transform duration-150 ${
             open ? "rotate-180" : "rotate-0"
           }`}
-          aria-hidden="true"
-        >
-          ▾
-        </span>
+        />
       </button>
 
       {/* Sous-menu */}
@@ -85,28 +84,26 @@ const AccountMenu: React.FC<AccountMenuProps> = ({ items, pathname }) => {
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className={`group relative flex items-center gap-3 rounded-r-full py-2 pl-4 pr-4 text-sm transition-all duration-150 ease-in ${
+                  className={`group relative flex items-center gap-3 rounded-sm py-3 pl-4 pr-5 text-sm transition-all duration-150 ease-in whitespace-nowrap ${
                     isActive
-                      ? "bg-white text-greenMain shadow-sm"
-                      : "text-[#B4B4B4] hover:text-[#7E7E7E] hover:bg-white"
+                      ? "bg-gray-1 text-greenMain"
+                      : "text-[#7E7E7E] hover:bg-gray-1"
                   }`}
                 >
                   <span
-                    className={`absolute left-0 top-1/2 h-[70%] w-[3px] -translate-y-1/2 rounded-r-full ${
+                    className={`absolute left-0 top-1/2 h-full w-[5px] -translate-y-1/2 rounded-l-full ${
                       isActive ? "bg-greenMain" : "bg-transparent"
                     }`}
                   />
                   <Icon
-                    size={16}
+                    size={18}
                     fill={
                       isActive
                         ? "fill-greenMain"
-                        : "fill-[#d0d0d0] group-hover:fill-[#9b9b9b]"
+                        : "fill-[#B4B4B4] group-hover:fill-greenMain"
                     }
                   />
-                  <span className="font-inclusive text-[13px]">
-                    {item.label}
-                  </span>
+                  <span className="font-inclusive">{item.label}</span>
                 </Link>
               </li>
             );
