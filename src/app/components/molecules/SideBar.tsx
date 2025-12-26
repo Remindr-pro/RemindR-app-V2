@@ -14,6 +14,7 @@ import IconNotification from "../atoms/icons/Notification";
 import IconGear from "../atoms/icons/Gear";
 import IconHelp from "../atoms/icons/Help";
 import AccountMenu from "../atoms/AccountMenu";
+import UserProfile from "./UserProfile";
 
 const SideBar = () => {
   const pathname = usePathname();
@@ -145,26 +146,7 @@ const SideBar = () => {
         </div>
 
         {/* Profil utilisateur */}
-        <div className="px-4 pb-6">
-          <div className="flex items-center justify-between rounded-2xl bg-[#f7f7f9] px-3 py-3">
-            <div className="flex items-center gap-3">
-              <div className="h-10 w-10 rounded-full bg-gray-300" />
-              <div className="flex flex-col">
-                <span className="text-sm font-medium">Camille Dupont</span>
-                <span className="text-xs text-gray-500 font-inclusive">
-                  Compte famille
-                </span>
-              </div>
-            </div>
-            <button
-              type="button"
-              className="flex h-8 w-8 items-center justify-center rounded-full border border-gray-200 text-gray-400 hover:border-gray-300 hover:text-gray-600 text-sm"
-              aria-label="Paramètres du compte"
-            >
-              ⚙︎
-            </button>
-          </div>
-        </div>
+        <UserProfile name="Camille Dupont" accountType="Compte famille" />
       </div>
     </aside>
   );
