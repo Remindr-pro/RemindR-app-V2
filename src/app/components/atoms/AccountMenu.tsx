@@ -18,9 +18,14 @@ export interface AccountMenuItem {
 interface AccountMenuProps {
   items: AccountMenuItem[];
   pathname: string;
+  isCollapsed?: boolean;
 }
 
-const AccountMenu: React.FC<AccountMenuProps> = ({ items, pathname }) => {
+const AccountMenu: React.FC<AccountMenuProps> = ({
+  items,
+  pathname,
+  isCollapsed = false,
+}) => {
   const safeItems = items ?? [];
   const [parent, ...children] = safeItems;
 
@@ -64,10 +69,20 @@ const AccountMenu: React.FC<AccountMenuProps> = ({ items, pathname }) => {
               }
             />
           </span>
-          <span className="font-inclusive">{parent.label}</span>
+          <span
+            className={`font-inclusive transition-opacity duration-300 ${
+              isCollapsed ? "opacity-0 lg:opacity-0" : "opacity-100"
+            }`}
+          >
+            {parent.label}
+          </span>
         </div>
 
-        <span className="shrink-0">
+        <span
+          className={`shrink-0 transition-opacity duration-300 ${
+            isCollapsed ? "opacity-0 lg:opacity-0" : "opacity-100"
+          }`}
+        >
           <IconChevron
             size={16}
             className={`ml-2 transition-transform duration-150 ${
@@ -78,7 +93,7 @@ const AccountMenu: React.FC<AccountMenuProps> = ({ items, pathname }) => {
       </button>
 
       {/* Sous-menu */}
-      {open && (
+      {open && !isCollapsed && (
         <ul className="mt-1 space-y-1 pl-4">
           {children.map((item) => {
             const { Icon } = item;

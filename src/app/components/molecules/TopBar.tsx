@@ -6,8 +6,13 @@ import IconPlus from "../atoms/icons/Plus";
 import IconFilter from "../atoms/icons/Filter";
 import Button from "../atoms/Button";
 import SearchInput from "../atoms/SearchInput";
+import { IconLayoutSidebarRightCollapseFilled } from "@tabler/icons-react";
 
-const TopBar = () => {
+interface TopBarProps {
+  onMenuClick?: () => void;
+}
+
+const TopBar = ({ onMenuClick }: TopBarProps) => {
   const pathName = usePathname();
 
   const dynamicTitle = useMemo(() => {
@@ -31,6 +36,16 @@ const TopBar = () => {
     <div className="flex flex-col gap-4">
       <div className="px-6 xl:px-10 h-16 flex items-center justify-between border-b border-gray-2">
         <div className="flex items-center gap-4 flex-1">
+          {/* Mobile menu button - only shown when sidebar is collapsed */}
+          {onMenuClick && (
+            <button
+              onClick={onMenuClick}
+              className="lg:hidden flex items-center justify-center w-10 h-10 rounded-md hover:bg-gray-1 transition-colors"
+              aria-label="Ouvrir le menu"
+            >
+              <IconLayoutSidebarRightCollapseFilled className="fill-greenMain w-8 h-8" />
+            </button>
+          )}
           <h1 className="text-2xl font-semibold">{dynamicTitle}</h1>
           {isFamilyPage && (
             <div className="flex items-center gap-4">

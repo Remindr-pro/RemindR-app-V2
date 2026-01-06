@@ -7,6 +7,7 @@ interface UserProfileProps {
   accountType: string;
   avatarUrl?: string;
   onLogout?: () => void;
+  isCollapsed?: boolean;
 }
 
 export default function UserProfile({
@@ -14,9 +15,44 @@ export default function UserProfile({
   accountType,
   avatarUrl,
   onLogout,
+  isCollapsed = false,
 }: UserProfileProps) {
   const defaultAvatar = "/images/articles/article-semaine-1.jpg";
 
+  // Mode collapsed : logout en haut, photo en bas
+  if (isCollapsed) {
+    return (
+      <div className="flex px-4 pb-6 flex-col items-center gap-4">
+        {/* Bouton logout en haut */}
+        <button
+          type="button"
+          onClick={onLogout}
+          className="flex h-10 w-10 items-center justify-center rounded-full hover:bg-gray-1 transition-colors"
+          aria-label="Déconnexion"
+          title="Déconnexion"
+        >
+          <Image
+            src="/images/icons/logout.png"
+            alt="Déconnexion"
+            width={20}
+            height={20}
+            className="drop-shadow-sm"
+          />
+        </button>
+        {/* Photo en bas */}
+        <div className="relative h-10 w-10 rounded-full overflow-hidden shrink-0">
+          <Image
+            src={avatarUrl || defaultAvatar}
+            alt="Photo de profil"
+            fill
+            className="object-cover"
+          />
+        </div>
+      </div>
+    );
+  }
+
+  // Mode normal
   return (
     <div className="px-4 pb-6">
       <div className="flex items-center justify-between rounded-2xl bg-light px-3 py-3 shadow-lg">
