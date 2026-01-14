@@ -31,6 +31,7 @@ const TopBar = ({ onMenuClick }: TopBarProps) => {
   }, [pathName]);
 
   const isFamilyPage = pathName === "/dashboard/mes-proches-et-moi";
+  const isCalendarPage = pathName === "/dashboard/calendrier";
 
   return (
     <div className="flex flex-col gap-4">
@@ -47,7 +48,7 @@ const TopBar = ({ onMenuClick }: TopBarProps) => {
             </button>
           )}
           <h1 className="text-2xl font-semibold">{dynamicTitle}</h1>
-          {isFamilyPage && (
+          {(isFamilyPage || isCalendarPage) && (
             <div className="flex items-center gap-4">
               <Button
                 variant="green"
@@ -56,12 +57,17 @@ const TopBar = ({ onMenuClick }: TopBarProps) => {
                 icon={<IconPlus size={16} />}
                 className="px-4 py-2"
               >
-                Ajouter un proche
+                {isFamilyPage ? "Ajouter un proche" : "Ajouter"}
               </Button>
+
+              {/* reminder icon */}
+              {isCalendarPage && (
+                <span className="w-7 h-7 bg-greenMain rounded-full"></span>
+              )}
             </div>
           )}
         </div>
-        {isFamilyPage && (
+        {(isFamilyPage || isCalendarPage) && (
           <div className="flex items-center gap-4">
             <Button
               variant="outline"
