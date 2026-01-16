@@ -20,13 +20,13 @@ const DashboardLayoutClient = ({ children }: DashboardLayoutClientProps) => {
   }, []);
 
   return (
-    <div className="flex min-h-screen w-full bg-gray-1 overflow-hidden">
+    <div className="flex min-h-screen w-full bg-gray-1">
       <SideBar isOpen={isSidebarOpen} onToggle={handleToggleSidebar} />
-      <div className="flex-1 flex flex-col overflow-hidden">
-        <header>
+      <div className="flex-1 flex flex-col min-w-0">
+        <header className="sticky top-0 z-40 bg-gray-1">
           <TopBar onMenuClick={handleOpenSidebar} />
         </header>
-        <main className="flex-1 px-6 xl:px-10 pb-8 overflow-y-auto">
+        <main className="flex-1 px-6 xl:px-10 pb-8">
           {children}
         </main>
       </div>

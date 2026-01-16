@@ -307,7 +307,7 @@ const SideBar = ({ isOpen: externalIsOpen, onToggle }: SideBarProps) => {
 
   const sidebarClasses = useMemo(() => {
     const baseClasses =
-      "fixed lg:static h-full min-h-screen flex-col justify-between bg-light text-dark font-syne border-r border-gray-2 z-50 transition-all duration-300 ease-in-out flex lg:shadow-none shadow-xl lg:rounded-none rounded-r-2xl";
+      "sticky top-0 h-screen max-h-screen flex-col justify-between bg-light text-dark font-syne border-r border-gray-2 z-50 transition-all duration-300 ease-in-out flex lg:shadow-none shadow-xl lg:rounded-none rounded-r-2xl self-start";
     const widthClasses = isOpen
       ? "translate-x-0 w-[220px] lg:w-[220px]"
       : "-translate-x-full lg:translate-x-0 lg:w-[80px]";
