@@ -12,7 +12,7 @@ const VARIANTS = {
       pink: "bg-pink-1 outline outline-2 outline-pink-1 text-light",
       blue: "bg-blue outline outline-2 outline-blue text-light",
       yellow: "bg-yellow-1 outline outline-2 outline-yellow-1 text-light",
-      orange: "bg-orange outline outline-2 outline-blue text-light",
+      orange: "bg-orange outline outline-2 outline-orange text-light",
     },
     hover: {
       red: "hover:bg-red-2 hover:outline-red-2",
@@ -39,7 +39,7 @@ const VARIANTS = {
       red: "hover:bg-red-1 hover:text-light",
       green: "hover:bg-greenMain hover:text-light",
       purple: "hover:bg-purple hover:text-light",
-      pink: "hover:bg-pink hover:text-light",
+      pink: "hover:bg-pink-1 hover:text-light",
       blue: "hover:bg-blue hover:text-light",
       yellow: "hover:bg-yellow-1 hover:text-light",
       orange: "hover:bg-orange hover:text-light",

@@ -4,6 +4,7 @@ import React, { useMemo } from "react";
 import { usePathname } from "next/navigation";
 import IconPlus from "../atoms/icons/Plus";
 import IconFilter from "../atoms/icons/Filter";
+import IconBell from "../atoms/icons/Bell";
 import Button from "../atoms/Button";
 import SearchInput from "../atoms/SearchInput";
 import { IconLayoutSidebarRightCollapseFilled } from "@tabler/icons-react";
@@ -60,9 +61,14 @@ const TopBar = ({ onMenuClick }: TopBarProps) => {
                 {isFamilyPage ? "Ajouter un proche" : "Ajouter"}
               </Button>
 
-              {/* reminder icon */}
+              {/* Notifications */}
               {isCalendarPage && (
-                <span className="w-7 h-7 bg-greenMain rounded-full"></span>
+                <button className="relative w-7 h-7 bg-greenMain rounded-full flex items-center justify-center hover:bg-greenMain-2 transition-colors">
+                  <IconBell size={20} className="fill-light" />
+                  <span className="absolute -top-1 -right-1 w-5 h-5 bg-red-1 rounded-full flex items-center justify-center text-light text-xs font-semibold">
+                    3
+                  </span>
+                </button>
               )}
             </div>
           )}
