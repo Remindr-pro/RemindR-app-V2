@@ -19,6 +19,12 @@ export default function UserProfile({
 }: UserProfileProps) {
   const defaultAvatar = "/images/articles/article-semaine-1.jpg";
 
+  const handleLogout = () => {
+    if (onLogout) {
+      onLogout();
+    }
+  };
+
   // Mode collapsed : logout en haut, photo en bas
   if (isCollapsed) {
     return (
@@ -26,7 +32,7 @@ export default function UserProfile({
         {/* Bouton logout en haut */}
         <button
           type="button"
-          onClick={onLogout}
+          onClick={handleLogout}
           className="flex h-10 w-10 items-center justify-center rounded-full hover:bg-gray-1 transition-colors"
           aria-label="Déconnexion"
           title="Déconnexion"
@@ -74,7 +80,7 @@ export default function UserProfile({
         </div>
         <button
           type="button"
-          onClick={onLogout}
+          onClick={handleLogout}
           className="flex h-8 w-8 items-center justify-center shrink-0 hover:opacity-80 transition-opacity"
           aria-label="Déconnexion"
         >

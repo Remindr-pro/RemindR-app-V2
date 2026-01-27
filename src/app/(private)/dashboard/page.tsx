@@ -8,8 +8,10 @@ import CommunicationCard from "@/app/components/molecules/CommunicationCard";
 import PromotionalCard from "@/app/components/molecules/PromotionalCard";
 import DashboardSidebar from "@/app/components/molecules/DashboardSidebar";
 import type { ArticleCardProps } from "@/app/components/molecules/ArticleCard";
+import { useAuth } from "@/lib/auth-provider";
 
 export default function DashboardPage() {
+  const { user } = useAuth();
   const [messages, setMessages] = useState([
     {
       id: "1",
@@ -95,7 +97,7 @@ export default function DashboardPage() {
         <div className="h-16 flex items-center justify-between border-b border-gray-2">
           <div className="px-6 xl:px-10 flex items-center justify-between gap-4 flex-1">
             <h2 className="text-xl font-semibold">
-              Bonjour, <span className="text-greenMain">Camille</span>
+              Bonjour, <span className="text-greenMain">{user?.firstName || "Utilisateur"}</span>
             </h2>
 
             <div className="flex items-center gap-3">

@@ -1,9 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Input from "../atoms/Input";
 import Button from "../atoms/Button";
 import Link from "next/link";
+import { useAuth } from "@/lib/auth-provider";
 
 interface LoginFormProps {
   onSwitchToActivation?: () => void;
@@ -12,11 +14,26 @@ interface LoginFormProps {
 export default function LoginForm({ onSwitchToActivation }: LoginFormProps) {
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const { login } = useAuth();
+  const router = useRouter();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Implémenter la logique de connexion
-    console.log("Connexion avec:", { identifier, password });
+    setError(null);
+    setLoading(true);
+
+    try {
+      // Utiliser l'email comme identifiant (vous pouvez adapter selon vos besoins)
+      await login(identifier, password);
+      // Rediriger vers le dashboard après connexion réussie
+      router.push("/dashboard");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Une erreur est survenue");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -26,13 +43,19 @@ export default function LoginForm({ onSwitchToActivation }: LoginFormProps) {
       </h2>
 
       <form onSubmit={handleSubmit} className="space-y-5">
+        {error && (
+          <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
+            {error}
+          </div>
+        )}
         <Input
-          type="text"
-          label="Mon identifiant"
-          hintText="Ex : prenom, prenom.nom, pseudo, etc."
-          placeholder="Identifiant"
+          type="email"
+          label="Mon email"
+          hintText="Votre adresse email"
+          placeholder="email@exemple.com"
           value={identifier}
           onChange={(e) => setIdentifier(e.target.value)}
+          required
         />
 
         <div className="space-y-2">
@@ -55,8 +78,8 @@ export default function LoginForm({ onSwitchToActivation }: LoginFormProps) {
         </div>
 
         <div className="pt-2">
-          <Button variant="green" className="w-full">
-            Se connecter
+          <Button variant="green" className="w-full" type="submit" disabled={loading}>
+            {loading ? "Connexion..." : "Se connecter"}
           </Button>
         </div>
       </form>

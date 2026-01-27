@@ -1,9 +1,12 @@
+"use client";
+
 import Button from "@/app/components/atoms/Button";
 import Preview from "@/app/components/organisms/Preview";
 import PreventionCollapse from "@/app/components/organisms/PreventionCollapse";
 import FeedbackGrid from "@/app/components/organisms/FeedbackGrid";
 import FAQ from "@/app/components/organisms/FAQ";
 import Companies from "@/app/components/organisms/Companies";
+import { useAuth } from "@/lib/auth-provider";
 
 const feedbacks = [
   {
@@ -81,6 +84,8 @@ const feedbacks = [
 ];
 
 export default function ParticuliersPage() {
+  const { isAuthenticated } = useAuth();
+
   return (
     <>
       {/* === Section Hero === */}
@@ -130,8 +135,13 @@ export default function ParticuliersPage() {
               Nos utilisateurs racontent comment Remindr les aide au quotidien à
               équilibrer leur vie, leur santé et celle de leurs proches.
             </p>
-            <Button href="/particuliers/connexion" variant="green">
-              Je crée aussi mon tableau de bord
+            <Button
+              href={isAuthenticated ? "/dashboard" : "/particuliers/connexion"}
+              variant="green"
+            >
+              {isAuthenticated
+                ? "Accéder à mon tableau de bord"
+                : "Je crée aussi mon tableau de bord"}
             </Button>
           </div>
 

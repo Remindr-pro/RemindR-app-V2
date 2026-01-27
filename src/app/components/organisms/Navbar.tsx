@@ -5,11 +5,13 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import Button from "../atoms/Button";
+import { useAuth } from "@/lib/auth-provider";
 
 export default function Navbar() {
   const pathname = usePathname();
   const isProfessionnal = pathname?.includes("/professionnels");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { isAuthenticated } = useAuth();
 
   if (isProfessionnal) {
     return (
@@ -197,12 +199,20 @@ export default function Navbar() {
 
           {/* Desktop Action Buttons */}
           <div className="hidden lg:flex items-center space-x-3">
-            <Button href="/particuliers/connexion" variant="green">
-              Se connecter
-            </Button>
-            <Button href="/particuliers/inscription" variant="dark">
-              S&apos;inscrire
-            </Button>
+            {isAuthenticated ? (
+              <Button href="/dashboard" variant="green">
+                Dashboard
+              </Button>
+            ) : (
+              <>
+                <Button href="/particuliers/connexion" variant="green">
+                  Se connecter
+                </Button>
+                <Button href="/particuliers/inscription" variant="dark">
+                  S&apos;inscrire
+                </Button>
+              </>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -266,20 +276,32 @@ export default function Navbar() {
                 Le magazine Prévention Santé
               </Link>
               <div className="flex flex-col space-y-2 mt-4 pt-4 border-t border-gray-2">
-                <Button
-                  href="/particuliers/connexion"
-                  variant="green"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  Se connecter
-                </Button>
-                <Button
-                  href="/particuliers/inscription"
-                  variant="dark"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  S&apos;inscrire
-                </Button>
+                {isAuthenticated ? (
+                  <Button
+                    href="/dashboard"
+                    variant="green"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Dashboard
+                  </Button>
+                ) : (
+                  <>
+                    <Button
+                      href="/particuliers/connexion"
+                      variant="green"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      Se connecter
+                    </Button>
+                    <Button
+                      href="/particuliers/inscription"
+                      variant="dark"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      S&apos;inscrire
+                    </Button>
+                  </>
+                )}
               </div>
             </div>
           </div>

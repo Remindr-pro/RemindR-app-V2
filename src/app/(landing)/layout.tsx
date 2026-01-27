@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import Navbar from "../components/organisms/Navbar";
 import Footer from "../components/organisms/Footer";
 import BannerCta from "../components/organisms/BannerCta";
+import { useAuth } from "@/lib/auth-provider";
 
 export default function LandingLayout({
   children,
@@ -11,6 +12,7 @@ export default function LandingLayout({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
+  const { isAuthenticated } = useAuth();
 
   // Banner configuration
   const getBannerConfig = () => {
@@ -61,8 +63,12 @@ export default function LandingLayout({
             Un pas simple vers <br /> une meilleure prévention.
           </>
         ),
-        button: "Je crée mon tableau de bord santé",
-        buttonLink: "/particuliers/inscription",
+        button: isAuthenticated
+          ? "Accéder à mon tableau de bord"
+          : "Je crée mon tableau de bord santé",
+        buttonLink: isAuthenticated
+          ? "/dashboard"
+          : "/particuliers/inscription",
       };
     } else {
       // Valeur par défaut
@@ -72,8 +78,12 @@ export default function LandingLayout({
             Un pas simple vers <br /> une meilleure prévention.
           </>
         ),
-        button: "Je crée mon tableau de bord santé",
-        buttonLink: "/particuliers/inscription",
+        button: isAuthenticated
+          ? "Accéder à mon tableau de bord"
+          : "Je crée mon tableau de bord santé",
+        buttonLink: isAuthenticated
+          ? "/dashboard"
+          : "/particuliers/inscription",
       };
     }
   };

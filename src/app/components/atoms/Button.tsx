@@ -31,7 +31,7 @@ export default function Button({
   const roundedClass = roundedFull ? "rounded-full" : "rounded-lg";
   const sizeClasses =
     size === "sm" ? "px-4 py-2 text-sm" : "px-6 py-3 text-base";
-  const baseClasses = `${sizeClasses} ${roundedClass} font-medium whitespace-nowrap transition-all duration-200 text-center inline-flex items-center justify-center gap-2 hover:shadow-md active:scale-[0.98]`;
+  const baseClasses = `${sizeClasses} ${roundedClass} cursor-pointer font-medium whitespace-nowrap transition-all duration-200 text-center inline-flex items-center justify-center gap-2 hover:shadow-md active:scale-[0.98]`;
 
   const getVariantClasses = () => {
     const variantConfig = {

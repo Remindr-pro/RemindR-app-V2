@@ -3,11 +3,12 @@
 import { useState, useEffect, useMemo, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import {
   IconLayoutSidebarLeftCollapseFilled,
   IconLayoutSidebarRightCollapseFilled,
 } from "@tabler/icons-react";
+import { useAuth } from "@/lib/auth-provider";
 
 import IconLayout from "../atoms/icons/Layout";
 import IconCalendar from "../atoms/icons/Calendar2";
@@ -273,6 +274,8 @@ const Overlay = ({ isVisible, onClose }: OverlayProps) => {
 // Main Component
 const SideBar = ({ isOpen: externalIsOpen, onToggle }: SideBarProps) => {
   const pathname = usePathname();
+  const router = useRouter();
+  const { logout, user } = useAuth();
   const [internalIsOpen, setInternalIsOpen] = useState(false);
 
   // Determine if sidebar is open (external state takes precedence)
@@ -304,6 +307,28 @@ const SideBar = ({ isOpen: externalIsOpen, onToggle }: SideBarProps) => {
   }, [externalIsOpen]);
 
   const accountItemsCollapsed = useMemo(() => ACCOUNT_NAV_ITEMS.slice(1), []);
+
+  // Handler pour le logout
+  const handleLogout = useCallback(async () => {
+    try {
+      await logout();
+
+      router.push("/connexion");
+    } catch (error) {
+      console.error("Erreur lors de la déconnexion:", error);
+
+      router.push("/connexion");
+    }
+  }, [logout, router]);
+
+  // Préparer les données utilisateur pour UserProfile
+  const userName = user ? `${user.firstName} ${user.lastName}` : "";
+  const accountType =
+    user?.userType === "family"
+      ? "Compte famille"
+      : user?.userType === "individual"
+        ? "Compte individuel"
+        : "";
 
   const sidebarClasses = useMemo(() => {
     const baseClasses =
@@ -383,9 +408,10 @@ const SideBar = ({ isOpen: externalIsOpen, onToggle }: SideBarProps) => {
 
           {/* User Profile */}
           <UserProfile
-            name="Camille Dupont"
-            accountType="Compte famille"
+            name={userName}
+            accountType={accountType}
             isCollapsed={!isOpen}
+            onLogout={handleLogout}
           />
         </div>
       </aside>
