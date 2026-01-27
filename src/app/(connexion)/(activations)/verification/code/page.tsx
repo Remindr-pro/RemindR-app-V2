@@ -25,17 +25,17 @@ export default function VerificationPage() {
       />
 
       <div className="w-full pt-2 text-center">
-        <Button variant="green" className="w-full md:w-max">
+        <Button variant="green" className="w-full md:w-max" href="/compte">
           Vérifier mon compte
         </Button>
       </div>
       <span>
         Vous n’avez pas reçu le code ?{" "}
-        <Link href="/" className="text-greenMain underline">
+        <Link href="/verification" className="text-greenMain underline">
           Renvoyer
         </Link>
       </span>
-      <Link href="/" className="text-greenMain underline">
+      <Link href="/verification" className="text-greenMain underline">
         Utiliser un autre moyen.
       </Link>
     </div>

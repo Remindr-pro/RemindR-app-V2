@@ -22,11 +22,7 @@ export default function ActivationInfo({
       </p>
 
       <div className="space-y-4">
-        <Button
-          variant="green"
-          href="/connexion/renvoyer-lien"
-          className="w-full"
-        >
+        <Button variant="green" href="/bienvenue" className="w-full">
           Renvoyer le lien d&apos;activation
         </Button>
 

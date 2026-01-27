@@ -14,7 +14,7 @@ export default function ComptePage() {
 
   return (
     <div className="w-full max-w-md flex flex-col items-center justify-center gap-2 font-inclusive">
-      <AccountForm onSubmit={handleSubmit} />
+      <AccountForm buttonHref="/compte-active" onSubmit={handleSubmit} />
     </div>
   );
 }

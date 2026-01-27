@@ -4,12 +4,13 @@ import { useState } from "react";
 import VerificationCard from "@/app/components/molecules/VerificationCard";
 import Button from "@/app/components/atoms/Button";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function VerificationPage() {
   const [selectedMethod, setSelectedMethod] = useState<"email" | "sms" | null>(
-    null
+    null,
   );
-
+  const router = useRouter();
   const handleMethodSelect = (method: "email" | "sms") => {
     setSelectedMethod(method);
   };
@@ -48,6 +49,7 @@ export default function VerificationPage() {
             if (selectedMethod) {
               // Logique pour envoyer le code
               console.log(`Envoi du code par ${selectedMethod}`);
+              router.push("/verification/code");
             }
           }}
           disabled={!selectedMethod}

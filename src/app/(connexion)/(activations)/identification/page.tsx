@@ -14,7 +14,7 @@ export default function IdentificationPage() {
 
   return (
     <div className="w-full max-w-md flex flex-col items-center justify-center gap-2 font-inclusive">
-      <IdentificationForm onSubmit={handleSubmit} />
+      <IdentificationForm buttonHref="/verification" onSubmit={handleSubmit} />
     </div>
   );
 }
