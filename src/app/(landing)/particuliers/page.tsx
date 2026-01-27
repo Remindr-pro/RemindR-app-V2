@@ -136,7 +136,7 @@ export default function ParticuliersPage() {
               équilibrer leur vie, leur santé et celle de leurs proches.
             </p>
             <Button
-              href={isAuthenticated ? "/dashboard" : "/particuliers/connexion"}
+              href={isAuthenticated ? "/dashboard" : "/connexion"}
               variant="green"
             >
               {isAuthenticated

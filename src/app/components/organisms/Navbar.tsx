@@ -205,10 +205,10 @@ export default function Navbar() {
               </Button>
             ) : (
               <>
-                <Button href="/particuliers/connexion" variant="green">
+                <Button href="/connexion" variant="green">
                   Se connecter
                 </Button>
-                <Button href="/particuliers/inscription" variant="dark">
+                <Button href="/inscription" variant="dark">
                   S&apos;inscrire
                 </Button>
               </>
@@ -287,14 +287,14 @@ export default function Navbar() {
                 ) : (
                   <>
                     <Button
-                      href="/particuliers/connexion"
+                      href="/connexion"
                       variant="green"
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
                       Se connecter
                     </Button>
                     <Button
-                      href="/particuliers/inscription"
+                      href="/inscription"
                       variant="dark"
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
