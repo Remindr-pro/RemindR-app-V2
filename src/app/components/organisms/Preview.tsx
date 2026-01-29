@@ -1,10 +1,12 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Button from "../atoms/Button";
 
 const PREVIEW_IMAGES = {
   "Tableau de bord familial": {
+    image: "/images/illustrations/dashboard.png",
     color: "#4A90E2",
     text: "Tableau de bord familial",
   },
@@ -35,14 +37,27 @@ export default function Preview() {
 
   return (
     <div className="w-full h-full flex flex-col items-center justify-center gap-4 sm:gap-6 px-4 sm:px-6 lg:px-8">
-      {/* Image */}
-      <div
-        className="bg-light border-6 md:border-8 border-gray-2 w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[660px] rounded-lg sm:rounded-xl overflow-hidden flex items-center justify-center shadow-md transition-all duration-300"
-        style={{ backgroundColor: currentImage.color }}
-      >
-        <span className="text-white text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-medium text-center px-4 sm:px-6 md:px-8 leading-tight">
-          {currentImage.text}
-        </span>
+      {/* Image ou placeholder */}
+      <div className="bg-light border-6 md:border-8 border-gray-2 w-full max-w-[1140px] rounded-lg sm:rounded-xl overflow-hidden shadow-md transition-all duration-300">
+        {"image" in currentImage && currentImage.image ? (
+          <Image
+            src={currentImage.image}
+            alt={currentImage.text}
+            width={1140}
+            height={662}
+            className="w-full h-auto block"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1140px"
+          />
+        ) : (
+          <div
+            className="w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[660px] flex items-center justify-center"
+            style={{ backgroundColor: currentImage.color }}
+          >
+            <span className="text-white text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-medium text-center px-4 sm:px-6 md:px-8 leading-tight">
+              {currentImage.text}
+            </span>
+          </div>
+        )}
       </div>
 
       {/* Nav */}

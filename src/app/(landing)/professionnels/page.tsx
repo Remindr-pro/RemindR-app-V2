@@ -2,6 +2,7 @@ import Button from "@/app/components/atoms/Button";
 import Companies from "@/app/components/organisms/Companies";
 import FeatureCard from "@/app/components/molecules/FeatureCard";
 import StepCard from "@/app/components/molecules/StepCard";
+import Image from "next/image";
 
 export default function ProfessionnelsPage() {
   const features = [
@@ -49,8 +50,17 @@ export default function ProfessionnelsPage() {
       {/* === Section Preview === */}
       <section className="min-h-screen flex flex-col items-center justify-center py-0 md:py-24">
         <div className="w-full h-full flex flex-col items-center justify-center gap-4 sm:gap-6 px-4 sm:px-6 lg:px-8">
-          {/* Image */}
-          <div className="bg-light border-6 md:border-8 border-gray-2 w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[660px] rounded-lg sm:rounded-xl overflow-hidden flex items-center justify-center shadow-md transition-all duration-300"></div>
+          <div className="bg-light border-6 md:border-8 border-gray-2 rounded-lg sm:rounded-xl overflow-hidden shadow-md w-full max-w-[1140px]">
+            <Image
+              src="/images/illustrations/dashboard-mutuelle.png"
+              alt="Tableau de bord professionnel Remindr"
+              width={1140}
+              height={662}
+              className="w-full h-auto block"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1140px"
+              priority
+            />
+          </div>
         </div>
       </section>
 
