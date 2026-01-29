@@ -1,17 +1,21 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Badge from "@/app/components/atoms/Badge";
 import BlogCarouselCard from "@/app/components/molecules/BlogCarouselCard";
 import RecommendedRemindersCard from "@/app/components/molecules/RecommendedRemindersCard";
 import CommunicationCard from "@/app/components/molecules/CommunicationCard";
 import PromotionalCard from "@/app/components/molecules/PromotionalCard";
 import DashboardSidebar from "@/app/components/molecules/DashboardSidebar";
+import WelcomeProfileModal from "@/app/components/organisms/WelcomeProfileModal";
 import type { ArticleCardProps } from "@/app/components/molecules/ArticleCard";
 import { useAuth } from "@/lib/auth-provider";
 
 export default function DashboardPage() {
   const { user } = useAuth();
+  const router = useRouter();
+  const [showWelcomeModal, setShowWelcomeModal] = useState(true);
   const [messages, setMessages] = useState([
     {
       id: "1",
@@ -91,13 +95,29 @@ export default function DashboardPage() {
     // Logique de refus du rappel
   };
 
+  const userName = user?.firstName ?? "Camille";
+
   return (
     <div className="w-full mx-auto bg-gray-1 rounded-2xl">
+      <WelcomeProfileModal
+        isOpen={showWelcomeModal}
+        onClose={() => setShowWelcomeModal(false)}
+        userName={userName}
+        onCompleteProfile={() => {
+          setShowWelcomeModal(false);
+          router.push("/dashboard/mon-compte");
+        }}
+        onIgnore={() => setShowWelcomeModal(false)}
+      />
+
       <div className="flex flex-col gap-4">
         <div className="h-16 flex items-center justify-between border-b border-gray-2">
           <div className="px-6 xl:px-10 flex items-center justify-between gap-4 flex-1">
             <h2 className="text-xl font-semibold">
-              Bonjour, <span className="text-greenMain">{user?.firstName || "Utilisateur"}</span>
+              Bonjour,{" "}
+              <span className="text-greenMain">
+                {user?.firstName || "Utilisateur"}
+              </span>
             </h2>
 
             <div className="flex items-center gap-3">
