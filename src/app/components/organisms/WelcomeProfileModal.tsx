@@ -57,7 +57,7 @@ export default function WelcomeProfileModal({
       >
         <ModalCloseButton onClose={onClose} />
 
-        <IconHandWave size={56} className="text-dark mb-6" />
+        <IconHandWave size={100} className="text-dark mb-6" />
 
         <h2
           id="welcome-modal-title"
