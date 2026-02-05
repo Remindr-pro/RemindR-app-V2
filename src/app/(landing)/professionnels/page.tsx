@@ -111,16 +111,19 @@ export default function ProfessionnelsPage() {
             number={1}
             title="Analyse intelligente & segmentation santé personnalisée."
             description="Remindr dresse automatiquement un portrait santé global pour chaque adhérent : âge, situation, habitudes de vie, besoins déclarés... Cette analyse permet d'identifier les priorités de prévention et d'activer les bons contenus au bon moment."
+            image="/images/illustrations/analyse.png"
           />
           <StepCard
             number={2}
             title="Recommandations & rappels automatiques."
             description="La plateforme envoie aux adhérents des rappels adaptés : vaccins, examens, dépistages, conseils nutrition/sommeil, moments clés de croissance (puberté, entrée à l'école...), bien-être mental, hygiène de vie... Toutes les recommandations sont fiables, vérifiées, et personnalisées selon les profils."
+            image="/images/illustrations/notifications.png"
           />
           <StepCard
             number={3}
             title="Tableau de bord B2B : vos KPIs, vos actions, votre impact"
             description="Suivez en temps réel l'engagement de vos adhérents, mesurez l'impact de vos campagnes de prévention, et pilotez votre stratégie santé grâce à des indicateurs clés personnalisés. Visualisez vos actions et leur efficacité pour optimiser continuellement votre approche de la prévention."
+            image="/images/illustrations/dashboard-b2b.png"
           />
         </div>
 

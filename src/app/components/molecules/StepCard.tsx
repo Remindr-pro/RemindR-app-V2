@@ -27,15 +27,15 @@ export default function StepCard({
     <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12 w-full max-w-6xl">
       {/* Élément visuel à gauche */}
       <div className="w-full md:w-1/2 flex items-center justify-center order-2 md:order-1">
-        <div className="w-full max-w-md h-[200px] md:h-[250px] bg-light border-6 md:border-8 border-gray-2 rounded-lg sm:rounded-xl">
+        <div className="w-full max-w-md aspect-4/3 md:aspect-5/4 relative bg-light border-6 md:border-8 border-gray-2 rounded-xl overflow-hidden shadow-sm">
           {image && (
-            <div className="w-full h-full rounded-xl overflow-hidden">
+            <div className="absolute inset-0 p-1 md:p-2">
               <Image
                 src={image}
                 alt={title}
-                width={100}
-                height={100}
-                className="w-full h-full object-cover"
+                fill
+                sizes="(max-width: 768px) 100vw, 45vw"
+                className="object-contain drop-shadow-sm"
               />
             </div>
           )}
