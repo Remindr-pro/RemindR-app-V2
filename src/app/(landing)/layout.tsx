@@ -1,10 +1,14 @@
 "use client";
 
+import { useState } from "react";
 import { usePathname } from "next/navigation";
 import Navbar from "../components/organisms/Navbar";
 import Footer from "../components/organisms/Footer";
 import BannerCta from "../components/organisms/BannerCta";
 import { useAuth } from "@/lib/auth-provider";
+import ChatIcon from "../components/atoms/icons/Chat";
+import Chat from "../components/molecules/Chat";
+import ToggleRoundedButton from "../components/atoms/ToggleRoundedButton";
 
 export default function LandingLayout({
   children,
@@ -13,6 +17,7 @@ export default function LandingLayout({
 }) {
   const pathname = usePathname();
   const { isAuthenticated } = useAuth();
+  const [isChatActive, setChatActive] = useState(false);
 
   // Banner configuration
   const getBannerConfig = () => {
@@ -96,6 +101,22 @@ export default function LandingLayout({
       <main className="min-h-screen max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {children}
       </main>
+
+      <div className="fixed bottom-6 right-3 md:bottom-8 md:right-4 z-9999">
+        {isChatActive && <Chat onClose={() => setChatActive(false)} />}
+        <ToggleRoundedButton
+          className="w-12 h-12 md:w-auto md:h-auto relative flex items-center justify-center border-2 border-light"
+          onClick={(active) => setChatActive(active)}
+          updateField={isChatActive}
+          inactiveBackground="primary"
+          activeBackground="steel"
+          activeTooltipContent="Discussion"
+          inactiveTooltipContent="Fermer la discussion"
+          tooltipPosition="left"
+        >
+          <ChatIcon fill="fill-light" />
+        </ToggleRoundedButton>
+      </div>
 
       <BannerCta
         title={bannerConfig.title}
