@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import Navbar from "../components/organisms/Navbar";
 import Footer from "../components/organisms/Footer";
 import BannerCta from "../components/organisms/BannerCta";
+import NewsletterSection from "../components/organisms/NewsletterSection";
 import { useAuth } from "@/lib/auth-provider";
 import ChatIcon from "../components/atoms/icons/Chat";
 import Chat from "../components/molecules/Chat";
@@ -124,6 +125,7 @@ export default function LandingLayout({
         button={bannerConfig.button}
         buttonLink={bannerConfig.buttonLink}
       />
+      {pathname?.includes("/particuliers/magazine") && <NewsletterSection />}
       <Footer />
     </>
   );
