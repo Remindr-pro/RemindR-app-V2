@@ -17,6 +17,7 @@ interface ContactFormData {
 
 interface ContactFormProps {
   onSubmit?: (data: ContactFormData) => void;
+  defaultEmail?: string;
 }
 
 const SUBJECT_OPTIONS = [
@@ -26,8 +27,11 @@ const SUBJECT_OPTIONS = [
   { value: "other", label: "Autre" },
 ];
 
-export default function ContactForm({ onSubmit }: ContactFormProps) {
-  const [email, setEmail] = useState("");
+export default function ContactForm({
+  onSubmit,
+  defaultEmail = "",
+}: ContactFormProps) {
+  const [email, setEmail] = useState(defaultEmail);
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
   const [acceptTerms, setAcceptTerms] = useState(false);

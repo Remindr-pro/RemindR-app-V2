@@ -30,7 +30,16 @@ export default function LoginForm({ onSwitchToActivation }: LoginFormProps) {
       // Rediriger vers le dashboard après connexion réussie
       router.push("/dashboard");
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Une erreur est survenue");
+      const rawMessage = err instanceof Error ? err.message : "";
+      const isAuthError =
+        /invalid credentials|identifiants invalides|unauthorized/i.test(
+          rawMessage
+        );
+      setError(
+        isAuthError
+          ? "L'adresse e-mail ou le mot de passe est incorrect. Veuillez réessayer."
+          : "Une erreur est survenue. Veuillez réessayer."
+      );
     } finally {
       setLoading(false);
     }
@@ -44,7 +53,10 @@ export default function LoginForm({ onSwitchToActivation }: LoginFormProps) {
 
       <form onSubmit={handleSubmit} className="space-y-5">
         {error && (
-          <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
+          <div
+            className="bg-red-50 border border-red-1 text-red-2 px-4 py-4 rounded-lg text-base font-inclusive text-center"
+            role="alert"
+          >
             {error}
           </div>
         )}
@@ -78,7 +90,12 @@ export default function LoginForm({ onSwitchToActivation }: LoginFormProps) {
         </div>
 
         <div className="pt-2">
-          <Button variant="green" className="w-full" type="submit" disabled={loading}>
+          <Button
+            variant="green"
+            className="w-full"
+            type="submit"
+            disabled={loading}
+          >
             {loading ? "Connexion..." : "Se connecter"}
           </Button>
         </div>

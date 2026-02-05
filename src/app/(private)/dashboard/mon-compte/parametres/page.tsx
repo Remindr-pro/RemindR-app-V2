@@ -2,8 +2,11 @@
 
 import Image from "next/image";
 import Input from "@/app/components/atoms/Input";
+import { useAuth } from "@/lib/auth-provider";
 
 export default function ParametresPage() {
+  const { user } = useAuth();
+
   return (
     <div className="w-full mx-auto pt-8">
       <div className="p-8 bg-light rounded-2xl">
@@ -38,7 +41,7 @@ export default function ParametresPage() {
               <Input
                 type="email"
                 label="Adresse e-mail"
-                defaultValue="camille.dupont@mail.com"
+                defaultValue={user?.email}
               />
               <Input
                 type="password"

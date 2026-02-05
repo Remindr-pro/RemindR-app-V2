@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Button from "@/app/components/atoms/Button";
 
 export default function ContratPage() {
@@ -24,12 +25,14 @@ export default function ContratPage() {
 
           <div className="flex gap-4">
             <Button variant="green">Consultez vos garanties</Button>
-            <Button
-              variant="outline"
-              className="border-greenMain text-greenMain hover:bg-greenMain/10"
-            >
-              Nous contacter
-            </Button>
+            <Link href="/dashboard/mon-compte/contact">
+              <Button
+                variant="outline"
+                className="border-greenMain text-greenMain hover:bg-greenMain/10"
+              >
+                Nous contacter
+              </Button>
+            </Link>
           </div>
         </div>
       </div>
