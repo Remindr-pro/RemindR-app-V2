@@ -8,13 +8,13 @@ export interface ProfileQuestionnaireCardProps {
   name: string;
   role: string;
   birthdate: string;
-  gender: "Femme" | "Homme";
+  gender: "Femme" | "Homme" | "Non précisé";
   avatarUrl?: string;
   onComplete: () => void;
   onRemove?: () => void;
 }
 
-const defaultAvatar = "/images/articles/article-semaine-1.jpg";
+const defaultAvatar = "/images/illustrations/avatar.png";
 
 export default function ProfileQuestionnaireCard({
   name,

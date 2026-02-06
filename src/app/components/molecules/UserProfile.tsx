@@ -17,8 +17,6 @@ export default function UserProfile({
   onLogout,
   isCollapsed = false,
 }: UserProfileProps) {
-  const defaultAvatar = "/images/articles/article-semaine-1.jpg";
-
   const handleLogout = () => {
     if (onLogout) {
       onLogout();
@@ -45,15 +43,17 @@ export default function UserProfile({
             className="drop-shadow-sm"
           />
         </button>
-        {/* Photo en bas */}
-        <div className="relative h-10 w-10 rounded-full overflow-hidden shrink-0">
-          <Image
-            src={avatarUrl || defaultAvatar}
-            alt="Photo de profil"
-            fill
-            className="object-cover"
-          />
-        </div>
+        {/* Photo en bas (affichée uniquement si une photo de profil est fournie) */}
+        {avatarUrl && (
+          <div className="relative h-10 w-10 rounded-full overflow-hidden shrink-0">
+            <Image
+              src={avatarUrl}
+              alt="Photo de profil"
+              fill
+              className="object-cover"
+            />
+          </div>
+        )}
       </div>
     );
   }
@@ -63,14 +63,16 @@ export default function UserProfile({
     <div className="px-4 pb-6">
       <div className="flex items-center justify-between rounded-2xl bg-light px-3 py-3 shadow-lg">
         <div className="flex items-center gap-3">
-          <div className="relative h-10 w-10 rounded-full overflow-hidden shrink-0">
-            <Image
-              src={avatarUrl || defaultAvatar}
-              alt="Photo de profil"
-              fill
-              className="object-cover"
-            />
-          </div>
+          {avatarUrl && (
+            <div className="relative h-10 w-10 rounded-full overflow-hidden shrink-0">
+              <Image
+                src={avatarUrl}
+                alt="Photo de profil"
+                fill
+                className="object-cover"
+              />
+            </div>
+          )}
           <div className="flex flex-col">
             <span className="text-sm font-medium">{name}</span>
             <span className="text-xs text-gray-500 font-inclusive">

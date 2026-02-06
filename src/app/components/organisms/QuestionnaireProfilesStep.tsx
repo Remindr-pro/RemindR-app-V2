@@ -8,7 +8,7 @@ export interface ProfileItem {
   name: string;
   role: string;
   birthdate: string;
-  gender: "Femme" | "Homme";
+  gender: "Femme" | "Homme" | "Non précisé";
   avatarUrl?: string;
 }
 
@@ -17,6 +17,7 @@ interface QuestionnaireProfilesStepProps {
   onCompleteProfile: (id: string) => void;
   onRemoveProfile?: (id: string) => void;
   onAddProfile: () => void;
+  mainProfileId?: string;
 }
 
 export default function QuestionnaireProfilesStep({
@@ -24,7 +25,15 @@ export default function QuestionnaireProfilesStep({
   onCompleteProfile,
   onRemoveProfile,
   onAddProfile,
+  mainProfileId,
 }: QuestionnaireProfilesStepProps) {
+  const canRemoveProfile = (profileId: string) => {
+    if (!onRemoveProfile) return false;
+    if (mainProfileId !== undefined) return profileId !== mainProfileId;
+
+    return profiles.length > 1;
+  };
+
   return (
     <div className="flex flex-col w-full">
       <div className="flex flex-col md:flex-row md:flex-wrap items-center md:items-start gap-4 md:gap-6">
@@ -38,8 +47,8 @@ export default function QuestionnaireProfilesStep({
             avatarUrl={profile.avatarUrl}
             onComplete={() => onCompleteProfile(profile.id)}
             onRemove={
-              onRemoveProfile && profiles.length > 1
-                ? () => onRemoveProfile(profile.id)
+              canRemoveProfile(profile.id)
+                ? () => onRemoveProfile?.(profile.id)
                 : undefined
             }
           />

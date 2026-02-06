@@ -3,7 +3,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { AuthService, RegisterData } from "./auth-service";
 
-interface User {
+export interface User {
   id: string;
   email: string;
   firstName: string;
@@ -11,6 +11,10 @@ interface User {
   role: string;
   userType: string;
   familyId?: string | null;
+  dateOfBirth?: string | null;
+  genderBirth?: string | null;
+  genderActual?: string | null;
+  profilePictureUrl?: string | null;
 }
 
 interface AuthContextType {
@@ -38,7 +42,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       } catch (error) {
         console.error(
           "Erreur lors de la vérification de l'authentification:",
-          error,
+          error
         );
       } finally {
         setLoading(false);
