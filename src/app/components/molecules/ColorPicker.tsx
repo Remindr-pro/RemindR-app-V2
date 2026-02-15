@@ -44,7 +44,9 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
             onClick={() => setIsOpen(!isOpen)}
             className="flex items-center justify-center"
           >
-            <IconHelp size={14} className="text-gray-4" />
+            <span className="text-gray-4">
+              <IconHelp size={14} />
+            </span>
           </button>
         </div>
 
