@@ -3,10 +3,21 @@
 import { useState, useCallback, useMemo } from "react";
 import QuestionnaireProfilesStep from "@/app/components/organisms/QuestionnaireProfilesStep";
 import QuestionnaireStepNavigation from "@/app/components/molecules/QuestionnaireStepNavigation";
+import ProfileEditModal from "@/app/components/organisms/ProfileEditModal";
 import type { ProfileItem } from "@/app/components/organisms/QuestionnaireProfilesStep";
+import type { ProfileEditFormData } from "@/app/components/organisms/ProfileEditModal";
 import { useAuth } from "@/lib/auth-provider";
 import type { User } from "@/lib/auth-provider";
 import { BASE_PATH } from "./constants";
+
+function formGenderToProfileItem(
+  value: string
+): "Femme" | "Homme" | "Non précisé" {
+  if (value === "non_precise") return "Non précisé";
+  if (value === "Homme") return "Homme";
+  if (value === "Femme") return "Femme";
+  return "Non précisé";
+}
 
 function formatBirthdate(isoDate: string | null | undefined): string {
   if (!isoDate) return "--/--/----";
@@ -61,18 +72,72 @@ export default function MonQuestionnaireSanteProfilsPage() {
   const [additionalProfiles, setAdditionalProfiles] = useState<ProfileItem[]>(
     []
   );
+  const [editingProfileId, setEditingProfileId] = useState<string | null>(null);
+  const [mainProfileOverride, setMainProfileOverride] = useState<{
+    firstName: string;
+    birthdate: string;
+    gender: "Femme" | "Homme" | "Non précisé";
+  } | null>(null);
+
+  const displayedMainProfile = useMemo(() => {
+    if (!mainProfile) return null;
+    if (!mainProfileOverride) return mainProfile;
+    return {
+      ...mainProfile,
+      name: mainProfileOverride.firstName || mainProfile.name,
+      birthdate: mainProfileOverride.birthdate || mainProfile.birthdate,
+      gender: mainProfileOverride.gender,
+    };
+  }, [mainProfile, mainProfileOverride]);
+
   const profiles = useMemo(
     () =>
-      mainProfile && showMainProfile
-        ? [mainProfile, ...additionalProfiles]
+      displayedMainProfile && showMainProfile
+        ? [displayedMainProfile, ...additionalProfiles]
         : additionalProfiles,
-    [mainProfile, showMainProfile, additionalProfiles]
+    [displayedMainProfile, showMainProfile, additionalProfiles]
+  );
+
+  const profileBeingEdited = useMemo(
+    () => profiles.find((p) => p.id === editingProfileId) ?? null,
+    [profiles, editingProfileId]
   );
 
   const handleCompleteProfile = useCallback((id: string) => {
-    // TODO: navigation vers formulaire de complétion du profil
-    console.log("Compléter le profil", id);
+    setEditingProfileId(id);
   }, []);
+
+  const handleCloseModal = useCallback(() => {
+    setEditingProfileId(null);
+  }, []);
+
+  const handleValidateProfile = useCallback(
+    (profileId: string, data: ProfileEditFormData) => {
+      const gender = formGenderToProfileItem(data.genderBirth);
+
+      if (mainProfile?.id === profileId) {
+        setMainProfileOverride({
+          firstName: data.firstName,
+          birthdate: data.birthdate,
+          gender,
+        });
+      } else {
+        setAdditionalProfiles((prev) =>
+          prev.map((p) =>
+            p.id === profileId
+              ? {
+                  ...p,
+                  name: data.firstName,
+                  birthdate: data.birthdate,
+                  gender,
+                }
+              : p
+          )
+        );
+      }
+    },
+    [mainProfile?.id]
+  );
 
   const handleRemoveProfile = useCallback(
     (id: string) => {
@@ -107,6 +172,13 @@ export default function MonQuestionnaireSanteProfilsPage() {
         onRemoveProfile={handleRemoveProfile}
         onAddProfile={handleAddProfile}
         mainProfileId={mainProfile?.id}
+      />
+
+      <ProfileEditModal
+        isOpen={editingProfileId !== null}
+        onClose={handleCloseModal}
+        profile={profileBeingEdited}
+        onValidate={handleValidateProfile}
       />
 
       <QuestionnaireStepNavigation
