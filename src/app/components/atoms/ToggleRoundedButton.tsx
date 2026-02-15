@@ -95,7 +95,13 @@ const ToggleRoundedButton = ({
     <button
       {...props}
       onClick={handleToggle}
-      className={`${effectiveActive ? activeBackgroundColor : inactiveBackgroundColor} p-4 rounded-full ease-out duration-300 ${isPulse ? "animate-pulse-effect" : ""} ${className}`}
+      type="button"
+      aria-label={tooltipContent ?? undefined}
+      className={`${
+        effectiveActive ? activeBackgroundColor : inactiveBackgroundColor
+      } p-4 rounded-full ease-out duration-300 ${
+        isPulse ? "animate-pulse-effect" : ""
+      } ${className}`}
       {...(isActiveTooltip
         ? { "data-tooltip": tooltipContent, "data-position": tooltipPosition }
         : {})}
