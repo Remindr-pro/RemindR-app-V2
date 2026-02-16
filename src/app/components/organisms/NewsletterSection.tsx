@@ -68,7 +68,7 @@ export default function NewsletterSection() {
           directement dans votre boîte mail. Pour des conseils personnalisés et
           des rappels santé sur mesure,{" "}
           <Link
-            href="/particuliers/dashboard"
+            href="/dashboard"
             className="underline text-gray-4 hover:text-greenMain transition-colors"
           >
             activez votre tableau de bord Remindr
