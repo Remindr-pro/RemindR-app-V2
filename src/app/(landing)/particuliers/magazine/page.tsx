@@ -6,12 +6,12 @@ import { ArticleCardProps } from "@/app/components/molecules/ArticleCard";
 const articles: ArticleCardProps[] = [
   {
     image: "/images/articles/article-semaine-1.jpg",
-    category: "Prévention au quotidien",
+    category: "Prévention",
     title: "Automne : 5 réflexes santé pour vous et vos proches",
     date: "20 octobre 2025",
   },
   {
-    image: "/images/articles/articles-semaine-2.jpg",
+    image: "/images/articles/article-semaine-2.jpg",
     category: "Bien-être global",
     title: "5 gestes pour alléger votre charge mentale santé",
     date: "16 octobre 2025",
@@ -30,7 +30,7 @@ const articles: ArticleCardProps[] = [
   },
   {
     image: "/images/articles/article-semaine-5.jpg",
-    category: "Prévention au quotidien",
+    category: "Prévention",
     title: "Vos droits santé simplifiés",
     date: "15 octobre 2025",
   },
@@ -39,13 +39,13 @@ const articles: ArticleCardProps[] = [
 const allArticles: ArticleCardProps[] = [
   {
     image: "/images/articles/article-semaine-1.jpg",
-    category: "Prévention au quotidien",
+    category: "Prévention",
     title: "Check-up de rentrée : ce qu'il ne faut pas oublier",
     date: "1 septembre 2025",
   },
   {
-    image: "/images/articles/articles-semaine-2.jpg",
-    category: "Prévention au quotidien",
+    image: "/images/articles/article-semaine-2.jpg",
+    category: "Prévention",
     title: "Les bons gestes pour renforcer l'immunité en hiver",
     date: "1 novembre 2025",
   },
@@ -69,7 +69,7 @@ const allArticles: ArticleCardProps[] = [
   },
   {
     image: "/images/articles/article-semaine-1.jpg",
-    category: "Prévention au quotidien",
+    category: "Prévention",
     title: "Prévention et nutrition : ajuster son assiette selon les saisons",
     date: "25 octobre 2025",
   },
@@ -87,7 +87,7 @@ const allArticles: ArticleCardProps[] = [
   },
   {
     image: "/images/articles/article-semaine-4.jpg",
-    category: "Prévention au quotidien",
+    category: "Prévention",
     title: "Ces rappels santé qu'on oublie (et qui comptent vraiment)",
     date: "20 octobre 2025",
   },
@@ -116,7 +116,7 @@ export default function MagazinePage() {
 
         {/* === Article Pin === */}
         <ArticlePin
-          category="Prévention au quotidien"
+          category="Prévention"
           imageSrc="/images/articles/article-octobre-rose.jpg"
           imageAlt="Article Octobre Rose"
           title="Octobre Rose : dépister tôt pour mieux se protéger"
@@ -134,10 +134,9 @@ export default function MagazinePage() {
               semaine.
             </h2>
             <p className="text-base md:text-lg font-inclusive font-medium text-dark">
-              Des articles récents et pertinents pour vous guider au quotidien
-              dans votre santé et celle de vos proches. Des conseils et astuces
-              concrets faciles à mettre en place, pour prévenir et agir au bon
-              moment.
+              Des articles récents et pertinents pour vous guider dans votre
+              santé et celle de vos proches. Des conseils et astuces concrets
+              faciles à mettre en place, pour prévenir et agir au bon moment.
             </p>
           </div>
 

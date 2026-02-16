@@ -9,6 +9,7 @@ interface ArticlePinProps {
   title: string;
   date: string;
   description?: string;
+  priority?: boolean;
 }
 
 export default function ArticlePin({
@@ -18,6 +19,7 @@ export default function ArticlePin({
   title,
   date,
   description,
+  priority = true,
 }: ArticlePinProps) {
   return (
     <div className="w-full max-w-5xl mx-auto mt-4 md:mt-8 px-4 md:px-0">
@@ -48,7 +50,8 @@ export default function ArticlePin({
             alt={imageAlt}
             fill
             className="object-cover"
-            priority
+            priority={priority}
+            loading={priority ? undefined : "lazy"}
           />
 
           {/* Overlay Gradient */}
