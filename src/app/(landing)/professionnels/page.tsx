@@ -38,10 +38,10 @@ export default function ProfessionnelsPage() {
           de réduire vos coûts tout en renforçant la fidélisation.
         </p>
         <div className="flex flex-col md:flex-row items-center justify-center gap-4">
-          <Button href="/professionnels/inscription" variant="dark">
+          <Button href="#" variant="dark">
             Télécharger la documentation
           </Button>
-          <Button href="/professionnels/contact" variant="green">
+          <Button href="#" variant="green">
             Demander une démo
           </Button>
         </div>
@@ -85,7 +85,7 @@ export default function ProfessionnelsPage() {
             ))}
           </div>
           <div>
-            <Button variant="green" href="/professionnels/contact">
+            <Button variant="green" href="#">
               Demander une démo
             </Button>
           </div>
@@ -128,10 +128,10 @@ export default function ProfessionnelsPage() {
         </div>
 
         <div className="flex flex-col md:flex-row items-center justify-center gap-4">
-          <Button href="/professionnels/inscription" variant="dark">
+          <Button href="#" variant="dark">
             Télécharger la documentation
           </Button>
-          <Button href="/professionnels/contact" variant="green">
+          <Button href="#" variant="green">
             Contacter un commercial
           </Button>
         </div>

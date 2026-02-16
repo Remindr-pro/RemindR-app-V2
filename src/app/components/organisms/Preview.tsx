@@ -102,7 +102,7 @@ export default function Preview() {
               isActive={currentPreview === "Recommandations personnalisées"}
               className="w-full text-sm sm:text-base"
             >
-              Recommandations personnalisées
+              Recommandations
             </Button>
           </li>
         </ul>

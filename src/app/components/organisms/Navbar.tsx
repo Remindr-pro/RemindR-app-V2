@@ -60,10 +60,10 @@ export default function Navbar() {
 
             {/* Desktop CTA Button */}
             <div className="hidden lg:flex items-center space-x-3">
-              <Button href="/particuliers/demo" variant="green">
+              <Button href="#" variant="green">
                 Demander une démo
               </Button>
-              <Button href="/particuliers/inscription" variant="dark">
+              <Button href="#" variant="dark">
                 Contacter un commercial
               </Button>
             </div>
@@ -124,14 +124,14 @@ export default function Navbar() {
 
               <div className="flex flex-col space-y-2 mt-4 pt-4 border-t border-gray-2">
                 <Button
-                  href="/professionnels/demo"
+                  href="#"
                   variant="green"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   Demander une démo
                 </Button>
                 <Button
-                  href="/professionnels/contact"
+                  href="#"
                   variant="dark"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
