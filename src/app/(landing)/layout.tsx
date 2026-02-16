@@ -37,7 +37,7 @@ export default function LandingLayout({
             santé avec Remindr
           </>
         ),
-        buttonLink: "/particuliers/dashboard",
+        buttonLink: "/dashboard",
       };
     } else if (pathname?.includes("/professionnels")) {
       return {
@@ -60,7 +60,7 @@ export default function LandingLayout({
           </p>
         ),
         button: "Réserver votre démo dès aujourd’hui",
-        buttonLink: "/professionnels/contact",
+        buttonLink: "#",
       };
     } else if (pathname?.includes("/particuliers")) {
       return {
@@ -72,9 +72,7 @@ export default function LandingLayout({
         button: isAuthenticated
           ? "Accéder à mon tableau de bord"
           : "Je crée mon tableau de bord santé",
-        buttonLink: isAuthenticated
-          ? "/dashboard"
-          : "/particuliers/inscription",
+        buttonLink: "/dashboard",
       };
     } else {
       // Valeur par défaut
@@ -87,9 +85,7 @@ export default function LandingLayout({
         button: isAuthenticated
           ? "Accéder à mon tableau de bord"
           : "Je crée mon tableau de bord santé",
-        buttonLink: isAuthenticated
-          ? "/dashboard"
-          : "/particuliers/inscription",
+        buttonLink: "/dashboard",
       };
     }
   };

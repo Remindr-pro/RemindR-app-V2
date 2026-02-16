@@ -1,36 +1,98 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# RemindR
 
-## Getting Started
+Application web de prévention santé qui aide les particuliers et les professionnels à mieux gérer la santé au quotidien : rappels de rendez-vous, suivi des proches, questionnaire santé et tableau de bord personnalisé.
 
-First, run the development server:
+**Slogan :** _Simplifions la santé du quotidien, pour tous._
+
+---
+
+## À propos du projet
+
+RemindR s’adresse à deux types d’utilisateurs :
+
+- **Particuliers** — Gérer sa santé et celle de ses proches : rappels (vaccins, contrôles, dépistages), calendrier santé, partage avec la famille, tableau de bord personnalisé.
+- **Professionnels** — Mutuelles, assurances santé et organismes de prévoyance : renforcer la prévention des adhérents, démos et contact dédiés.
+
+Fonctionnalités principales côté particulier : questionnaire santé (mesures, maladies, habitudes), tableau de bord avec rappels recommandés, calendrier, espace « Mes proches et moi », mon compte (paramètres, notifications, contrat, contact), magazine, newsletter et chat d’aide.
+
+---
+
+## Stack technique
+
+- **Framework :** [Next.js](https://nextjs.org) 16 (App Router)
+- **UI :** React 19, [Tailwind CSS](https://tailwindcss.com) 4
+- **Auth :** [Better Auth](https://www.better-auth.com) (configuration prête, service personnalisé utilisé côté API)
+- **Icônes :** [Tabler Icons](https://tabler.io/icons) (React)
+- **Langage :** TypeScript
+
+---
+
+## Prérequis
+
+- Node.js (version supportée par Next.js 16)
+- `npm`, `yarn`, `pnpm` ou `bun`
+
+---
+
+## Installation et lancement
 
 ```bash
+# Installer les dépendances
+npm install
+
+# Lancer le serveur de développement
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Ouvrir l’application dans le navigateur : [http://localhost:3000](http://localhost:3000) ou [http://localhost:3001](http://localhost:3001) selon que l’API Remindr tourne aussi ou non (le port 3001 est utilisé lorsque le port 3000 est déjà pris).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Autres commandes
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Commande        | Description           |
+| --------------- | --------------------- |
+| `npm run build` | Build de production   |
+| `npm run start` | Serveur de production |
+| `npm run lint`  | Vérification ESLint   |
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## Structure du projet (aperçu)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **`src/app/`** — Routes et pages (App Router)
+  - **`(landing)/`** — Pages d’accueil : particuliers, professionnels, magazine
+  - **`(connexion)/`** — Connexion, inscription, vérification, activation
+  - **`(private)/`** — Espace connecté (protégé)
+    - **`dashboard/`** — Tableau de bord, calendrier, mon compte, mes proches, magazine
+    - **`mon-questionnaire-sante/`** — Questionnaire santé (mesures, maladies, habitudes)
+- **`src/app/components/`** — Composants (atoms, molecules, organisms)
+- **`src/lib/`** — Auth (client, provider, service), configuration
+- **`src/app/api/`** — Routes API (auth, chat, newsletter)
+- **`src/proxy.ts`** — Logique de redirection pour les routes protégées (`/dashboard`, `/connexion`)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## Variables d’environnement
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+En fonction de votre déploiement, vous pouvez avoir besoin de variables pour :
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- L’API d’authentification (backend)
+- Mailjet (newsletter, emails)
+- Toute API externe utilisée par l’app
+
+Créer un fichier `.env.local` à la racine du projet et y ajouter les clés nécessaires (voir la doc Next.js sur [Environment Variables](https://nextjs.org/docs/app/building-your-application/configuring/environment-variables)).
+
+---
+
+## Déploiement
+
+Le déploiement se fait via [Vercel](https://vercel.com) :
+
+- **Production** — branche `main`
+- **Pré-production** — branche `develop`
+
+---
+
+## Documentation Next.js
+
+- [Documentation Next.js](https://nextjs.org/docs)
+- [Tutoriel Learn Next.js](https://nextjs.org/learn)

@@ -135,10 +135,7 @@ export default function ParticuliersPage() {
               Nos utilisateurs racontent comment Remindr les aide au quotidien à
               équilibrer leur vie, leur santé et celle de leurs proches.
             </p>
-            <Button
-              href={isAuthenticated ? "/dashboard" : "/connexion"}
-              variant="green"
-            >
+            <Button href="/dashboard" variant="green">
               {isAuthenticated
                 ? "Accéder à mon tableau de bord"
                 : "Je crée aussi mon tableau de bord"}

@@ -26,7 +26,7 @@ export default function ActivationInfo({
           Renvoyer le lien d&apos;activation
         </Button>
 
-        <Button variant="dark" href="/mutuelles-partenaires" className="w-full">
+        <Button variant="dark" href="#" className="w-full">
           Voir nos mutuelles partenaires
         </Button>
       </div>
