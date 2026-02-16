@@ -19,7 +19,7 @@ export default function BienvenuePage() {
       <span>
         Je peux aussi{" "}
         <Link href="/" className="text-greenMain underline">
-          refuser l’accés
+          refuser l’accès
         </Link>{" "}
         à mon espace.
       </span>
