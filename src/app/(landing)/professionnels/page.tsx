@@ -65,7 +65,10 @@ export default function ProfessionnelsPage() {
       </section>
 
       {/* === Section Explaination === */}
-      <section className="min-h-screen flex flex-col items-center justify-center py-0 md:py-24">
+      <section
+        className="min-h-screen flex flex-col items-center justify-center py-0 md:py-24"
+        id="pourquoi-remindr"
+      >
         <div className="w-full h-full flex flex-col items-center justify-center gap-4 sm:gap-6 px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl md:text-5xl font-inclusive font-bold text-center">
             Une solution pensée pour la{" "}
@@ -93,7 +96,10 @@ export default function ProfessionnelsPage() {
       </section>
 
       {/* === Section Presentation === */}
-      <section className="min-h-screen flex flex-col items-center justify-center gap-20 py-24 px-4 sm:px-6 lg:px-8">
+      <section
+        className="min-h-screen flex flex-col items-center justify-center gap-20 py-24 px-4 sm:px-6 lg:px-8"
+        id="nos-fonctionnalites"
+      >
         <div className="max-w-7xl mx-auto flex flex-col gap-10 text-center">
           <h2 className="text-3xl md:text-5xl font-inclusive font-bold">
             Comment nous <span className="text-greenMain">fonctionnons</span>.
@@ -138,7 +144,10 @@ export default function ProfessionnelsPage() {
       </section>
 
       {/* === Section Companies === */}
-      <section className="min-h-screen flex flex-col items-center justify-center gap-20 py-24">
+      <section
+        className="min-h-screen flex flex-col items-center justify-center gap-20 py-24"
+        id="nos-sources"
+      >
         <div className="max-w-3xl w-full mx-auto flex flex-col gap-16 text-center">
           <h2 className="text-3xl md:text-6xl font-inclusive font-bold">
             Des sources <span className="text-greenMain">fiables</span> pour une
