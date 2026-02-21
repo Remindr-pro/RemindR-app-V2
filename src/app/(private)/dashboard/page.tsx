@@ -72,7 +72,7 @@ export default function DashboardPage() {
   const blogArticles: ArticleCardProps[] = [
     {
       image: "/images/articles/article-semaine-1.jpg",
-      category: "Prévention au quotidien",
+      category: "Prévention",
       title: "Automne: 5 réflexes santé pour vous et vos proches",
       date: "20 octobre 2025",
       variant: "advice",

@@ -34,6 +34,7 @@ export default function ArticlesCarousel({ articles }: ArticlesCarouselProps) {
             imageAlt={slideArticles[0].title}
             title={slideArticles[0].title}
             date={slideArticles[0].date}
+            priority={false}
           />
         </div>
       );

@@ -99,8 +99,25 @@ export default function LandingLayout({
         {children}
       </main>
 
+      {isChatActive && (
+        <button
+          type="button"
+          aria-label="Fermer le chat"
+          className="fixed inset-0 z-9998 bg-dark/50  animate-fade-in"
+          onClick={() => setChatActive(false)}
+        />
+      )}
       <div className="fixed bottom-6 right-3 md:bottom-8 md:right-4 z-9999">
-        {isChatActive && <Chat onClose={() => setChatActive(false)} />}
+        {isChatActive && (
+          <Chat
+            onClose={() => setChatActive(false)}
+            variant={
+              pathname?.includes("/professionnels")
+                ? "professionnels"
+                : "particuliers"
+            }
+          />
+        )}
         <ToggleRoundedButton
           className="w-12 h-12 md:w-auto md:h-auto relative flex items-center justify-center border-2 border-light"
           onClick={(active) => setChatActive(active)}

@@ -10,7 +10,7 @@ interface ArticlesGridProps {
 
 const CATEGORIES = [
   "Tout",
-  "Prévention au quotidien",
+  "Prévention",
   "Prendre soin des siens",
   "Bien-être global",
   "Comprendre & agir",

@@ -63,10 +63,10 @@ export default function ArticleCard({
   const overlayClasses = [
     "absolute inset-0 transition-all duration-300",
     position === "horizontal"
-      ? "bg-gradient-to-r from-black/80 via-black/60 to-black/40 group-hover:from-black/90 group-hover:via-black/70 group-hover:to-black/50"
+      ? "bg-gradient-to-r from-dark/80 via-dark/60 to-dark/40 group-hover:from-dark/90 group-hover:via-dark/70 group-hover:to-dark/50"
       : isForward && variant === "advice"
-      ? "bg-gradient-to-t from-black/75 via-black/55 to-black/35 group-hover:from-black/85 group-hover:via-black/65 group-hover:to-black/45"
-      : "bg-gradient-to-t from-black/70 via-black/50 to-black/30 group-hover:from-black/90 group-hover:via-black/70 group-hover:to-black/50",
+      ? "bg-gradient-to-t from-dark/75 via-dark/55 to-dark/35 group-hover:from-dark/85 group-hover:via-dark/65 group-hover:to-dark/45"
+      : "bg-gradient-to-t from-dark/75 via-dark/50 to-dark/30 group-hover:from-dark/90 group-hover:via-dark/70 group-hover:to-dark/50",
   ]
     .filter(Boolean)
     .join(" ");
@@ -100,6 +100,7 @@ export default function ArticleCard({
           fill
           className="object-cover transition-transform duration-300 group-hover:scale-105"
           sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          loading="lazy"
         />
       </div>
       {/* Overlay Gradient */}

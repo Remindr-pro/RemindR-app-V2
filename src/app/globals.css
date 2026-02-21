@@ -93,6 +93,12 @@
   will-change: transform;
 }
 
+@media (max-width: 768px) {
+  .animate-scroll {
+    animation-duration: 10s;
+  }
+}
+
 @keyframes scroll-down {
   0% {
     transform: translateY(0);
@@ -119,6 +125,10 @@
 .animate-scroll-up {
   animation: scroll-up 40s linear infinite;
   will-change: transform;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {

@@ -13,19 +13,33 @@ export interface ChatMessage {
   content: string;
 }
 
+const SUGGESTED_QUESTIONS_PARTICULIERS = [
+  "Comment Remindr peut m'aider à ne plus oublier mes rendez-vous et suivis santé ?",
+  "Est-ce que Remindr est adapté pour gérer la santé de toute ma famille ?",
+  "Comment créer mon tableau de bord santé personnalisé ?",
+] as const;
+
+const SUGGESTED_QUESTIONS_PROFESSIONNELS = [
+  "Comment Remindr aide-t-il les mutuelles et assureurs à renforcer la prévention santé ?",
+  "Quels indicateurs de suivi et de performance sont disponibles pour piloter les actions de prévention ?",
+  "Comment intégrer Remindr dans une stratégie d'engagement adhérents ou collaborateurs ?",
+] as const;
+
+export type ChatVariant = "particuliers" | "professionnels";
+
 interface ChatProps {
   onClose: () => void;
+  variant?: ChatVariant;
 }
-
-const SUGGESTED_QUESTIONS = [
-  "Qu’est-ce que Remindr et à qui s’adresse la plateforme ?",
-  "Comment Remindr aide-t-il les mutuelles dans la prévention santé ?",
-  "Comment créer mon tableau de bord santé avec Remindr ?",
-] as const;
 
 const DEFAULT_PLACEHOLDER = "Posez votre question ici...";
 
-const Chat = ({ onClose }: ChatProps) => {
+const Chat = ({ onClose, variant = "particuliers" }: ChatProps) => {
+  const suggestedQuestions =
+    variant === "professionnels"
+      ? SUGGESTED_QUESTIONS_PROFESSIONNELS
+      : SUGGESTED_QUESTIONS_PARTICULIERS;
+
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState("");
   const [placeholder, setPlaceholder] = useState(DEFAULT_PLACEHOLDER);
@@ -115,7 +129,7 @@ const Chat = ({ onClose }: ChatProps) => {
               Comment puis-je vous aider aujourd’hui ?
             </p>
             <ul className="flex flex-col border-t border-gray-2">
-              {SUGGESTED_QUESTIONS.map((question) => (
+              {suggestedQuestions.map((question) => (
                 <li
                   key={question}
                   className="border-b border-gray-2 last:border-b-0"
