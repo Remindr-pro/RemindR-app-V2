@@ -58,11 +58,11 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/contact"
+                  href="/aide-contact"
                   className="text-gray-2 hover:text-light transition-colors text-sm block"
                   style={{ fontFamily: "var(--font-inclusive)" }}
                 >
-                  Nous contacter
+                  Aide et Contact
                 </Link>
               </li>
             </ul>
@@ -127,16 +127,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/politique-confidentialite"
-                  className="text-gray-2 hover:text-light transition-colors text-sm block"
-                  style={{ fontFamily: "var(--font-inclusive)" }}
-                >
-                  Politique de confidentialité
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/cgu"
+                  href="/conditions-generales-utilisation"
                   className="text-gray-2 hover:text-light transition-colors text-sm block"
                   style={{ fontFamily: "var(--font-inclusive)" }}
                 >
@@ -145,7 +136,34 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/faq"
+                  href="/politique-de-confidentialite"
+                  className="text-gray-2 hover:text-light transition-colors text-sm block"
+                  style={{ fontFamily: "var(--font-inclusive)" }}
+                >
+                  Politique de confidentialité
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/accessibilite"
+                  className="text-gray-2 hover:text-light transition-colors text-sm block"
+                  style={{ fontFamily: "var(--font-inclusive)" }}
+                >
+                  Accessibilité
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/gestion-des-cookies"
+                  className="text-gray-2 hover:text-light transition-colors text-sm block"
+                  style={{ fontFamily: "var(--font-inclusive)" }}
+                >
+                  Gestion des cookies
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/particuliers#faq"
                   className="text-gray-2 hover:text-light transition-colors text-sm block"
                   style={{ fontFamily: "var(--font-inclusive)" }}
                 >

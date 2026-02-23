@@ -22,7 +22,7 @@ export default function ConnexionLayout({ children }: { children: ReactNode }) {
         <ul className="flex flex-row flex-wrap justify-center items-center gap-2 sm:gap-2 md:gap-3 lg:gap-4 text-[10px] sm:text-xs md:text-sm lg:text-base font-inclusive text-gray-4">
           <li className="text-center">
             <Link
-              href="/"
+              href="/particuliers"
               className="hover:underline whitespace-nowrap text-gray-4 hover:text-dark transition-colors"
             >
               Tout savoir sur mon espace santé
@@ -31,7 +31,7 @@ export default function ConnexionLayout({ children }: { children: ReactNode }) {
           <li className="hidden sm:inline text-gray-3">•</li>
           <li className="text-center">
             <Link
-              href="/"
+              href="/accessibilite"
               className="hover:underline text-gray-4 hover:text-dark transition-colors"
             >
               Accessibilité
@@ -40,7 +40,7 @@ export default function ConnexionLayout({ children }: { children: ReactNode }) {
           <li className="hidden sm:inline text-gray-3">•</li>
           <li className="text-center">
             <Link
-              href="/"
+              href="/mentions-legales"
               className="hover:underline whitespace-nowrap text-gray-4 hover:text-dark transition-colors"
             >
               Mentions légales et CGU
@@ -49,7 +49,7 @@ export default function ConnexionLayout({ children }: { children: ReactNode }) {
           <li className="hidden sm:inline text-gray-3">•</li>
           <li className="text-center">
             <Link
-              href="/"
+              href="/politique-de-confidentialite"
               className="hover:underline whitespace-nowrap text-gray-4 hover:text-dark transition-colors"
             >
               Protection des données personnelles
@@ -58,7 +58,7 @@ export default function ConnexionLayout({ children }: { children: ReactNode }) {
           <li className="hidden sm:inline text-gray-3">•</li>
           <li className="text-center">
             <Link
-              href="/"
+              href="/gestion-des-cookies"
               className="hover:underline text-gray-4 hover:text-dark transition-colors"
             >
               Gestion des cookies
@@ -67,7 +67,7 @@ export default function ConnexionLayout({ children }: { children: ReactNode }) {
           <li className="hidden sm:inline text-gray-3">•</li>
           <li className="text-center">
             <Link
-              href="/"
+              href="/aide-contact"
               className="hover:underline text-gray-4 hover:text-dark transition-colors"
             >
               Aide et Contact

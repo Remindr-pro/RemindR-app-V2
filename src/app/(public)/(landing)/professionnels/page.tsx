@@ -22,7 +22,7 @@ export default function ProfessionnelsPage() {
       image: "/images/icons/pepicons-print_letter-circle.png",
       title: "Communication ciblée & instantanée",
       description:
-        "Envoyez des messages, alertes et campagnes directement dans l’espace adhérent.",
+        "Envoyez des messages, alertes et campagnes directement dans l'espace adhérent.",
     },
   ];
   return (
@@ -106,7 +106,7 @@ export default function ProfessionnelsPage() {
           </h2>
           <p className="max-w-2xl mx-auto text-base md:text-lg font-inclusive font-regular">
             Nous avons développé un outil unique pour centraliser vos actions,
-            comprendre vos adhérents et renforcer l’impact de votre stratégie de
+            comprendre vos adhérents et renforcer l'impact de votre stratégie de
             prévention.
           </p>
         </div>
