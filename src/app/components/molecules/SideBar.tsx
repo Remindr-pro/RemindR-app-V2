@@ -313,11 +313,11 @@ const SideBar = ({ isOpen: externalIsOpen, onToggle }: SideBarProps) => {
     try {
       await logout();
 
-      router.push("/connexion");
+      router.push("/connexion?logout=true");
     } catch (error) {
       console.error("Erreur lors de la déconnexion:", error);
 
-      router.push("/connexion");
+      router.push("/connexion?logout=true");
     }
   }, [logout, router]);
 
