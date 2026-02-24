@@ -29,34 +29,30 @@ const WeekView = ({ currentDate, events, onDayClick }: WeekViewProps) => {
       { bg: string; text: string; border: string }
     > = {
       purple: {
-        bg: "bg-purple/20",
+        bg: "bg-purple/10",
         text: "text-purple",
         border: "border-purple",
       },
-      blue: { bg: "bg-blue/20", text: "text-blue", border: "border-blue" },
-      pink: {
-        bg: "bg-pink-1/20",
-        text: "text-pink-1",
-        border: "border-pink-1",
-      },
+      blue: { bg: "bg-blue/10", text: "text-blue", border: "border-blue" },
+      pink: { bg: "bg-pink-1/10", text: "text-pink-1", border: "border-pink-1" },
       orange: {
-        bg: "bg-orange/20",
+        bg: "bg-orange/10",
         text: "text-orange",
         border: "border-orange",
       },
       camille: {
-        bg: "bg-purple/20",
+        bg: "bg-purple/10",
         text: "text-purple",
         border: "border-purple",
       },
-      maxime: { bg: "bg-blue/20", text: "text-blue", border: "border-blue" },
+      maxime: { bg: "bg-blue/10", text: "text-blue", border: "border-blue" },
       alice: {
-        bg: "bg-pink-1/20",
+        bg: "bg-pink-1/10",
         text: "text-pink-1",
         border: "border-pink-1",
       },
       milo: {
-        bg: "bg-orange/20",
+        bg: "bg-orange/10",
         text: "text-orange",
         border: "border-orange",
       },
@@ -65,25 +61,39 @@ const WeekView = ({ currentDate, events, onDayClick }: WeekViewProps) => {
     return colorMap[color] || colorMap.blue;
   };
 
+  const isTodayDate = (date: Date) => {
+    const today = new Date();
+    return (
+      date.getDate() === today.getDate() &&
+      date.getMonth() === today.getMonth() &&
+      date.getFullYear() === today.getFullYear()
+    );
+  };
+
   return (
-    <div className="bg-light rounded-2xl p-6 min-h-[560px] flex flex-col">
-      <div className="grid grid-cols-7 flex-1 min-h-[500px]">
+    <div className="bg-light rounded-2xl overflow-hidden border border-gray-2 flex flex-col">
+      <div className="grid grid-cols-7 flex-1">
         {weekDays.map((day, index) => {
           const dayEvents = getEventsForDay(events, day);
           const dayName = dayNames[index];
+          const isActive = isTodayDate(day);
 
           return (
             <div
               key={index}
-              className="flex flex-col cursor-pointer hover:bg-gray-1 transition-colors min-h-0"
+              className={`flex flex-col cursor-pointer transition-colors min-h-[600px] border-r border-gray-2 last:border-r-0 ${
+                isActive ? "bg-gray-1/50" : "hover:bg-gray-1"
+              }`}
               onClick={() => onDayClick?.(day)}
             >
-              <div className="text-center mb-4 shrink-0">
-                <div className="text-sm font-semibold text-gray-5 font-inclusive">
-                  {dayName} {day.getDate()}
-                </div>
+              <div
+                className={`text-center py-3 shrink-0 border-b border-gray-2 bg-gray-1 font-inclusive text-sm font-semibold ${
+                  isActive ? "text-dark" : "text-gray-5"
+                }`}
+              >
+                {dayName} {day.getDate()}
               </div>
-              <div className="flex-1 min-h-0 flex flex-col gap-2 border-l border-gray-2 px-2">
+              <div className="flex-1 p-2 flex flex-col gap-3">
                 {dayEvents.map((event) => {
                   const colors = getColorClasses(event);
                   const startTime = formatTime(new Date(event.startDate));
@@ -92,38 +102,40 @@ const WeekView = ({ currentDate, events, onDayClick }: WeekViewProps) => {
                   return (
                     <div
                       key={event.id}
-                      className={`${colors.bg} ${colors.text} rounded-lg p-3 border-l-4 ${colors.border} flex flex-col gap-1`}
+                      className={`${colors.bg} ${colors.text} ${colors.border} rounded-xl p-3 border-l-4 shadow-sm flex flex-col gap-2`}
                     >
                       {event.isReminder ? (
                         <>
                           <div className="flex items-center gap-2">
-                            <IconBell size={16} className={colors.text} />
-                            <span className="font-semibold text-sm font-inclusive">
+                            <div className="p-1 rounded-md bg-light shadow-sm">
+                              <IconBell size={14} className={colors.text} />
+                            </div>
+                            <span className="font-bold text-xs font-inclusive truncate">
                               {event.reminderTitle || event.title}
                             </span>
                           </div>
                           {event.details && (
-                            <p className="text-xs opacity-80">
+                            <p className="text-[10px] leading-relaxed opacity-90 font-inclusive line-clamp-3">
                               {event.details}
                             </p>
                           )}
-                          <button className="text-xs underline mt-1 text-left">
+                          <button className="text-[10px] font-bold underline text-left hover:opacity-70 transition-opacity">
                             En savoir plus
                           </button>
                         </>
                       ) : (
                         <>
-                          <div className="text-xs font-semibold">
-                            {startTime} - {endTime}
+                          <div className="flex gap-1.5 overflow-x-auto pb-1 scrollbar-hide">
+                            <span className="text-[10px] font-bold bg-blue/10 px-2 py-0.5 rounded text-blue">
+                              {startTime}
+                            </span>
+                            <span className="text-[10px] font-bold bg-blue/10 px-2 py-0.5 rounded text-blue">
+                              {endTime}
+                            </span>
                           </div>
-                          <div className="font-semibold text-sm font-inclusive">
+                          <div className="font-bold text-xs font-inclusive truncate">
                             {event.title}
                           </div>
-                          {event.address && (
-                            <div className="text-xs opacity-80 mt-1">
-                              {event.address}
-                            </div>
-                          )}
                         </>
                       )}
                     </div>

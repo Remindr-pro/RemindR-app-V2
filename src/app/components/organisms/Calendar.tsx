@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import {
   CalendarView,
   CalendarEvent,
@@ -18,9 +19,46 @@ interface CalendarProps {
 }
 
 const Calendar = ({ events = [], users = [] }: CalendarProps) => {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
   const [currentDate, setCurrentDate] = useState(new Date()); // Current date
   const [view, setView] = useState<CalendarView>("month");
   const [selectedUsers, setSelectedUsers] = useState<string[]>([]);
+
+  // Helper to update URL with both date and view
+  const syncUrl = (date: Date, newView: CalendarView) => {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    const dateString = `${year}-${month}-${day}`;
+
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("date", dateString);
+    params.set("view", newView);
+
+    router.push(`${pathname}?${params.toString()}`, { scroll: false });
+  };
+
+  // Listen for changes in URL to update internal state
+  useEffect(() => {
+    const dateParam = searchParams.get("date");
+    const viewParam = searchParams.get("view") as CalendarView;
+
+    if (dateParam) {
+      const parsedDate = new Date(dateParam);
+      if (!isNaN(parsedDate.getTime())) {
+        setCurrentDate(parsedDate);
+      }
+    }
+
+    if (viewParam && ["month", "week", "day"].includes(viewParam)) {
+      setView(viewParam);
+    } else if (dateParam && !viewParam) {
+      // If date is provided but no view, default to 'day' view as per user request
+      setView("day");
+    }
+  }, [searchParams]);
 
   // Filter events by selected users
   const filteredEvents = useMemo(() => {
@@ -40,7 +78,7 @@ const Calendar = ({ events = [], users = [] }: CalendarProps) => {
       newDate.setDate(newDate.getDate() - 1);
     }
 
-    setCurrentDate(newDate);
+    syncUrl(newDate, view);
   };
 
   const handleNext = () => {
@@ -54,15 +92,15 @@ const Calendar = ({ events = [], users = [] }: CalendarProps) => {
       newDate.setDate(newDate.getDate() + 1);
     }
 
-    setCurrentDate(newDate);
+    syncUrl(newDate, view);
   };
 
   const handleToday = () => {
-    setCurrentDate(new Date());
+    syncUrl(new Date(), view);
   };
 
   const handleViewChange = (newView: CalendarView) => {
-    setView(newView);
+    syncUrl(currentDate, newView);
   };
 
   const handleUserToggle = (userId: string) => {
@@ -78,8 +116,7 @@ const Calendar = ({ events = [], users = [] }: CalendarProps) => {
   };
 
   const handleDayClick = (date: Date) => {
-    setCurrentDate(date);
-    setView("day");
+    syncUrl(date, "day");
   };
 
   return (

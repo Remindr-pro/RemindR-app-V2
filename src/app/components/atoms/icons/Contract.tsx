@@ -1,9 +1,10 @@
 interface IconContractProps {
   size?: number;
   fill?: string;
+  className?: string;
 }
 
-const IconContract = ({ size = 24, fill }: IconContractProps) => {
+const IconContract = ({ size = 24, fill, className = "" }: IconContractProps) => {
   return (
     <svg
       width={size}
@@ -11,7 +12,7 @@ const IconContract = ({ size = 24, fill }: IconContractProps) => {
       viewBox="0 0 15 15"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className={fill}
+      className={fill || className}
     >
       <path
         fillRule="evenodd"
