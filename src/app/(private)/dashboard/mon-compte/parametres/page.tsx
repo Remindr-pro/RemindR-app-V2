@@ -15,7 +15,9 @@ export default function ParametresPage() {
         </h1>
 
         <p className="text-base text-dark font-inclusive mb-8 leading-relaxed">
-          <span className="font-bold">Gérez vos paramètres de connexion.</span>
+          <span className="font-bold text-xl">
+            Gérez vos paramètres de connexion.
+          </span>
           <br />
           Ici, vous pouvez modifier vos paramètres de connexion et supprimer
           votre compte.
@@ -32,7 +34,7 @@ export default function ParametresPage() {
                 height={35}
                 className="w-9 h-9"
               />
-              <h2 className="text-xl font-bold text-dark font-inclusive">
+              <h2 className="text-lg font-bold text-dark font-inclusive">
                 Identifiants
               </h2>
             </div>
@@ -66,7 +68,7 @@ export default function ParametresPage() {
                 height={35}
                 className="w-9 h-9"
               />
-              <h2 className="text-xl font-bold text-dark font-inclusive">
+              <h2 className="text-lg font-bold text-dark font-inclusive">
                 Suppression du compte
               </h2>
             </div>
