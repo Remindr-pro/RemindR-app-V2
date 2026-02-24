@@ -43,9 +43,14 @@ export default function FamilyPage() {
 
   return (
     <div className="w-full pt-8">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="flex flex-wrap gap-6">
         {familyMembers.map((member) => (
-          <FamilyMemberCard key={member.name} {...member} />
+          <div
+            key={member.name}
+            className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] min-w-0"
+          >
+            <FamilyMemberCard {...member} />
+          </div>
         ))}
       </div>
     </div>
