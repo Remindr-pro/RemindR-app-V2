@@ -27,7 +27,7 @@ interface Reminder {
 export default function DashboardSidebar() {
   const [currentMonth, setCurrentMonth] = useState("Novembre 2025");
   const [expandedAppointment, setExpandedAppointment] = useState<string | null>(
-    null
+    null,
   );
 
   const appointments: Appointment[] = [
@@ -97,8 +97,9 @@ export default function DashboardSidebar() {
     <div className="lg:sticky top-[100px] bg-light flex flex-col gap-6 w-full lg:w-70 xl:w-80 rounded-2xl p-6 shadow-md">
       {/* Section Calendrier */}
       <div>
-        <h3 className="text-base font-bold text-dark font-inclusive mb-4">
-          À venir - pour vous et vos proches.
+        <h3 className="text-base text-dark font-inclusive mb-4">
+          À venir - pour vous et vos{" "}
+          <span className="text-greenMain">proches</span>.
         </h3>
 
         {/* Calendrier */}
@@ -134,8 +135,8 @@ export default function DashboardSidebar() {
                   date.month === "prev"
                     ? "text-gray-3"
                     : date.hasEvent
-                    ? "text-greenMain font-semibold bg-greenMain/5"
-                    : "text-dark hover:bg-gray-1"
+                      ? "text-greenMain font-semibold bg-greenMain/5"
+                      : "text-dark hover:bg-gray-1"
                 } transition-colors cursor-pointer`}
               >
                 <span>{date.day}</span>
@@ -154,7 +155,7 @@ export default function DashboardSidebar() {
 
       {/* Section Rappels & Rendez-vous */}
       <div className="">
-        <h3 className="text-base font-bold text-dark font-inclusive mb-4">
+        <h3 className="text-base text-dark font-inclusive mb-4">
           Rappels & rendez-vous
         </h3>
 
