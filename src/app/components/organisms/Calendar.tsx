@@ -98,7 +98,7 @@ const Calendar = ({ events = [], users = [] }: CalendarProps) => {
         onToday={handleToday}
         onViewChange={handleViewChange}
       />
-      <div className="flex-1">
+      <div className="flex-1 min-h-[600px]">
         {view === "month" && (
           <MonthView
             currentDate={currentDate}

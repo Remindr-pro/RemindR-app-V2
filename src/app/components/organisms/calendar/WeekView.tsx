@@ -66,8 +66,8 @@ const WeekView = ({ currentDate, events, onDayClick }: WeekViewProps) => {
   };
 
   return (
-    <div className="bg-light rounded-2xl p-6">
-      <div className="grid grid-cols-7">
+    <div className="bg-light rounded-2xl p-6 min-h-[560px] flex flex-col">
+      <div className="grid grid-cols-7 flex-1 min-h-[500px]">
         {weekDays.map((day, index) => {
           const dayEvents = getEventsForDay(events, day);
           const dayName = dayNames[index];
@@ -75,15 +75,15 @@ const WeekView = ({ currentDate, events, onDayClick }: WeekViewProps) => {
           return (
             <div
               key={index}
-              className="flex flex-col cursor-pointer hover:bg-gray-1 transition-colors"
+              className="flex flex-col cursor-pointer hover:bg-gray-1 transition-colors min-h-0"
               onClick={() => onDayClick?.(day)}
             >
-              <div className="text-center mb-4">
+              <div className="text-center mb-4 shrink-0">
                 <div className="text-sm font-semibold text-gray-5 font-inclusive">
                   {dayName} {day.getDate()}
                 </div>
               </div>
-              <div className="flex-1 flex flex-col gap-2 border-l border-gray-2 px-2">
+              <div className="flex-1 min-h-0 flex flex-col gap-2 border-l border-gray-2 px-2">
                 {dayEvents.map((event) => {
                   const colors = getColorClasses(event);
                   const startTime = formatTime(new Date(event.startDate));
