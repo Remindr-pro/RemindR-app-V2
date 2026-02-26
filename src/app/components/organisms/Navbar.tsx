@@ -208,6 +208,9 @@ export default function Navbar() {
                 <Button href="/connexion" variant="green">
                   Se connecter
                 </Button>
+                <Button href="/connexion" variant="dark">
+                  S&apos;inscrire
+                </Button>
               </>
             )}
           </div>
@@ -289,6 +292,13 @@ export default function Navbar() {
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
                       Se connecter
+                    </Button>
+                    <Button
+                      href="/connexion"
+                      variant="dark"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      S&apos;inscrire
                     </Button>
                   </>
                 )}
