@@ -110,8 +110,8 @@ export default function ProfessionnelsPage() {
           </h2>
           <p className="max-w-2xl mx-auto text-base md:text-lg font-inclusive font-regular">
             Nous avons développé un outil unique pour centraliser vos actions,
-            comprendre vos adhérents et renforcer l'impact de votre stratégie de
-            prévention.
+            comprendre vos adhérents et renforcer l&apos;impact de votre
+            stratégie de prévention.
           </p>
         </div>
 
