@@ -41,27 +41,27 @@ const COLLAPSE_ITEMS = [
   {
     title: "La prévention et le suivi santé, simple et fiable.",
     content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      "Remindr centralise vos rappels de vaccins, bilans et rendez-vous médicaux. Les recommandations s'appuient sur les préconisations officielles des organismes de santé. Vous recevez des notifications au bon moment pour ne rien oublier.",
   },
   {
     title: "Des tableaux de bord clairs pour vous et vos proches.",
     content:
-      "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "Un espace par personne : le vôtre et ceux de vos proches (enfants, parents). Tout est au même endroit. Vous visualisez d'un coup d'œil les prochains rendez-vous, les rappels en attente et les conseils de prévention personnalisés.",
   },
   {
     title: "Des rappels qui s'adaptent à vous.",
     content:
-      "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
+      "Les rappels sont calculés selon votre âge, votre profil et vos antécédents. Remindr vous suggère aussi des examens ou bilans auxquels vous n'auriez pas pensé. Plus de stress, plus d'oubli.",
   },
   {
     title: "Un calendrier santé partagé.",
     content:
-      "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet.",
+      "Gérez la santé de toute la famille depuis un seul compte. Accédez au calendrier de vos proches (avec leur accord), suivez leurs rendez-vous et leurs rappels. Idéal pour les aidants ou les parents.",
   },
   {
     title: "Un lien direct avec votre mutuelle.",
     content:
-      "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa.",
+      "Envoyez vos factures à votre mutuelle et suivez vos remboursements directement depuis Remindr. Votre complémentaire santé et votre suivi prévention travaillent ensemble pour vous simplifier la vie.",
   },
 ];
 
