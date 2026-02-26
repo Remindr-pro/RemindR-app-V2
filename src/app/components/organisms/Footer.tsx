@@ -1,7 +1,14 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import Logo from "../atoms/Logo";
 
 export default function Footer() {
+  const pathname = usePathname();
+  const contactHref = pathname?.startsWith("/professionnels")
+    ? "/professionnels/contact"
+    : "/particuliers/contact";
   return (
     <footer className="w-full bg-dark text-light">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -58,7 +65,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/aide-contact"
+                  href={contactHref}
                   className="text-gray-2 hover:text-light transition-colors text-sm block"
                   style={{ fontFamily: "var(--font-inclusive)" }}
                 >

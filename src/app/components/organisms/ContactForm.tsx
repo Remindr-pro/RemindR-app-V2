@@ -18,6 +18,7 @@ export interface ContactFormData {
 interface ContactFormProps {
   onSubmit?: (data: ContactFormData) => void | Promise<void>;
   defaultEmail?: string;
+  description?: string;
 }
 
 const SUBJECT_OPTIONS = [
@@ -27,9 +28,13 @@ const SUBJECT_OPTIONS = [
   { value: "other", label: "Autre" },
 ];
 
+const DEFAULT_DESCRIPTION =
+  "Pour toute assistance technique ou question concernant votre contrat, utilisez le formulaire ci-dessous.";
+
 export default function ContactForm({
   onSubmit,
   defaultEmail = "",
+  description = DEFAULT_DESCRIPTION,
 }: ContactFormProps) {
   const [email, setEmail] = useState(defaultEmail);
   const [subject, setSubject] = useState("");
@@ -52,11 +57,15 @@ export default function ContactForm({
         message,
         acceptTerms,
       });
-      setSuccessMessage("Votre message a bien été envoyé. Nous vous répondrons dès que possible.");
+      setSuccessMessage(
+        "Votre message a bien été envoyé. Nous vous répondrons dès que possible.",
+      );
       setMessage("");
     } catch (err) {
       setErrorMessage(
-        err instanceof Error ? err.message : "Une erreur est survenue. Veuillez réessayer."
+        err instanceof Error
+          ? err.message
+          : "Une erreur est survenue. Veuillez réessayer.",
       );
     } finally {
       setIsSubmitting(false);
@@ -69,8 +78,7 @@ export default function ContactForm({
         Contactez-nous
       </h1>
       <p className="text-dark font-inclusive text-base mb-8 text-center">
-        Pour toute assistance technique ou question concernant votre contrat,
-        utilisez le formulaire ci-dessous.
+        {description}
       </p>
 
       {(successMessage || errorMessage) && (

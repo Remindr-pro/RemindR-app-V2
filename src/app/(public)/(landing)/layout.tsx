@@ -83,16 +83,22 @@ export default function LandingLayout({
   };
 
   const bannerConfig = getBannerConfig();
+  const isContactPage =
+    pathname === "/particuliers/contact" ||
+    pathname === "/professionnels/contact";
+  const showBannerCta = !isContactPage;
 
   return (
     <>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">{children}</div>
-      <BannerCta
-        title={bannerConfig.title}
-        content={bannerConfig.content}
-        button={bannerConfig.button}
-        buttonLink={bannerConfig.buttonLink}
-      />
+      {showBannerCta && (
+        <BannerCta
+          title={bannerConfig.title}
+          content={bannerConfig.content}
+          button={bannerConfig.button}
+          buttonLink={bannerConfig.buttonLink}
+        />
+      )}
       {pathname?.includes("/particuliers/magazine") && <NewsletterSection />}
     </>
   );
