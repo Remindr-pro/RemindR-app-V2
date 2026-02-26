@@ -1,28 +1,39 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import CollapseList from "./CollapseList";
 
 const COLLAPSE_IMAGES = {
   0: {
-    color: "#1aa484",
-    text: "La prévention et le suivi santé",
+    image: "/images/illustrations/notification-preview.png",
+    alt: "Aperçu des notifications et du suivi santé",
+    width: 400,
+    height: 360,
   },
   1: {
-    color: "#4a90e2",
-    text: "Des tableaux de bord clairs",
+    image: "/images/illustrations/dashboard.png",
+    alt: "Tableaux de bord clairs pour vous et vos proches",
+    width: 1200,
+    height: 800,
   },
   2: {
-    color: "#7ca42b",
-    text: "Des rappels qui s'adaptent",
+    image: "/images/illustrations/dashboard-calendrier.png",
+    alt: "Des rappels qui s'adaptent à vous",
+    width: 1200,
+    height: 800,
   },
   3: {
-    color: "#9055a2",
-    text: "Un calendrier santé partagé",
+    image: "/images/illustrations/dashboard-proches.png",
+    alt: "Calendrier santé partagé avec vos proches",
+    width: 1200,
+    height: 800,
   },
   4: {
-    color: "#f4a261",
-    text: "Un lien direct avec votre mutuelle",
+    image: "/images/illustrations/dashboard-contact.png",
+    alt: "Lien direct avec votre mutuelle",
+    width: 1200,
+    height: 800,
   },
 };
 
@@ -82,14 +93,22 @@ export default function PreventionCollapse() {
       {/* Image */}
       <div className="hidden lg:block">
         <div
-          className="rounded-2xl h-full w-full flex items-center justify-center transition-all duration-300"
-          style={{ backgroundColor: currentImage.color }}
+          className="rounded-2xl h-full w-full flex items-center justify-center transition-all duration-300 overflow-hidden"
+          style={{
+            backgroundColor: "transparent",
+          }}
         >
-          {currentImage.text && (
-            <span className="text-white text-2xl md:text-3xl font-inclusive font-medium text-center px-8">
-              {currentImage.text}
-            </span>
-          )}
+          {"image" in currentImage && currentImage.image ? (
+            <Image
+              src={currentImage.image}
+              alt={"alt" in currentImage ? currentImage.alt : ""}
+              width={"width" in currentImage ? currentImage.width : 1200}
+              height={"height" in currentImage ? currentImage.height : 800}
+              sizes="(min-width: 1024px) 50vw, 0px"
+              quality={90}
+              className="w-full h-full object-contain"
+            />
+          ) : null}
         </div>
       </div>
     </div>
