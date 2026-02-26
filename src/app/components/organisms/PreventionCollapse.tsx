@@ -6,16 +6,16 @@ import CollapseList from "./CollapseList";
 
 const COLLAPSE_IMAGES = {
   0: {
-    image: "/images/illustrations/notification-preview.png",
-    alt: "Aperçu des notifications et du suivi santé",
-    width: 400,
-    height: 360,
-  },
-  1: {
     image: "/images/illustrations/dashboard.png",
     alt: "Tableaux de bord clairs pour vous et vos proches",
     width: 1200,
     height: 800,
+  },
+  1: {
+    image: "/images/illustrations/notification-preview.png",
+    alt: "Aperçu des notifications et du suivi santé",
+    width: 400,
+    height: 360,
   },
   2: {
     image: "/images/illustrations/dashboard-calendrier.png",
@@ -39,14 +39,14 @@ const COLLAPSE_IMAGES = {
 
 const COLLAPSE_ITEMS = [
   {
-    title: "La prévention et le suivi santé, simple et fiable.",
-    content:
-      "Remindr centralise vos rappels de vaccins, bilans et rendez-vous médicaux. Les recommandations s'appuient sur les préconisations officielles des organismes de santé. Vous recevez des notifications au bon moment pour ne rien oublier.",
-  },
-  {
     title: "Des tableaux de bord clairs pour vous et vos proches.",
     content:
       "Un espace par personne : le vôtre et ceux de vos proches (enfants, parents). Tout est au même endroit. Vous visualisez d'un coup d'œil les prochains rendez-vous, les rappels en attente et les conseils de prévention personnalisés.",
+  },
+  {
+    title: "La prévention et le suivi santé, simple et fiable.",
+    content:
+      "Remindr centralise vos rappels de vaccins, bilans et rendez-vous médicaux. Les recommandations s'appuient sur les préconisations officielles des organismes de santé. Vous recevez des notifications au bon moment pour ne rien oublier.",
   },
   {
     title: "Des rappels qui s'adaptent à vous.",
