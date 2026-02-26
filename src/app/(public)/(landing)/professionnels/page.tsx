@@ -45,7 +45,7 @@ export default function ProfessionnelsPage() {
           >
             Télécharger la documentation
           </Button>
-          <Button href="#" variant="green">
+          <Button href="/professionnels/contact" variant="green">
             Demander une démo
           </Button>
         </div>
@@ -92,7 +92,7 @@ export default function ProfessionnelsPage() {
             ))}
           </div>
           <div>
-            <Button variant="green" href="#">
+            <Button variant="green" href="/professionnels/contact">
               Demander une démo
             </Button>
           </div>
@@ -145,7 +145,7 @@ export default function ProfessionnelsPage() {
           >
             Télécharger la documentation
           </Button>
-          <Button href="#" variant="green">
+          <Button href="/professionnels/contact" variant="green">
             Contacter un commercial
           </Button>
         </div>

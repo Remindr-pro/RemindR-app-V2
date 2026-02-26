@@ -53,7 +53,7 @@ export default function LandingLayout({
           </p>
         ),
         button: "Réserver votre démo dès aujourd'hui",
-        buttonLink: "#",
+        buttonLink: "/professionnels/contact",
       };
     }
     if (pathname?.includes("/particuliers")) {
