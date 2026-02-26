@@ -38,7 +38,11 @@ export default function ProfessionnelsPage() {
           de réduire vos coûts tout en renforçant la fidélisation.
         </p>
         <div className="flex flex-col md:flex-row items-center justify-center gap-4">
-          <Button href="#" variant="dark">
+          <Button
+            href="/pdf/La_solution_Remindr.pdf"
+            variant="dark"
+            download="La_solution_Remindr.pdf"
+          >
             Télécharger la documentation
           </Button>
           <Button href="#" variant="green">
@@ -134,7 +138,11 @@ export default function ProfessionnelsPage() {
         </div>
 
         <div className="flex flex-col md:flex-row items-center justify-center gap-4">
-          <Button href="#" variant="dark">
+          <Button
+            href="/pdf/La_solution_Remindr.pdf"
+            variant="dark"
+            download="La_solution_Remindr.pdf"
+          >
             Télécharger la documentation
           </Button>
           <Button href="#" variant="green">
