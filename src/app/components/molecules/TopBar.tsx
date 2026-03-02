@@ -22,8 +22,8 @@ const TopBar = ({ onMenuClick }: TopBarProps) => {
         return "Tableau de bord";
       case "/dashboard/calendrier":
         return "Calendrier";
-      case "/dashboard/mes-proches-et-moi":
-        return "Mes proches & moi";
+      case "/dashboard/membres":
+        return "Mes proches et moi";
       case "/dashboard/mon-magazine":
         return "Mon magazine prévention santé";
       default:
@@ -31,7 +31,7 @@ const TopBar = ({ onMenuClick }: TopBarProps) => {
     }
   }, [pathName]);
 
-  const isFamilyPage = pathName === "/dashboard/mes-proches-et-moi";
+  const isFamilyPage = pathName === "/dashboard/membres";
   const isCalendarPage = pathName === "/dashboard/calendrier";
 
   return (

@@ -1,11 +1,15 @@
 "use client";
 
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback, useMemo, useEffect } from "react";
 import QuestionnaireProfilesStep from "@/app/components/organisms/QuestionnaireProfilesStep";
 import QuestionnaireStepNavigation from "@/app/components/molecules/QuestionnaireStepNavigation";
 import ProfileEditModal from "@/app/components/organisms/ProfileEditModal";
 import type { ProfileItem } from "@/app/components/organisms/QuestionnaireProfilesStep";
 import type { ProfileEditFormData } from "@/app/components/organisms/ProfileEditModal";
+import {
+  getQuestionnaireFamilyMembers,
+  type QuestionnaireFamilyMember,
+} from "@/app/actions/family";
 import { useAuth } from "@/lib/auth-provider";
 import type { User } from "@/lib/auth-provider";
 import { BASE_PATH } from "./constants";
@@ -62,6 +66,24 @@ function userToProfileItem(user: User): ProfileItem {
   };
 }
 
+function mapRoleToProfileLabel(role: string): string {
+  if (role === "family_member") return "Proche";
+  if (role === "professional") return "Professionnel";
+  if (role === "admin") return "Administrateur";
+  return "Proche";
+}
+
+function familyUserToProfileItem(member: QuestionnaireFamilyMember): ProfileItem {
+  return {
+    id: member.id,
+    name: [member.firstName, member.lastName].filter(Boolean).join(" ") || "Proche",
+    role: mapRoleToProfileLabel(member.role),
+    birthdate: formatBirthdate(member.dateOfBirth),
+    gender: mapGenderToProfile(member.genderActual ?? member.genderBirth),
+    avatarUrl: member.profilePictureUrl ?? undefined,
+  };
+}
+
 export default function MonQuestionnaireSanteProfilsPage() {
   const { user } = useAuth();
   const mainProfile = useMemo(
@@ -78,6 +100,25 @@ export default function MonQuestionnaireSanteProfilsPage() {
     birthdate: string;
     gender: "Femme" | "Homme" | "Non précisé";
   } | null>(null);
+
+  useEffect(() => {
+    const fetchExistingFamilyMembers = async () => {
+      if (!user?.id) return;
+
+      try {
+        const members = (await getQuestionnaireFamilyMembers())
+          .filter((member) => member.isActive)
+          .filter((member) => member.id !== user.id)
+          .map(familyUserToProfileItem);
+
+        setAdditionalProfiles(members);
+      } catch {
+        // On garde l'état local si le chargement échoue.
+      }
+    };
+
+    fetchExistingFamilyMembers();
+  }, [user?.id]);
 
   const displayedMainProfile = useMemo(() => {
     if (!mainProfile) return null;

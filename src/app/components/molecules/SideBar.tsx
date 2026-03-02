@@ -59,7 +59,7 @@ const MAIN_NAV_ITEMS: NavItem[] = [
   },
   {
     label: "Mes proches & moi",
-    href: "/dashboard/mes-proches-et-moi",
+    href: "/dashboard/membres",
     Icon: IconHouse,
   },
   {

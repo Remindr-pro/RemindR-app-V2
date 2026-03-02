@@ -19,6 +19,15 @@ export interface RegisterData {
   userType?: string;
 }
 
+export interface ForgotPasswordData {
+  email: string;
+}
+
+export interface ResetPasswordData {
+  token: string;
+  newPassword: string;
+}
+
 export interface AuthResponse {
   success: boolean;
   message: string;
@@ -104,6 +113,42 @@ export class AuthService {
     return result;
   }
 
+  static async forgotPassword(data: ForgotPasswordData): Promise<void> {
+    const response = await fetch(`${API_URL}/auth/forgot-password`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      const error = await response.json().catch(() => null);
+      throw new Error(
+        error?.message ||
+          "Impossible d'envoyer le lien de réinitialisation pour le moment."
+      );
+    }
+  }
+
+  static async resetPassword(data: ResetPasswordData): Promise<void> {
+    const response = await fetch(`${API_URL}/auth/reset-password`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      const error = await response.json().catch(() => null);
+      throw new Error(
+        error?.message ||
+          "Impossible de réinitialiser le mot de passe pour le moment."
+      );
+    }
+  }
+
   static async logout(): Promise<void> {
     const token = this.getToken();
 
@@ -153,6 +198,59 @@ export class AuthService {
       this.removeToken();
 
       return null;
+    }
+  }
+
+  static async verifyPassword(currentPassword: string): Promise<void> {
+    const token = this.getToken();
+
+    if (!token) {
+      throw new Error("Utilisateur non connecté");
+    }
+
+    const response = await fetch(`${API_URL}/auth/verify-password`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ currentPassword }),
+    });
+
+    if (!response.ok) {
+      const error = await response.json().catch(() => null);
+      throw new Error(
+        error?.message ||
+          "Impossible de vérifier l'ancien mot de passe pour le moment."
+      );
+    }
+  }
+
+  static async changePassword(
+    currentPassword: string,
+    newPassword: string
+  ): Promise<void> {
+    const token = this.getToken();
+
+    if (!token) {
+      throw new Error("Utilisateur non connecté");
+    }
+
+    const response = await fetch(`${API_URL}/auth/change-password`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ currentPassword, newPassword }),
+    });
+
+    if (!response.ok) {
+      const error = await response.json().catch(() => null);
+      throw new Error(
+        error?.message ||
+          "Impossible de modifier votre mot de passe pour le moment."
+      );
     }
   }
 
