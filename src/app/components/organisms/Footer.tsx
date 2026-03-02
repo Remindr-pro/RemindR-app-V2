@@ -6,6 +6,7 @@ import Logo from "../atoms/Logo";
 
 export default function Footer() {
   const pathname = usePathname();
+  const currentYear = new Date().getFullYear();
   const contactHref = pathname?.startsWith("/professionnels")
     ? "/professionnels/contact"
     : "/particuliers/contact";
@@ -365,7 +366,7 @@ export default function Footer() {
             className="text-gray-2 text-sm"
             style={{ fontFamily: "var(--font-inclusive)" }}
           >
-            © 2025 Remindr. Tous droits réservés.
+            © {currentYear} Remindr. Tous droits réservés.
           </div>
         </div>
       </div>
