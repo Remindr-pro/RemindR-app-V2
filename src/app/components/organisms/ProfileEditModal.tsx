@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Button from "@/app/components/atoms/Button";
+import Input from "@/app/components/atoms/Input";
+import Toggle from "@/app/components/atoms/Toggle";
 import IconHelp from "@/app/components/atoms/icons/Help";
 import IconChevron from "@/app/components/atoms/icons/Chevron";
 import ColorPicker from "@/app/components/molecules/ColorPicker";
@@ -35,6 +37,10 @@ export interface ProfileEditFormData {
   genderBirth: string;
   genderActual: string;
   color: string;
+  email: string;
+  createLogin: boolean;
+  password: string;
+  confirmPassword: string;
 }
 
 function parseDisplayBirthdate(s: string): string {
@@ -52,6 +58,10 @@ function profileToFormData(profile: ProfileItem | null): ProfileEditFormData {
       genderBirth: "",
       genderActual: "",
       color: DEFAULT_COLOR,
+      email: "",
+      createLogin: false,
+      password: "",
+      confirmPassword: "",
     };
   }
   const [firstName = "", ...lastNameParts] = (profile.name || "").split(" ");
@@ -70,6 +80,14 @@ function profileToFormData(profile: ProfileItem | null): ProfileEditFormData {
     genderBirth: genderValue,
     genderActual: genderValue,
     color: profile.color || DEFAULT_COLOR,
+    email: profile.email || "",
+    createLogin:
+      !!profile.link &&
+      profile.link !== "moi" &&
+      !!profile.email &&
+      !profile.email.endsWith("@remindr.local"),
+    password: "",
+    confirmPassword: "",
   };
 }
 
@@ -95,9 +113,29 @@ function ProfileEditFormContent({
     profileToFormData(profile),
   );
   const isMainProfile = profile?.role === "Profil principal";
+  const canCreateConnectedAccount =
+    !isMainProfile && !!formData.link && formData.link !== "moi";
+  const selectedLinkLabel =
+    LIEN_OPTIONS.find(
+      (opt) => opt.value === formData.link,
+    )?.label.toLowerCase() || "proche";
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (canCreateConnectedAccount && formData.createLogin) {
+      if (!formData.email) {
+        window.alert("Veuillez renseigner un email.");
+        return;
+      }
+      if (formData.password.length < 8) {
+        window.alert("Le mot de passe doit contenir au moins 8 caracteres.");
+        return;
+      }
+      if (formData.password !== formData.confirmPassword) {
+        window.alert("La confirmation du mot de passe ne correspond pas.");
+        return;
+      }
+    }
     if (profile) {
       onValidate(profile.id, formData);
       onClose();
@@ -157,7 +195,7 @@ function ProfileEditFormContent({
           <p className="text-gray-3 font-inclusive text-sm mb-2">
             Ex : Prénom, pseudo
           </p>
-          <input
+          <Input
             id="profile-firstname"
             type="text"
             placeholder="Prénom"
@@ -168,7 +206,6 @@ function ProfileEditFormContent({
                 firstName: e.target.value,
               }))
             }
-            className="w-full px-4 py-3 rounded-lg border border-gray-3 bg-light text-dark font-inclusive text-base placeholder:text-gray-3 focus:outline-none focus:ring-2 focus:ring-greenMain focus:border-transparent"
           />
         </div>
 
@@ -185,7 +222,7 @@ function ProfileEditFormContent({
               <IconHelp size={14} />
             </span>
           </div>
-          <input
+          <Input
             id="profile-lastname"
             type="text"
             placeholder="Nom"
@@ -196,7 +233,6 @@ function ProfileEditFormContent({
                 lastName: e.target.value,
               }))
             }
-            className="w-full px-4 py-3 rounded-lg border border-gray-3 bg-light text-dark font-inclusive text-base placeholder:text-gray-3 focus:outline-none focus:ring-2 focus:ring-greenMain focus:border-transparent"
           />
         </div>
 
@@ -218,7 +254,26 @@ function ProfileEditFormContent({
               id="profile-link"
               value={formData.link}
               onChange={(e) =>
-                setFormData((prev) => ({ ...prev, link: e.target.value }))
+                setFormData((prev) => ({
+                  ...prev,
+                  link: e.target.value,
+                  createLogin:
+                    e.target.value && e.target.value !== "moi"
+                      ? prev.createLogin
+                      : false,
+                  email:
+                    e.target.value && e.target.value !== "moi"
+                      ? prev.email
+                      : "",
+                  password:
+                    e.target.value && e.target.value !== "moi"
+                      ? prev.password
+                      : "",
+                  confirmPassword:
+                    e.target.value && e.target.value !== "moi"
+                      ? prev.confirmPassword
+                      : "",
+                }))
               }
               disabled={isMainProfile}
               className="w-full px-4 py-3 rounded-lg border border-gray-3 bg-light text-dark font-inclusive text-base focus:outline-none focus:ring-2 focus:ring-greenMain appearance-none pr-10 cursor-pointer"
@@ -234,6 +289,111 @@ function ProfileEditFormContent({
             </div>
           </div>
         </div>
+
+        {canCreateConnectedAccount && (
+          <>
+            <div className="flex items-center justify-between rounded-lg border border-gray-3 p-3">
+              <div className="flex flex-col">
+                <span className="text-dark font-inclusive text-sm font-semibold">
+                  {`Créer un compte connecté (${selectedLinkLabel})`}
+                </span>
+                <span className="text-gray-4 font-inclusive text-xs">
+                  Cette personne pourra se connecter avec les identifiants
+                  saisis.
+                </span>
+              </div>
+              <Toggle
+                id="create-connected-account"
+                checked={formData.createLogin}
+                onChange={(checked) =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    createLogin: checked,
+                    email: checked ? prev.email : "",
+                    password: checked ? prev.password : "",
+                    confirmPassword: checked ? prev.confirmPassword : "",
+                  }))
+                }
+              />
+            </div>
+
+            {formData.createLogin && (
+              <>
+                <div className="flex flex-col">
+                  <div className="flex items-center gap-1.5 mb-1">
+                    <label
+                      htmlFor="profile-email"
+                      className="text-dark font-inclusive text-base"
+                    >
+                      Email du conjoint
+                    </label>
+                    <span className="text-gray-4">
+                      <IconHelp size={14} />
+                    </span>
+                  </div>
+                  <Input
+                    id="profile-email"
+                    type="email"
+                    placeholder="Email"
+                    value={formData.email}
+                    onChange={(e) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        email: e.target.value,
+                      }))
+                    }
+                  />
+                </div>
+                <div className="flex flex-col">
+                  <div className="flex items-center gap-1.5 mb-1">
+                    <label
+                      htmlFor="profile-password"
+                      className="text-dark font-inclusive text-base"
+                    >
+                      Mot de passe
+                    </label>
+                  </div>
+                  <Input
+                    id="profile-password"
+                    type="password"
+                    placeholder="Mot de passe"
+                    value={formData.password}
+                    onChange={(e) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        password: e.target.value,
+                      }))
+                    }
+                    showPasswordToggle
+                  />
+                </div>
+                <div className="flex flex-col">
+                  <div className="flex items-center gap-1.5 mb-1">
+                    <label
+                      htmlFor="profile-confirm-password"
+                      className="text-dark font-inclusive text-base"
+                    >
+                      Confirmer le mot de passe
+                    </label>
+                  </div>
+                  <Input
+                    id="profile-confirm-password"
+                    type="password"
+                    placeholder="Confirmer le mot de passe"
+                    value={formData.confirmPassword}
+                    onChange={(e) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        confirmPassword: e.target.value,
+                      }))
+                    }
+                    showPasswordToggle
+                  />
+                </div>
+              </>
+            )}
+          </>
+        )}
 
         {/* Date de naissance */}
         <div className="flex flex-col">
@@ -251,7 +411,7 @@ function ProfileEditFormContent({
           <p className="text-gray-3 font-inclusive text-sm mb-2">
             Ex : 28/12/1999
           </p>
-          <input
+          <Input
             id="profile-birthdate"
             type="text"
             placeholder="Date de naissance"
@@ -262,7 +422,6 @@ function ProfileEditFormContent({
                 birthdate: e.target.value,
               }))
             }
-            className="w-full px-4 py-3 rounded-lg border border-gray-3 bg-light text-dark font-inclusive text-base placeholder:text-gray-3 focus:outline-none focus:ring-2 focus:ring-greenMain focus:border-transparent"
           />
         </div>
 

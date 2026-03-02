@@ -23,6 +23,7 @@ interface FamilyApiUser {
   genderBirth?: string | null;
   genderActual?: string | null;
   profilePictureUrl?: string | null;
+  profileLink?: string | null;
   profileColor?: string | null;
   healthProfile?: {
     bloodType?: string | null;
@@ -63,7 +64,8 @@ export interface FamilyMemberViewModel {
   role: string;
   gender: "Femme" | "Homme" | "Non renseigné";
   birthdate: string;
-  email: string;
+  email?: string;
+  showPeopleLink: boolean;
   profileCompletion: number;
   borderColor: BorderColor;
 }
@@ -80,12 +82,14 @@ export interface QuestionnaireFamilyMember {
   id: string;
   firstName: string;
   lastName: string;
+  email: string;
   role: string;
   isActive: boolean;
   dateOfBirth: string;
   genderBirth?: string | null;
   genderActual?: string | null;
   profilePictureUrl?: string | null;
+  profileLink?: string | null;
   profileColor?: string | null;
 }
 
@@ -198,6 +202,12 @@ function computeProfileCompletion(user: FamilyApiUser): number {
   return Math.round((completedFields / fieldsToCheck.length) * 100);
 }
 
+function isConnectableMember(email: string | null | undefined): boolean {
+  if (!email) return false;
+
+  return !email.toLowerCase().endsWith("@remindr.local");
+}
+
 export async function getMyFamilyMembers(): Promise<FamilyMemberViewModel[]> {
   const mePayload = await api.get<MeApiResponse>("/auth/me", {
     next: { tags: ["user"] },
@@ -247,19 +257,25 @@ export async function getMyFamilyMembers(): Promise<FamilyMemberViewModel[]> {
     );
   });
 
-  return sortedUsers.map((member, index) => ({
-    id: member.id,
-    name: `${member.firstName} ${member.lastName}`,
-    role: mapRole(member.role, member.id === currentUserId),
-    gender: mapGender(member.genderActual ?? member.genderBirth),
-    birthdate: formatBirthdate(
-      member.dateOfBirth,
-      member.genderActual ?? member.genderBirth,
-    ),
-    email: member.email,
-    profileCompletion: computeProfileCompletion(member),
-    borderColor: mapProfileColorToBorderColor(member.profileColor, index),
-  }));
+  return sortedUsers.map((member, index) => {
+    const isCurrentUser = member.id === currentUserId;
+    const connectable = isConnectableMember(member.email);
+
+    return {
+      id: member.id,
+      name: `${member.firstName} ${member.lastName}`,
+      role: mapRole(member.role, isCurrentUser),
+      gender: mapGender(member.genderActual ?? member.genderBirth),
+      birthdate: formatBirthdate(
+        member.dateOfBirth,
+        member.genderActual ?? member.genderBirth,
+      ),
+      email: connectable ? member.email : undefined,
+      showPeopleLink: !connectable && !isCurrentUser,
+      profileCompletion: computeProfileCompletion(member),
+      borderColor: mapProfileColorToBorderColor(member.profileColor, index),
+    };
+  });
 }
 
 export async function getDashboardFamilyMembers(): Promise<
@@ -356,6 +372,7 @@ export async function getQuestionnaireFamilyMembers(): Promise<
         genderBirth: mePayload.data.genderBirth,
         genderActual: mePayload.data.genderActual,
         profilePictureUrl: mePayload.data.profilePictureUrl,
+        profileLink: "moi",
         profileColor: mePayload.data.profileColor,
       },
     ];
@@ -372,12 +389,14 @@ export async function getQuestionnaireFamilyMembers(): Promise<
       id: member.id,
       firstName: member.firstName,
       lastName: member.lastName,
+      email: member.email,
       role: member.role,
       isActive: member.isActive,
       dateOfBirth: member.dateOfBirth,
       genderBirth: member.genderBirth,
       genderActual: member.genderActual,
       profilePictureUrl: member.profilePictureUrl,
+      profileLink: member.profileLink,
       profileColor: member.profileColor,
     }));
 }

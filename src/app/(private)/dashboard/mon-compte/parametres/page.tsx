@@ -2,13 +2,15 @@
 
 import { useMemo, useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import Input from "@/app/components/atoms/Input";
 import Button from "@/app/components/atoms/Button";
 import { useAuth } from "@/lib/auth-provider";
 import { AuthService } from "@/lib/auth-service";
 
 export default function ParametresPage() {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
+  const router = useRouter();
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
@@ -17,6 +19,9 @@ export default function ParametresPage() {
   const [isCurrentPasswordVerified, setIsCurrentPasswordVerified] =
     useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isDeletingAccount, setIsDeletingAccount] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [deleteError, setDeleteError] = useState<string | null>(null);
   const [passwordError, setPasswordError] = useState<string | null>(null);
   const [passwordSuccess, setPasswordSuccess] = useState<string | null>(null);
 
@@ -109,6 +114,27 @@ export default function ParametresPage() {
       );
     } finally {
       setIsSubmitting(false);
+    }
+  };
+
+  const handleDeleteAccount = async () => {
+    try {
+      setIsDeletingAccount(true);
+      setDeleteError(null);
+
+      await AuthService.deleteMyAccount();
+      await logout();
+
+      router.push("/connexion");
+    } catch (error) {
+      setDeleteError(
+        error instanceof Error
+          ? error.message
+          : "Impossible de supprimer votre compte.",
+      );
+    } finally {
+      setIsDeletingAccount(false);
+      setShowDeleteModal(false);
     }
   };
 
@@ -236,16 +262,54 @@ export default function ParametresPage() {
                 Supprimez votre compte et toutes les données associées. Aucune
                 récupération possible.
               </p>
-              <a
-                href="#"
-                className="text-greenMain underline font-inclusive text-base hover:text-greenMain-2 transition-colors"
+              <button
+                type="button"
+                onClick={() => setShowDeleteModal(true)}
+                className="text-left text-greenMain underline font-inclusive text-base hover:text-greenMain-2 transition-colors cursor-pointer"
               >
                 Supprimer votre compte
-              </a>
+              </button>
+              {deleteError && (
+                <p className="mt-2 text-sm font-inclusive text-red-1">
+                  {deleteError}
+                </p>
+              )}
             </div>
           </div>
         </div>
       </div>
+
+      {showDeleteModal && (
+        <div className="fixed inset-0 z-9999 flex items-center justify-center p-4 bg-dark/50 backdrop-blur-sm">
+          <div className="w-full max-w-md bg-light rounded-2xl shadow-xl p-6">
+            <h3 className="text-xl font-semibold text-dark font-inclusive mb-3">
+              Suppression du compte
+            </h3>
+            <p className="text-sm text-gray-4 font-inclusive mb-6">
+              Etes-vous sur de vouloir supprimer votre compte ? Cette action est
+              irreversible.
+            </p>
+            <div className="flex items-center justify-end gap-3">
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => setShowDeleteModal(false)}
+                disabled={isDeletingAccount}
+              >
+                Annuler
+              </Button>
+              <Button
+                type="button"
+                variant="green"
+                onClick={handleDeleteAccount}
+                disabled={isDeletingAccount}
+              >
+                {isDeletingAccount ? "Suppression..." : "Confirmer"}
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

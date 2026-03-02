@@ -35,6 +35,20 @@ export interface ForgotPasswordData {
   email: string;
 }
 
+export interface FamilyMemberPayload {
+  firstName: string;
+  lastName: string;
+  dateOfBirth: string;
+  genderBirth?: string;
+  genderActual?: string;
+  profilePictureUrl?: string;
+  profileLink?: string;
+  profileColor?: string;
+  email?: string;
+  createLogin?: boolean;
+  password?: string;
+}
+
 export interface ResetPasswordData {
   token: string;
   newPassword: string;
@@ -268,6 +282,104 @@ export class AuthService {
       throw new Error(
         error?.message ||
           "Impossible de vérifier l'ancien mot de passe pour le moment.",
+      );
+    }
+  }
+
+  static async createFamilyMember(data: FamilyMemberPayload) {
+    const token = this.getToken();
+
+    if (!token) {
+      throw new Error("Utilisateur non connecté");
+    }
+
+    const response = await fetch(`${API_URL}/families/members`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      const error = await response.json().catch(() => null);
+      throw new Error(
+        error?.message || "Impossible d'ajouter ce proche pour le moment.",
+      );
+    }
+
+    return response.json();
+  }
+
+  static async updateFamilyMember(memberId: string, data: FamilyMemberPayload) {
+    const token = this.getToken();
+
+    if (!token) {
+      throw new Error("Utilisateur non connecté");
+    }
+
+    const response = await fetch(`${API_URL}/families/members/${memberId}`, {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      const error = await response.json().catch(() => null);
+      throw new Error(
+        error?.message || "Impossible de modifier ce proche pour le moment.",
+      );
+    }
+
+    return response.json();
+  }
+
+  static async deleteFamilyMember(memberId: string): Promise<void> {
+    const token = this.getToken();
+
+    if (!token) {
+      throw new Error("Utilisateur non connecté");
+    }
+
+    const response = await fetch(`${API_URL}/families/members/${memberId}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      const error = await response.json().catch(() => null);
+      throw new Error(
+        error?.message || "Impossible de supprimer ce proche pour le moment.",
+      );
+    }
+  }
+
+  static async deleteMyAccount(): Promise<void> {
+    const token = this.getToken();
+
+    if (!token) {
+      throw new Error("Utilisateur non connecté");
+    }
+
+    const response = await fetch(`${API_URL}/auth/me`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      const error = await response.json().catch(() => null);
+      throw new Error(
+        error?.message || "Impossible de supprimer votre compte pour le moment.",
       );
     }
   }

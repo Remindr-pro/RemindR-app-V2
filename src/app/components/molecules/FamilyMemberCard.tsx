@@ -9,6 +9,7 @@ interface FamilyMemberCardProps {
   gender: "Femme" | "Homme" | "Non renseigné";
   birthdate: string;
   email?: string;
+  showPeopleLink?: boolean;
   profileCompletion: number;
   avatarUrl?: string;
   borderColor: "green" | "purple" | "blue" | "pink" | "orange";
@@ -28,6 +29,7 @@ export default function FamilyMemberCard({
   gender,
   birthdate,
   email,
+  showPeopleLink = false,
   profileCompletion,
   avatarUrl,
   borderColor,
@@ -39,7 +41,7 @@ export default function FamilyMemberCard({
       className={`bg-light rounded-2xl p-6 border-2 ${borderColorClasses[borderColor]} shadow-sm hover:shadow-md transition-shadow flex flex-col relative`}
     >
       {/* Icône PeopleLink en haut à droite */}
-      {role !== "Profil principal" && (
+      {showPeopleLink && (
         <button
           type="button"
           className="absolute top-6 right-6 text-gray-4 hover:text-dark transition-colors"
@@ -72,7 +74,9 @@ export default function FamilyMemberCard({
           <div className="flex flex-col gap-1 text-sm text-dark font-inclusive">
             <span>{gender}</span>
             <span>{birthdate}</span>
-            {email && <span className="text-gray-4">{email}</span>}
+            <div className="min-h-5">
+              {email && <span className="text-gray-4">{email}</span>}
+            </div>
           </div>
         </div>
 

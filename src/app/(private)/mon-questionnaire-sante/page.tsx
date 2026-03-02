@@ -4,6 +4,7 @@ import { useState, useCallback, useMemo, useEffect } from "react";
 import QuestionnaireProfilesStep from "@/app/components/organisms/QuestionnaireProfilesStep";
 import QuestionnaireStepNavigation from "@/app/components/molecules/QuestionnaireStepNavigation";
 import ProfileEditModal from "@/app/components/organisms/ProfileEditModal";
+import Button from "@/app/components/atoms/Button";
 import type { ProfileItem } from "@/app/components/organisms/QuestionnaireProfilesStep";
 import type { ProfileEditFormData } from "@/app/components/organisms/ProfileEditModal";
 import {
@@ -63,6 +64,12 @@ function displayBirthdateToIso(displayDate: string): string | null {
   return `${year}-${month}-${day}`;
 }
 
+function isUuid(value: string): boolean {
+  return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(
+    value,
+  );
+}
+
 function userToProfileItem(user: User): ProfileItem {
   return {
     id: user.id,
@@ -76,6 +83,8 @@ function userToProfileItem(user: User): ProfileItem {
     ),
     avatarUrl: user.profilePictureUrl ?? undefined,
     color: user.profileColor ?? undefined,
+    link: user.profileLink ?? "moi",
+    email: user.email,
   };
 }
 
@@ -98,6 +107,8 @@ function familyUserToProfileItem(
     gender: mapGenderToProfile(member.genderActual ?? member.genderBirth),
     avatarUrl: member.profilePictureUrl ?? undefined,
     color: member.profileColor ?? undefined,
+    link: member.profileLink ?? undefined,
+    email: member.email,
   };
 }
 
@@ -107,7 +118,6 @@ export default function MonQuestionnaireSanteProfilsPage() {
     () => (user ? userToProfileItem(user) : null),
     [user],
   );
-  const [showMainProfile, setShowMainProfile] = useState(true);
   const [additionalProfiles, setAdditionalProfiles] = useState<ProfileItem[]>(
     [],
   );
@@ -118,6 +128,10 @@ export default function MonQuestionnaireSanteProfilsPage() {
     birthdate: string;
     gender: "Femme" | "Homme" | "Non précisé";
     color?: string;
+  } | null>(null);
+  const [pendingDeletion, setPendingDeletion] = useState<{
+    id: string;
+    name: string;
   } | null>(null);
 
   useEffect(() => {
@@ -156,10 +170,10 @@ export default function MonQuestionnaireSanteProfilsPage() {
 
   const profiles = useMemo(
     () =>
-      displayedMainProfile && showMainProfile
+      displayedMainProfile
         ? [displayedMainProfile, ...additionalProfiles]
         : additionalProfiles,
-    [displayedMainProfile, showMainProfile, additionalProfiles],
+    [displayedMainProfile, additionalProfiles],
   );
 
   const profileBeingEdited = useMemo(
@@ -178,18 +192,17 @@ export default function MonQuestionnaireSanteProfilsPage() {
   const handleValidateProfile = useCallback(
     async (profileId: string, data: ProfileEditFormData) => {
       const gender = formGenderToProfileItem(data.genderBirth);
+      const birthDateIso = displayBirthdateToIso(data.birthdate);
+      const genderBirth =
+        data.genderBirth === "non_precise" || data.genderBirth === ""
+          ? ""
+          : data.genderBirth;
+      const genderActual =
+        data.genderActual === "non_precise" || data.genderActual === ""
+          ? ""
+          : data.genderActual;
 
       if (mainProfile?.id === profileId) {
-        const birthDateIso = displayBirthdateToIso(data.birthdate);
-        const genderBirth =
-          data.genderBirth === "non_precise" || data.genderBirth === ""
-            ? ""
-            : data.genderBirth;
-        const genderActual =
-          data.genderActual === "non_precise" || data.genderActual === ""
-            ? ""
-            : data.genderActual;
-
         try {
           await AuthService.updateMe({
             firstName: data.firstName || undefined,
@@ -215,21 +228,79 @@ export default function MonQuestionnaireSanteProfilsPage() {
           color: data.color || undefined,
         });
       } else {
-        setAdditionalProfiles((prev) =>
-          prev.map((p) =>
-            p.id === profileId
-              ? {
-                  ...p,
-                  name: [data.firstName, data.lastName]
-                    .filter(Boolean)
-                    .join(" "),
-                  birthdate: data.birthdate,
-                  gender,
-                  color: data.color || undefined,
-                }
-              : p,
-          ),
-        );
+        if (!birthDateIso || !data.firstName || !data.lastName) {
+          return;
+        }
+
+        const shouldCreateConnectedAccount =
+          data.createLogin && !!data.link && data.link !== "moi";
+
+        const payload = {
+          firstName: data.firstName,
+          lastName: data.lastName,
+          dateOfBirth: birthDateIso,
+          genderBirth: genderBirth || undefined,
+          genderActual: genderActual || undefined,
+          profileLink: data.link || undefined,
+          profileColor: data.color || undefined,
+          email: shouldCreateConnectedAccount ? data.email || undefined : undefined,
+          createLogin: shouldCreateConnectedAccount,
+          password: shouldCreateConnectedAccount ? data.password || undefined : undefined,
+        };
+
+        try {
+          if (isUuid(profileId)) {
+            const response = await AuthService.updateFamilyMember(
+              profileId,
+              payload,
+            );
+            const updatedId = response?.data?.id || profileId;
+            setAdditionalProfiles((prev) =>
+              prev.map((p) =>
+                p.id === profileId
+                  ? {
+                      ...p,
+                      id: updatedId,
+                      role: "Proche",
+                      name: [data.firstName, data.lastName]
+                        .filter(Boolean)
+                        .join(" "),
+                      birthdate: data.birthdate,
+                      gender,
+                      color: data.color || undefined,
+                      link: data.link || undefined,
+                      email: data.email || p.email,
+                    }
+                  : p,
+              ),
+            );
+          } else {
+            const response = await AuthService.createFamilyMember(payload);
+            const createdId = response?.data?.member?.id || profileId;
+            const accountEmail = response?.data?.account?.email;
+            setAdditionalProfiles((prev) =>
+              prev.map((p) =>
+                p.id === profileId
+                  ? {
+                      ...p,
+                      id: createdId,
+                      role: "Proche",
+                      name: [data.firstName, data.lastName]
+                        .filter(Boolean)
+                        .join(" "),
+                      birthdate: data.birthdate,
+                      gender,
+                      color: data.color || undefined,
+                      link: data.link || undefined,
+                      email: accountEmail || data.email || p.email,
+                    }
+                  : p,
+              ),
+            );
+          }
+        } catch {
+          // En cas d'échec API, on ne marque pas localement comme "sauvegardé".
+        }
       }
     },
     [mainProfile?.id],
@@ -237,14 +308,38 @@ export default function MonQuestionnaireSanteProfilsPage() {
 
   const handleRemoveProfile = useCallback(
     (id: string) => {
-      if (mainProfile?.id === id) {
-        setShowMainProfile(false);
-      } else {
-        setAdditionalProfiles((prev) => prev.filter((p) => p.id !== id));
-      }
+      const profile = profiles.find((p) => p.id === id);
+      if (!profile) return;
+      setPendingDeletion({ id, name: profile.name || "ce profil" });
     },
-    [mainProfile?.id],
+    [profiles],
   );
+
+  const handleCancelDeletion = useCallback(() => {
+    setPendingDeletion(null);
+  }, []);
+
+  const handleConfirmDeletion = useCallback(async () => {
+    if (!pendingDeletion) return;
+
+    const id = pendingDeletion.id;
+
+    if (mainProfile?.id === id) {
+      setPendingDeletion(null);
+      return;
+    }
+
+    try {
+      if (isUuid(id)) {
+        await AuthService.deleteFamilyMember(id);
+      }
+      setAdditionalProfiles((prev) => prev.filter((p) => p.id !== id));
+    } catch {
+      // Si suppression API impossible, on conserve la carte.
+    } finally {
+      setPendingDeletion(null);
+    }
+  }, [mainProfile?.id, pendingDeletion]);
 
   const handleAddProfile = useCallback(() => {
     const newId = String(Date.now());
@@ -257,6 +352,8 @@ export default function MonQuestionnaireSanteProfilsPage() {
         birthdate: "--/--/----",
         gender: "Femme",
         color: "#1aa484",
+        link: "",
+        email: "",
       },
     ]);
   }, []);
@@ -282,6 +379,33 @@ export default function MonQuestionnaireSanteProfilsPage() {
         quitterHref="/dashboard"
         nextHref={`${BASE_PATH}/mesures`}
       />
+
+      {pendingDeletion && (
+        <div className="fixed inset-0 z-9999 flex items-center justify-center p-4 bg-dark/50 backdrop-blur-sm">
+          <div className="w-full max-w-md bg-light rounded-2xl shadow-xl p-6">
+            <h3 className="text-xl font-semibold text-dark font-inclusive mb-3">
+              Confirmation de suppression
+            </h3>
+            <p className="text-sm text-gray-4 font-inclusive mb-6">
+              Etes-vous sur de vouloir supprimer le profil{" "}
+              <span className="font-semibold text-dark">{pendingDeletion.name}</span>{" "}
+              ?
+            </p>
+            <div className="flex items-center justify-end gap-3">
+              <Button
+                type="button"
+                variant="outline"
+                onClick={handleCancelDeletion}
+              >
+                Annuler
+              </Button>
+              <Button type="button" variant="green" onClick={handleConfirmDeletion}>
+                Confirmer
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }

@@ -11,6 +11,8 @@ export interface ProfileItem {
   gender: "Femme" | "Homme" | "Non précisé";
   avatarUrl?: string;
   color?: string;
+  link?: string;
+  email?: string;
 }
 
 interface QuestionnaireProfilesStepProps {
@@ -28,11 +30,14 @@ export default function QuestionnaireProfilesStep({
   onAddProfile,
   mainProfileId,
 }: QuestionnaireProfilesStepProps) {
-  const canRemoveProfile = (profileId: string) => {
+  const canRemoveProfile = (profile: ProfileItem) => {
     if (!onRemoveProfile) return false;
-    if (mainProfileId !== undefined) return profileId !== mainProfileId;
+    if (mainProfileId !== undefined && profile.id === mainProfileId) return false;
 
-    return profiles.length > 1;
+    const email = profile.email?.toLowerCase() || "";
+    const isSimpleProfile = !email || email.endsWith("@remindr.local");
+
+    return isSimpleProfile;
   };
 
   return (
@@ -49,7 +54,7 @@ export default function QuestionnaireProfilesStep({
             color={profile.color}
             onComplete={() => onCompleteProfile(profile.id)}
             onRemove={
-              canRemoveProfile(profile.id)
+              canRemoveProfile(profile)
                 ? () => onRemoveProfile?.(profile.id)
                 : undefined
             }
