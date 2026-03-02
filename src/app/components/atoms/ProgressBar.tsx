@@ -1,10 +1,11 @@
 interface ProgressBarProps {
   percentage: number;
-  color: "purple" | "blue" | "pink" | "orange";
+  color: "green" | "purple" | "blue" | "pink" | "orange";
   label?: string;
 }
 
 const progressBarColors = {
+  green: "bg-greenMain",
   purple: "bg-purple",
   blue: "bg-blue",
   pink: "bg-pink-2",

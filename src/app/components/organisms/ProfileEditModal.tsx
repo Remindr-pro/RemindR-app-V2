@@ -29,9 +29,11 @@ const GENRE_OPTIONS = [
 
 export interface ProfileEditFormData {
   firstName: string;
+  lastName: string;
   link: string;
   birthdate: string;
   genderBirth: string;
+  genderActual: string;
   color: string;
 }
 
@@ -44,24 +46,30 @@ function profileToFormData(profile: ProfileItem | null): ProfileEditFormData {
   if (!profile) {
     return {
       firstName: "",
+      lastName: "",
       link: "",
       birthdate: "",
       genderBirth: "",
+      genderActual: "",
       color: DEFAULT_COLOR,
     };
   }
+  const [firstName = "", ...lastNameParts] = (profile.name || "").split(" ");
+  const lastName = lastNameParts.join(" ");
   const genderValue =
     profile.gender === "Non précisé"
       ? "non_precise"
       : profile.gender === "Homme"
-      ? "Homme"
-      : "Femme";
+        ? "Homme"
+        : "Femme";
   return {
-    firstName: profile.name || "",
-    link: "",
+    firstName,
+    lastName,
+    link: profile.role === "Profil principal" ? "moi" : "",
     birthdate: parseDisplayBirthdate(profile.birthdate),
     genderBirth: genderValue,
-    color: DEFAULT_COLOR,
+    genderActual: genderValue,
+    color: profile.color || DEFAULT_COLOR,
   };
 }
 
@@ -84,8 +92,9 @@ function ProfileEditFormContent({
   onClose,
 }: ProfileEditFormContentProps) {
   const [formData, setFormData] = useState<ProfileEditFormData>(() =>
-    profileToFormData(profile)
+    profileToFormData(profile),
   );
+  const isMainProfile = profile?.role === "Profil principal";
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -163,6 +172,34 @@ function ProfileEditFormContent({
           />
         </div>
 
+        {/* Nom */}
+        <div className="flex flex-col">
+          <div className="flex items-center gap-1.5 mb-1">
+            <label
+              htmlFor="profile-lastname"
+              className="text-dark font-inclusive text-base"
+            >
+              Nom
+            </label>
+            <span className="text-gray-4">
+              <IconHelp size={14} />
+            </span>
+          </div>
+          <input
+            id="profile-lastname"
+            type="text"
+            placeholder="Nom"
+            value={formData.lastName}
+            onChange={(e) =>
+              setFormData((prev) => ({
+                ...prev,
+                lastName: e.target.value,
+              }))
+            }
+            className="w-full px-4 py-3 rounded-lg border border-gray-3 bg-light text-dark font-inclusive text-base placeholder:text-gray-3 focus:outline-none focus:ring-2 focus:ring-greenMain focus:border-transparent"
+          />
+        </div>
+
         {/* Lien */}
         <div className="flex flex-col">
           <div className="flex items-center gap-1.5 mb-1">
@@ -183,6 +220,7 @@ function ProfileEditFormContent({
               onChange={(e) =>
                 setFormData((prev) => ({ ...prev, link: e.target.value }))
               }
+              disabled={isMainProfile}
               className="w-full px-4 py-3 rounded-lg border border-gray-3 bg-light text-dark font-inclusive text-base focus:outline-none focus:ring-2 focus:ring-greenMain appearance-none pr-10 cursor-pointer"
             >
               {LIEN_OPTIONS.map((opt) => (
@@ -249,6 +287,43 @@ function ProfileEditFormContent({
                 setFormData((prev) => ({
                   ...prev,
                   genderBirth: e.target.value,
+                }))
+              }
+              className="w-full px-4 py-3 rounded-lg border border-gray-3 bg-light text-dark font-inclusive text-base focus:outline-none focus:ring-2 focus:ring-greenMain appearance-none pr-10 cursor-pointer"
+            >
+              {GENRE_OPTIONS.map((opt) => (
+                <option key={opt.value} value={opt.value}>
+                  {opt.label}
+                </option>
+              ))}
+            </select>
+            <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
+              <IconChevron size={20} className="text-gray-4" />
+            </div>
+          </div>
+        </div>
+
+        {/* Genre actuel */}
+        <div className="flex flex-col">
+          <div className="flex items-center gap-1.5 mb-1">
+            <label
+              htmlFor="profile-gender-actual"
+              className="text-dark font-inclusive text-base"
+            >
+              Genre actuel
+            </label>
+            <span className="text-gray-4">
+              <IconHelp size={14} />
+            </span>
+          </div>
+          <div className="relative">
+            <select
+              id="profile-gender-actual"
+              value={formData.genderActual}
+              onChange={(e) =>
+                setFormData((prev) => ({
+                  ...prev,
+                  genderActual: e.target.value,
                 }))
               }
               className="w-full px-4 py-3 rounded-lg border border-gray-3 bg-light text-dark font-inclusive text-base focus:outline-none focus:ring-2 focus:ring-greenMain appearance-none pr-10 cursor-pointer"

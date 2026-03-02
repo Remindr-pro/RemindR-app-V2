@@ -14,14 +14,21 @@ import { getDashboardFamilyMembers } from "@/app/actions/family";
 import { getDashboardMemberData } from "@/app/actions/dashboard";
 import { useAuth } from "@/lib/auth-provider";
 
-type MemberColor = "purple" | "blue" | "pink" | "orange";
-const MEMBER_COLORS: MemberColor[] = ["purple", "blue", "pink", "orange"];
+type MemberColor = "green" | "purple" | "blue" | "pink" | "orange";
+const MEMBER_COLORS: MemberColor[] = [
+  "green",
+  "purple",
+  "blue",
+  "pink",
+  "orange",
+];
 
 interface FamilyMember {
   id: string;
   firstName: string;
   lastName: string;
   isActive: boolean;
+  color: MemberColor;
 }
 
 interface NotificationItem {
@@ -60,7 +67,7 @@ export default function DashboardPageContent({
       person: string;
       date: string;
       source: string;
-      color: "orange" | "purple" | "blue" | "pink";
+      color: "green" | "orange" | "purple" | "blue" | "pink";
       learnMoreUrl?: string;
     }[]
   >([]);
@@ -92,14 +99,18 @@ export default function DashboardPageContent({
   const memberColorById = useMemo(() => {
     const map = new Map<string, MemberColor>();
     familyMembers.forEach((member, index) => {
-      map.set(member.id, MEMBER_COLORS[index % MEMBER_COLORS.length]);
+      map.set(
+        member.id,
+        member.color || MEMBER_COLORS[index % MEMBER_COLORS.length],
+      );
     });
     return map;
   }, [familyMembers]);
 
   const selectedMember = useMemo(
-    () => familyMembers.find((member) => member.id === selectedMemberId) || null,
-    [familyMembers, selectedMemberId]
+    () =>
+      familyMembers.find((member) => member.id === selectedMemberId) || null,
+    [familyMembers, selectedMemberId],
   );
   const isOwnDashboard = !!user?.id && selectedMemberId === user.id;
 
@@ -117,7 +128,9 @@ export default function DashboardPageContent({
           return;
         }
 
-        const isValidMember = activeMembers.some((member) => member.id === memberId);
+        const isValidMember = activeMembers.some(
+          (member) => member.id === memberId,
+        );
         if (!isValidMember) {
           setSelectedMemberId(user.id);
           router.replace("/dashboard");
@@ -132,6 +145,7 @@ export default function DashboardPageContent({
             firstName: user.firstName,
             lastName: user.lastName,
             isActive: true,
+            color: MEMBER_COLORS[0],
           },
         ];
         setFamilyMembers(fallbackMembers);
@@ -157,7 +171,7 @@ export default function DashboardPageContent({
         const payload = await getDashboardMemberData(
           selectedMemberId,
           start.toISOString(),
-          end.toISOString()
+          end.toISOString(),
         );
 
         const nextReminders = (payload.reminders || [])
@@ -165,7 +179,7 @@ export default function DashboardPageContent({
           .slice(0, 5)
           .map((item) => {
             const reminderMember = familyMembers.find(
-              (member) => member.id === item.user.id
+              (member) => member.id === item.user.id,
             );
             const color = memberColorById.get(item.user.id) || "purple";
             const referenceDate =
@@ -189,19 +203,19 @@ export default function DashboardPageContent({
         const nextMessages = (payload.notifications || [])
           .slice(0, 5)
           .map((item: NotificationItem) => {
-          const date = new Date(item.sentAt);
-          return {
-            id: item.id,
-            day: String(date.getDate()),
-            month: date
-              .toLocaleString("fr-FR", { month: "short" })
-              .replace(".", "")
-              .toUpperCase(),
-            content: item.message || item.title || "Notification",
-            actionText: "Voir le détail",
-            actionUrl: "#",
-          };
-        });
+            const date = new Date(item.sentAt);
+            return {
+              id: item.id,
+              day: String(date.getDate()),
+              month: date
+                .toLocaleString("fr-FR", { month: "short" })
+                .replace(".", "")
+                .toUpperCase(),
+              content: item.message || item.title || "Notification",
+              actionText: "Voir le détail",
+              actionUrl: "#",
+            };
+          });
         setMessages(nextMessages);
       } catch {
         setReminders([]);

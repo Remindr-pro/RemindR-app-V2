@@ -15,6 +15,9 @@ export interface User {
   genderBirth?: string | null;
   genderActual?: string | null;
   profilePictureUrl?: string | null;
+  profileLink?: string | null;
+  profileColor?: string | null;
+  profileCompleted?: boolean;
 }
 
 interface AuthContextType {
@@ -42,7 +45,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       } catch (error) {
         console.error(
           "Erreur lors de la vérification de l'authentification:",
-          error
+          error,
         );
       } finally {
         setLoading(false);

@@ -19,6 +19,18 @@ export interface RegisterData {
   userType?: string;
 }
 
+export interface UpdateMeData {
+  firstName?: string;
+  lastName?: string;
+  dateOfBirth?: string;
+  genderBirth?: string;
+  genderActual?: string;
+  profilePictureUrl?: string;
+  profileLink?: string;
+  profileColor?: string;
+  profileCompleted?: boolean;
+}
+
 export interface ForgotPasswordData {
   email: string;
 }
@@ -40,6 +52,13 @@ export interface AuthResponse {
       role: string;
       userType: string;
       familyId?: string | null;
+      dateOfBirth?: string | null;
+      genderBirth?: string | null;
+      genderActual?: string | null;
+      profilePictureUrl?: string | null;
+      profileLink?: string | null;
+      profileColor?: string | null;
+      profileCompleted?: boolean;
     };
     token: string;
     refreshToken: string;
@@ -126,7 +145,7 @@ export class AuthService {
       const error = await response.json().catch(() => null);
       throw new Error(
         error?.message ||
-          "Impossible d'envoyer le lien de réinitialisation pour le moment."
+          "Impossible d'envoyer le lien de réinitialisation pour le moment.",
       );
     }
   }
@@ -144,7 +163,7 @@ export class AuthService {
       const error = await response.json().catch(() => null);
       throw new Error(
         error?.message ||
-          "Impossible de réinitialiser le mot de passe pour le moment."
+          "Impossible de réinitialiser le mot de passe pour le moment.",
       );
     }
   }
@@ -201,6 +220,33 @@ export class AuthService {
     }
   }
 
+  static async updateMe(data: UpdateMeData) {
+    const token = this.getToken();
+
+    if (!token) {
+      throw new Error("Utilisateur non connecté");
+    }
+
+    const response = await fetch(`${API_URL}/auth/me`, {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      const error = await response.json().catch(() => null);
+      throw new Error(
+        error?.message ||
+          "Impossible de mettre à jour le profil pour le moment.",
+      );
+    }
+
+    return response.json();
+  }
+
   static async verifyPassword(currentPassword: string): Promise<void> {
     const token = this.getToken();
 
@@ -221,14 +267,14 @@ export class AuthService {
       const error = await response.json().catch(() => null);
       throw new Error(
         error?.message ||
-          "Impossible de vérifier l'ancien mot de passe pour le moment."
+          "Impossible de vérifier l'ancien mot de passe pour le moment.",
       );
     }
   }
 
   static async changePassword(
     currentPassword: string,
-    newPassword: string
+    newPassword: string,
   ): Promise<void> {
     const token = this.getToken();
 
@@ -249,7 +295,7 @@ export class AuthService {
       const error = await response.json().catch(() => null);
       throw new Error(
         error?.message ||
-          "Impossible de modifier votre mot de passe pour le moment."
+          "Impossible de modifier votre mot de passe pour le moment.",
       );
     }
   }

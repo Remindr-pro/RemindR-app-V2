@@ -11,7 +11,7 @@ interface ReminderItem {
   person: string;
   date: string;
   source: string;
-  color: "orange" | "purple" | "blue" | "pink";
+  color: "green" | "orange" | "purple" | "blue" | "pink";
   learnMoreUrl?: string;
 }
 
@@ -22,6 +22,11 @@ interface RecommendedRemindersCardProps {
 }
 
 const colorClasses = {
+  green: {
+    bg: "bg-greenMain/10",
+    border: "border-greenMain",
+    text: "text-greenMain",
+  },
   orange: {
     bg: "bg-orange/10",
     border: "border-orange",

@@ -2,9 +2,15 @@
 
 import api from "@/lib/api";
 
-type BorderColor = "purple" | "blue" | "pink" | "orange";
+type BorderColor = "green" | "purple" | "blue" | "pink" | "orange";
 
-const BORDER_COLORS: BorderColor[] = ["purple", "blue", "pink", "orange"];
+const BORDER_COLORS: BorderColor[] = [
+  "green",
+  "purple",
+  "blue",
+  "pink",
+  "orange",
+];
 
 interface FamilyApiUser {
   id: string;
@@ -17,6 +23,7 @@ interface FamilyApiUser {
   genderBirth?: string | null;
   genderActual?: string | null;
   profilePictureUrl?: string | null;
+  profileColor?: string | null;
   healthProfile?: {
     bloodType?: string | null;
     height?: number | null;
@@ -46,6 +53,7 @@ interface MeApiResponse {
     genderBirth?: string | null;
     genderActual?: string | null;
     profilePictureUrl?: string | null;
+    profileColor?: string | null;
   } | null;
 }
 
@@ -65,6 +73,7 @@ export interface DashboardFamilyMember {
   firstName: string;
   lastName: string;
   isActive: boolean;
+  color: BorderColor;
 }
 
 export interface QuestionnaireFamilyMember {
@@ -77,6 +86,54 @@ export interface QuestionnaireFamilyMember {
   genderBirth?: string | null;
   genderActual?: string | null;
   profilePictureUrl?: string | null;
+  profileColor?: string | null;
+}
+
+function mapProfileColorToBorderColor(
+  profileColor: string | null | undefined,
+  fallbackIndex: number,
+): BorderColor {
+  const normalized = (profileColor || "").trim().toLowerCase();
+
+  if (
+    normalized.includes("green") ||
+    ["#1aa484", "#10b981", "#179275"].includes(normalized)
+  ) {
+    return "green";
+  }
+
+  if (
+    normalized.includes("purple") ||
+    ["#ab7dfa", "#8b5cf6", "#7c3aed"].includes(normalized)
+  ) {
+    return "purple";
+  }
+
+  if (
+    normalized.includes("blue") ||
+    ["#4a90e2", "#3b82f6", "#2563eb", "#607d8b"].includes(normalized)
+  ) {
+    return "blue";
+  }
+
+  if (
+    normalized.includes("pink") ||
+    normalized.includes("red") ||
+    ["#a31b39", "#ec4899", "#f43f5e"].includes(normalized)
+  ) {
+    return "pink";
+  }
+
+  if (
+    normalized.includes("orange") ||
+    normalized.includes("yellow") ||
+    normalized.includes("brown") ||
+    ["#f4a261", "#f0e763", "#795548", "#f59e0b"].includes(normalized)
+  ) {
+    return "orange";
+  }
+
+  return BORDER_COLORS[fallbackIndex % BORDER_COLORS.length];
 }
 
 function mapGender(
@@ -173,6 +230,7 @@ export async function getMyFamilyMembers(): Promise<FamilyMemberViewModel[]> {
         dateOfBirth: mePayload.data.dateOfBirth || "",
         genderBirth: mePayload.data.genderBirth,
         genderActual: mePayload.data.genderActual,
+        profileColor: mePayload.data.profileColor,
       },
     ];
   }
@@ -200,7 +258,7 @@ export async function getMyFamilyMembers(): Promise<FamilyMemberViewModel[]> {
     ),
     email: member.email,
     profileCompletion: computeProfileCompletion(member),
-    borderColor: BORDER_COLORS[index % BORDER_COLORS.length],
+    borderColor: mapProfileColorToBorderColor(member.profileColor, index),
   }));
 }
 
@@ -237,6 +295,7 @@ export async function getDashboardFamilyMembers(): Promise<
         dateOfBirth: mePayload.data.dateOfBirth || "",
         genderBirth: mePayload.data.genderBirth,
         genderActual: mePayload.data.genderActual,
+        profileColor: mePayload.data.profileColor,
       },
     ];
   }
@@ -254,11 +313,12 @@ export async function getDashboardFamilyMembers(): Promise<
         "fr-FR",
       );
     })
-    .map((member) => ({
+    .map((member, index) => ({
       id: member.id,
       firstName: member.firstName,
       lastName: member.lastName,
       isActive: member.isActive,
+      color: mapProfileColorToBorderColor(member.profileColor, index),
     }));
 }
 
@@ -296,6 +356,7 @@ export async function getQuestionnaireFamilyMembers(): Promise<
         genderBirth: mePayload.data.genderBirth,
         genderActual: mePayload.data.genderActual,
         profilePictureUrl: mePayload.data.profilePictureUrl,
+        profileColor: mePayload.data.profileColor,
       },
     ];
   }
@@ -317,5 +378,6 @@ export async function getQuestionnaireFamilyMembers(): Promise<
       genderBirth: member.genderBirth,
       genderActual: member.genderActual,
       profilePictureUrl: member.profilePictureUrl,
+      profileColor: member.profileColor,
     }));
 }

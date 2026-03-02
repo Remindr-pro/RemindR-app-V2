@@ -11,10 +11,11 @@ interface FamilyMemberCardProps {
   email?: string;
   profileCompletion: number;
   avatarUrl?: string;
-  borderColor: "purple" | "blue" | "pink" | "orange";
+  borderColor: "green" | "purple" | "blue" | "pink" | "orange";
 }
 
 const borderColorClasses = {
+  green: "border-greenMain",
   purple: "border-purple",
   blue: "border-blue",
   pink: "border-pink-2",
@@ -31,7 +32,7 @@ export default function FamilyMemberCard({
   avatarUrl,
   borderColor,
 }: FamilyMemberCardProps) {
-  const defaultAvatar = "/images/articles/article-semaine-1.jpg";
+  const defaultAvatar = "/images/illustrations/avatar.png";
 
   return (
     <div

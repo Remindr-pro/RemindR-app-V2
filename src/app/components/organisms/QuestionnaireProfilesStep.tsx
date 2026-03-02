@@ -10,6 +10,7 @@ export interface ProfileItem {
   birthdate: string;
   gender: "Femme" | "Homme" | "Non précisé";
   avatarUrl?: string;
+  color?: string;
 }
 
 interface QuestionnaireProfilesStepProps {
@@ -45,6 +46,7 @@ export default function QuestionnaireProfilesStep({
             birthdate={profile.birthdate}
             gender={profile.gender}
             avatarUrl={profile.avatarUrl}
+            color={profile.color}
             onComplete={() => onCompleteProfile(profile.id)}
             onRemove={
               canRemoveProfile(profile.id)
