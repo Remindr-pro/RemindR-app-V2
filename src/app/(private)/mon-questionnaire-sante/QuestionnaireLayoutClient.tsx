@@ -28,8 +28,8 @@ const pageConfigs: Record<string, PageConfig> = {
   },
   [`${BASE_PATH}/mesures`]: {
     step: 2,
-    title: "Mesures",
-    description: "Contenu à venir.",
+    title: "Je renseigne mon poids et ma taille pour avoir des conseils personnalisés et suivre mon évolution.",
+    description: "",
   },
   [`${BASE_PATH}/maladies`]: {
     step: 3,

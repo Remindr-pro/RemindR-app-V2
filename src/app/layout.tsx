@@ -3,6 +3,7 @@ import Script from "next/script";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/lib/auth-provider";
+import AppToaster from "@/app/components/providers/AppToaster";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -54,7 +55,10 @@ export default function RootLayout({
             gtag('config', 'G-ZY0VH8KTTJ');
           `}
         </Script>
-        <AuthProvider>{children}</AuthProvider>
+        <AuthProvider>
+          {children}
+          <AppToaster />
+        </AuthProvider>
       </body>
     </html>
   );

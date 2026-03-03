@@ -9,6 +9,7 @@ import IconHelp from "@/app/components/atoms/icons/Help";
 import IconChevron from "@/app/components/atoms/icons/Chevron";
 import ColorPicker from "@/app/components/molecules/ColorPicker";
 import type { ProfileItem } from "@/app/components/organisms/QuestionnaireProfilesStep";
+import { sileo } from "sileo";
 
 const DEFAULT_AVATAR = "/images/illustrations/avatar.png";
 const DEFAULT_COLOR = "#1aa484";
@@ -124,15 +125,19 @@ function ProfileEditFormContent({
     e.preventDefault();
     if (canCreateConnectedAccount && formData.createLogin) {
       if (!formData.email) {
-        window.alert("Veuillez renseigner un email.");
+        sileo.error({ title: "Veuillez renseigner un email." });
         return;
       }
       if (formData.password.length < 8) {
-        window.alert("Le mot de passe doit contenir au moins 8 caracteres.");
+        sileo.error({
+          title: "Le mot de passe doit contenir au moins 8 caractères.",
+        });
         return;
       }
       if (formData.password !== formData.confirmPassword) {
-        window.alert("La confirmation du mot de passe ne correspond pas.");
+        sileo.error({
+          title: "La confirmation du mot de passe ne correspond pas.",
+        });
         return;
       }
     }
@@ -145,7 +150,7 @@ function ProfileEditFormContent({
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col items-center overflow-y-auto min-h-0 flex-1 max-h-[calc(90vh-5rem)]"
+      className="flex flex-col items-center overflow-y-auto min-h-0 flex-1 max-h-[calc(90vh-5rem)] px-2"
     >
       {/* Photo de profil */}
       <div className="flex flex-col items-center mb-6 shrink-0">
@@ -561,16 +566,11 @@ export default function ProfileEditModal({
           <button
             type="button"
             onClick={onClose}
-            className="text-gray-4 font-inclusive text-sm hover:text-dark transition-colors"
-          >
-            Quitter
-          </button>
-          <button
-            type="button"
-            onClick={onClose}
-            className="w-9 h-9 rounded-full bg-greenMain text-light flex items-center justify-center hover:bg-greenMain-2 transition-colors shrink-0"
+            className="flex items-center gap-2 text-gray-4 font-inclusive text-sm hover:text-dark transition-colors cursor-pointer"
             aria-label="Fermer"
           >
+            <span>Quitter</span>
+            <span className="w-9 h-9 rounded-full bg-greenMain text-light flex items-center justify-center hover:bg-greenMain-2 transition-colors shrink-0">
             <svg
               width="18"
               height="18"
@@ -583,6 +583,7 @@ export default function ProfileEditModal({
                 fill="currentColor"
               />
             </svg>
+            </span>
           </button>
         </div>
 

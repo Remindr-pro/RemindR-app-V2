@@ -14,6 +14,7 @@ import {
 import { AuthService } from "@/lib/auth-service";
 import { useAuth } from "@/lib/auth-provider";
 import type { User } from "@/lib/auth-provider";
+import { sileo } from "sileo";
 import { BASE_PATH } from "./constants";
 
 function formGenderToProfileItem(
@@ -297,6 +298,18 @@ export default function MonQuestionnaireSanteProfilsPage() {
                   : p,
               ),
             );
+            const normalizedToastGender = (
+              data.genderActual || data.genderBirth || ""
+            ).toLowerCase();
+            const addedLabel =
+              normalizedToastGender === "femme"
+                ? "ajoutée"
+                : normalizedToastGender === "homme"
+                  ? "ajouté"
+                  : "ajouté(e)";
+            sileo.success({
+              title: `${data.firstName} a bien été ${addedLabel} aux profils.`,
+            });
           }
         } catch {
           // En cas d'échec API, on ne marque pas localement comme "sauvegardé".
