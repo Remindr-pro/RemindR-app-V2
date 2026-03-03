@@ -31,7 +31,7 @@ export default function FAQCollapseItem({
     <div className="border-b border-gray-2 last:border-b-0">
       <button
         onClick={handleToggle}
-        className="w-full flex items-center justify-between py-4 text-left hover:opacity-80 transition-opacity"
+        className="w-full flex items-center justify-between py-4 text-left hover:opacity-80 transition-opacity cursor-pointer"
       >
         <span className="text-base md:text-lg font-inclusive font-medium text-dark">
           {title}

@@ -6,14 +6,26 @@ import { useAuth } from "@/lib/auth-provider";
 export default function ContactPage() {
   const { user } = useAuth();
 
-  const handleSubmit = (data: {
+  const handleSubmit = async (data: {
     email: string;
     subject: string;
     message: string;
     acceptTerms: boolean;
   }) => {
-    // TODO: Implémenter l'envoi du formulaire
-    console.log("Formulaire soumis:", data);
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email: data.email,
+        subject: data.subject,
+        message: data.message,
+      }),
+    });
+    const json = await res.json().catch(() => ({}));
+
+    if (!res.ok) {
+      throw new Error(json.error || "Erreur lors de l'envoi du message.");
+    }
   };
 
   return (

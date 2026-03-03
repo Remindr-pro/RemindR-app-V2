@@ -13,6 +13,7 @@ interface ButtonProps {
   icon?: ReactNode;
   roundedFull?: boolean;
   size?: "sm" | "default";
+  download?: boolean | string;
 }
 
 export default function Button({
@@ -27,6 +28,7 @@ export default function Button({
   icon,
   roundedFull = false,
   size = "default",
+  download,
 }: ButtonProps) {
   const roundedClass = roundedFull ? "rounded-full" : "rounded-lg";
   const sizeClasses =
@@ -88,16 +90,27 @@ export default function Button({
     </>
   );
 
-  return href ? (
-    <Link
-      href={href}
-      className={combinedClasses}
-      onClick={onClick}
-      style={{ fontFamily: "var(--font-inclusive)" }}
-    >
-      {content}
-    </Link>
-  ) : (
+  if (href) {
+    const isDownload = download !== undefined;
+    const linkProps = {
+      href,
+      className: combinedClasses,
+      onClick,
+      style: { fontFamily: "var(--font-inclusive)" } as React.CSSProperties,
+      ...(isDownload && {
+        download: typeof download === "string" ? download : true,
+        target: "_blank",
+        rel: "noopener noreferrer",
+      }),
+    };
+    return isDownload ? (
+      <a {...linkProps}>{content}</a>
+    ) : (
+      <Link {...linkProps}>{content}</Link>
+    );
+  }
+
+  return (
     <button
       type={type}
       className={combinedClasses}

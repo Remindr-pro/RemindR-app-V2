@@ -1,7 +1,15 @@
+"use client";
+
 import Link from "next/link";
-import Logo from "../atoms/Logo";
+import { usePathname } from "next/navigation";
+import Logo from "@/app/components/atoms/Logo";
 
 export default function Footer() {
+  const pathname = usePathname();
+  const currentYear = new Date().getFullYear();
+  const contactHref = pathname?.startsWith("/professionnels")
+    ? "/professionnels/contact"
+    : "/particuliers/contact";
   return (
     <footer className="w-full bg-dark text-light">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -58,11 +66,11 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/contact"
+                  href={contactHref}
                   className="text-gray-2 hover:text-light transition-colors text-sm block"
                   style={{ fontFamily: "var(--font-inclusive)" }}
                 >
-                  Nous contacter
+                  Aide et Contact
                 </Link>
               </li>
             </ul>
@@ -127,16 +135,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/politique-confidentialite"
-                  className="text-gray-2 hover:text-light transition-colors text-sm block"
-                  style={{ fontFamily: "var(--font-inclusive)" }}
-                >
-                  Politique de confidentialité
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/cgu"
+                  href="/conditions-generales-utilisation"
                   className="text-gray-2 hover:text-light transition-colors text-sm block"
                   style={{ fontFamily: "var(--font-inclusive)" }}
                 >
@@ -145,7 +144,34 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/faq"
+                  href="/politique-de-confidentialite"
+                  className="text-gray-2 hover:text-light transition-colors text-sm block"
+                  style={{ fontFamily: "var(--font-inclusive)" }}
+                >
+                  Politique de confidentialité
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/accessibilite"
+                  className="text-gray-2 hover:text-light transition-colors text-sm block"
+                  style={{ fontFamily: "var(--font-inclusive)" }}
+                >
+                  Accessibilité
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/gestion-des-cookies"
+                  className="text-gray-2 hover:text-light transition-colors text-sm block"
+                  style={{ fontFamily: "var(--font-inclusive)" }}
+                >
+                  Gestion des cookies
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/particuliers#faq"
                   className="text-gray-2 hover:text-light transition-colors text-sm block"
                   style={{ fontFamily: "var(--font-inclusive)" }}
                 >
@@ -340,7 +366,7 @@ export default function Footer() {
             className="text-gray-2 text-sm"
             style={{ fontFamily: "var(--font-inclusive)" }}
           >
-            © 2025 Remindr. Tous droits réservés.
+            © {currentYear} Remindr. Tous droits réservés.
           </div>
         </div>
       </div>

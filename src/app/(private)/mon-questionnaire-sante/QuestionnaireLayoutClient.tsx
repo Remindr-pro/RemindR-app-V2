@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import IconX from "@/app/components/atoms/icons/X";
 import StepIndicator from "@/app/components/atoms/StepIndicator";
-import { BASE_PATH } from "./constants";
+import { BASE_PATH } from "@/app/(private)/mon-questionnaire-sante/constants";
 
 const QUESTIONNAIRE_STEP_LABELS = [
   "Profil(s)",
@@ -28,13 +28,13 @@ const pageConfigs: Record<string, PageConfig> = {
   },
   [`${BASE_PATH}/mesures`]: {
     step: 2,
-    title: "Mesures",
-    description: "Contenu à venir.",
+    title: "Je renseigne mon poids et ma taille pour avoir des conseils personnalisés et suivre mon évolution.",
+    description: "",
   },
   [`${BASE_PATH}/maladies`]: {
     step: 3,
-    title: "Maladies",
-    description: "Contenu à venir.",
+    title: "Je renseigne mes maladies et mes allergies pour avoir des conseils et des rappels personnalisés.",
+    description: "",
   },
   [`${BASE_PATH}/habitudes`]: {
     step: 4,

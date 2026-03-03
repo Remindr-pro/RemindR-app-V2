@@ -1,56 +1,67 @@
 "use client";
 
 import { useState } from "react";
-import CollapseList from "./CollapseList";
+import Image from "next/image";
+import CollapseList from "@/app/components/organisms/CollapseList";
 
 const COLLAPSE_IMAGES = {
   0: {
-    color: "#1aa484",
-    text: "La prévention et le suivi santé",
+    image: "/images/illustrations/dashboard.png",
+    alt: "Tableaux de bord clairs pour vous et vos proches",
+    width: 1200,
+    height: 800,
   },
   1: {
-    color: "#4a90e2",
-    text: "Des tableaux de bord clairs",
+    image: "/images/illustrations/notification-preview.png",
+    alt: "Aperçu des notifications et du suivi santé",
+    width: 400,
+    height: 360,
   },
   2: {
-    color: "#7ca42b",
-    text: "Des rappels qui s'adaptent",
+    image: "/images/illustrations/dashboard-calendrier.png",
+    alt: "Des rappels qui s'adaptent à vous",
+    width: 1200,
+    height: 800,
   },
   3: {
-    color: "#9055a2",
-    text: "Un calendrier santé partagé",
+    image: "/images/illustrations/dashboard-proches.png",
+    alt: "Calendrier santé partagé avec vos proches",
+    width: 1200,
+    height: 800,
   },
   4: {
-    color: "#f4a261",
-    text: "Un lien direct avec votre mutuelle",
+    image: "/images/illustrations/dashboard-contact.png",
+    alt: "Lien direct avec votre mutuelle",
+    width: 1200,
+    height: 800,
   },
 };
 
 const COLLAPSE_ITEMS = [
   {
-    title: "La prévention et le suivi santé, simple et fiable.",
-    content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-  },
-  {
     title: "Des tableaux de bord clairs pour vous et vos proches.",
     content:
-      "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "Un espace par personne : le vôtre et ceux de vos proches (enfants, parents). Tout est au même endroit. Vous visualisez d'un coup d'œil les prochains rendez-vous, les rappels en attente et les conseils de prévention personnalisés.",
+  },
+  {
+    title: "La prévention et le suivi santé, simple et fiable.",
+    content:
+      "Remindr centralise vos rappels de vaccins, bilans et rendez-vous médicaux. Les recommandations s'appuient sur les préconisations officielles des organismes de santé. Vous recevez des notifications au bon moment pour ne rien oublier.",
   },
   {
     title: "Des rappels qui s'adaptent à vous.",
     content:
-      "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
+      "Les rappels sont calculés selon votre âge, votre profil et vos antécédents. Remindr vous suggère aussi des examens ou bilans auxquels vous n'auriez pas pensé. Plus de stress, plus d'oubli.",
   },
   {
     title: "Un calendrier santé partagé.",
     content:
-      "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet.",
+      "Gérez la santé de toute la famille depuis un seul compte. Accédez au calendrier de vos proches (avec leur accord), suivez leurs rendez-vous et leurs rappels. Idéal pour les aidants ou les parents.",
   },
   {
     title: "Un lien direct avec votre mutuelle.",
     content:
-      "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa.",
+      "Envoyez vos factures à votre mutuelle et suivez vos remboursements directement depuis Remindr. Votre complémentaire santé et votre suivi prévention travaillent ensemble pour vous simplifier la vie.",
   },
 ];
 
@@ -82,14 +93,22 @@ export default function PreventionCollapse() {
       {/* Image */}
       <div className="hidden lg:block">
         <div
-          className="rounded-2xl h-full w-full flex items-center justify-center transition-all duration-300"
-          style={{ backgroundColor: currentImage.color }}
+          className="rounded-2xl h-full w-full flex items-center justify-center transition-all duration-300 overflow-hidden"
+          style={{
+            backgroundColor: "transparent",
+          }}
         >
-          {currentImage.text && (
-            <span className="text-white text-2xl md:text-3xl font-inclusive font-medium text-center px-8">
-              {currentImage.text}
-            </span>
-          )}
+          {"image" in currentImage && currentImage.image ? (
+            <Image
+              src={currentImage.image}
+              alt={"alt" in currentImage ? currentImage.alt : ""}
+              width={"width" in currentImage ? currentImage.width : 1200}
+              height={"height" in currentImage ? currentImage.height : 800}
+              sizes="(min-width: 1024px) 50vw, 0px"
+              quality={90}
+              className="w-full h-full object-contain"
+            />
+          ) : null}
         </div>
       </div>
     </div>

@@ -22,7 +22,7 @@ export default function ProfessionnelsPage() {
       image: "/images/icons/pepicons-print_letter-circle.png",
       title: "Communication ciblée & instantanée",
       description:
-        "Envoyez des messages, alertes et campagnes directement dans l’espace adhérent.",
+        "Envoyez des messages, alertes et campagnes directement dans l'espace adhérent.",
     },
   ];
   return (
@@ -38,10 +38,14 @@ export default function ProfessionnelsPage() {
           de réduire vos coûts tout en renforçant la fidélisation.
         </p>
         <div className="flex flex-col md:flex-row items-center justify-center gap-4">
-          <Button href="#" variant="dark">
+          <Button
+            href="/pdf/La_solution_Remindr.pdf"
+            variant="dark"
+            download="La_solution_Remindr.pdf"
+          >
             Télécharger la documentation
           </Button>
-          <Button href="#" variant="green">
+          <Button href="/professionnels/contact" variant="green">
             Demander une démo
           </Button>
         </div>
@@ -88,7 +92,7 @@ export default function ProfessionnelsPage() {
             ))}
           </div>
           <div>
-            <Button variant="green" href="#">
+            <Button variant="green" href="/professionnels/contact">
               Demander une démo
             </Button>
           </div>
@@ -106,8 +110,8 @@ export default function ProfessionnelsPage() {
           </h2>
           <p className="max-w-2xl mx-auto text-base md:text-lg font-inclusive font-regular">
             Nous avons développé un outil unique pour centraliser vos actions,
-            comprendre vos adhérents et renforcer l’impact de votre stratégie de
-            prévention.
+            comprendre vos adhérents et renforcer l&apos;impact de votre
+            stratégie de prévention.
           </p>
         </div>
 
@@ -134,10 +138,14 @@ export default function ProfessionnelsPage() {
         </div>
 
         <div className="flex flex-col md:flex-row items-center justify-center gap-4">
-          <Button href="#" variant="dark">
+          <Button
+            href="/pdf/La_solution_Remindr.pdf"
+            variant="dark"
+            download="La_solution_Remindr.pdf"
+          >
             Télécharger la documentation
           </Button>
-          <Button href="#" variant="green">
+          <Button href="/professionnels/contact" variant="green">
             Contacter un commercial
           </Button>
         </div>

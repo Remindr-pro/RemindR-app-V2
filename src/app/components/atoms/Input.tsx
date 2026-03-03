@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, InputHTMLAttributes } from "react";
-import IconEye from "./icons/Eye";
-import IconEyeOff from "./icons/EyeOff";
+import IconEye from "@/app/components/atoms/icons/Eye";
+import IconEyeOff from "@/app/components/atoms/icons/EyeOff";
 
 interface InputProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, "type"> {

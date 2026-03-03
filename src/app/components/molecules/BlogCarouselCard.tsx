@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import ArticleCard, { ArticleCardProps } from "./ArticleCard";
-import IconChevron from "../atoms/icons/Chevron";
+import ArticleCard, { ArticleCardProps } from "@/app/components/molecules/ArticleCard";
+import IconChevron from "@/app/components/atoms/icons/Chevron";
 
 interface BlogCarouselCardProps {
   articles: ArticleCardProps[];
@@ -27,7 +27,7 @@ export default function BlogCarouselCard({ articles }: BlogCarouselCardProps) {
 
   return (
     <div className="bg-light rounded-2xl p-6 xl:p-8 shadow-md h-full">
-      <h3 className="text-base font-bold text-dark font-inclusive mb-6">
+      <h3 className="text-base text-dark font-inclusive mb-6">
         Le blog - Ça peut vous intéresser
       </h3>
 

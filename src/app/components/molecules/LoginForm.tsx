@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import Input from "../atoms/Input";
-import Button from "../atoms/Button";
+import Input from "@/app/components/atoms/Input";
+import Button from "@/app/components/atoms/Button";
 import Link from "next/link";
 import { useAuth } from "@/lib/auth-provider";
 

@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import LoginForm from "../molecules/LoginForm";
-import ActivationInfo from "../molecules/ActivationInfo";
+import LoginForm from "@/app/components/molecules/LoginForm";
+import ActivationInfo from "@/app/components/molecules/ActivationInfo";
 
 export default function ConnexionCards() {
   const [showActivation, setShowActivation] = useState(false);

@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import IconChevron from "./icons/Chevron";
+import IconChevron from "@/app/components/atoms/icons/Chevron";
 
 type IconComponent = (props: {
   size?: number;

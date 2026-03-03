@@ -1,8 +1,8 @@
 import Link from "next/link";
-import IconX from "../atoms/icons/X";
-import IconArrowRight from "../atoms/icons/ArrowRight";
-import Button from "../atoms/Button";
-import IconBubbleChatNotification from "../atoms/icons/BubbleChatNotification";
+import IconX from "@/app/components/atoms/icons/X";
+import IconArrowRight from "@/app/components/atoms/icons/ArrowRight";
+import Button from "@/app/components/atoms/Button";
+import IconBubbleChatNotification from "@/app/components/atoms/icons/BubbleChatNotification";
 
 interface MessageItem {
   id: string;

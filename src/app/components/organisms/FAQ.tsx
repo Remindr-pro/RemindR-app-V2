@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import Button from "../atoms/Button";
-import FAQCollapseList from "./FAQCollapseList";
+import Button from "@/app/components/atoms/Button";
+import FAQCollapseList from "@/app/components/organisms/FAQCollapseList";
 
 const FAQ_CATEGORIES = {
   "Notre service": {

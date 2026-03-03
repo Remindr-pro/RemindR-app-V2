@@ -96,7 +96,7 @@ export default function ParticuliersPage() {
         <p className="text-base md:text-lg font-inclusive font-medium md:max-w-5/6">
           Remindr vous aide à ne rien oublier pour votre santé et celle de vos
           proches. Des rappels simples, un espace clair de prévention et de
-          suivi pour toute la famille, et l’esprit enfin léger.
+          suivi pour toute la famille, et l&apos;esprit enfin léger.
         </p>
       </section>
 

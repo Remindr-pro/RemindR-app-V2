@@ -1,4 +1,4 @@
-import AvatarIcon from "../atoms/icons/Avatar";
+import AvatarIcon from "@/app/components/atoms/icons/Avatar";
 
 interface FeedbackCardProps {
   name: string;

@@ -1,4 +1,4 @@
-import Button from "../atoms/Button";
+import Button from "@/app/components/atoms/Button";
 import { ReactNode } from "react";
 
 interface BannerCtaProps {

@@ -1,7 +1,7 @@
 "use client";
 
 import { InputHTMLAttributes, ReactNode } from "react";
-import IconSearch from "./icons/Search";
+import IconSearch from "@/app/components/atoms/icons/Search";
 
 interface SearchInputProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, "type" | "size"> {

@@ -19,7 +19,7 @@ export default function NotificationsPage() {
         </h1>
 
         <p className="text-base text-dark font-inclusive mb-8 leading-relaxed">
-          <span className="font-bold">
+          <span className="font-bold text-xl">
             Gérez vos préférences en toute simplicité.
           </span>
           <br />
@@ -39,16 +39,16 @@ export default function NotificationsPage() {
                 height={24}
                 className="w-9 h-9"
               />
-              <h2 className="text-xl font-bold text-dark font-inclusive">
+              <h2 className="text-lg font-bold text-dark font-inclusive">
                 Notifications
               </h2>
             </div>
 
             <div className="flex flex-col gap-6 pl-9">
               {/* Rappels de santé */}
-              <div className="flex items-start justify-between gap-4">
+              <div className="flex flex-col md:flex-row items-start justify-between gap-4">
                 <div className="flex-1">
-                  <p className="text-base font-semibold text-dark font-inclusive mb-1">
+                  <p className="text-base text-dark font-inclusive mb-1">
                     Rappels de santé
                   </p>
                   <p className="text-sm text-gray-4 font-inclusive">
@@ -64,9 +64,9 @@ export default function NotificationsPage() {
               </div>
 
               {/* Conseils personnalisés */}
-              <div className="flex items-start justify-between gap-4">
+              <div className="flex flex-col md:flex-row items-start justify-between gap-4">
                 <div className="flex-1">
-                  <p className="text-base font-semibold text-dark font-inclusive mb-1">
+                  <p className="text-base text-dark font-inclusive mb-1">
                     Conseils personnalisés
                   </p>
                   <p className="text-sm text-gray-4 font-inclusive">
@@ -82,9 +82,9 @@ export default function NotificationsPage() {
               </div>
 
               {/* Mises à jour et nouveautés */}
-              <div className="flex items-start justify-between gap-4">
+              <div className="flex flex-col md:flex-row items-start justify-between gap-4">
                 <div className="flex-1">
-                  <p className="text-base font-semibold text-dark font-inclusive mb-1">
+                  <p className="text-base text-dark font-inclusive mb-1">
                     Mises à jour et nouveautés
                   </p>
                   <p className="text-sm text-gray-4 font-inclusive">
@@ -110,16 +110,16 @@ export default function NotificationsPage() {
                 height={24}
                 className="w-9 h-9"
               />
-              <h2 className="text-xl font-bold text-dark font-inclusive">
+              <h2 className="text-lg font-bold text-dark font-inclusive">
                 Gestion des e-mails
               </h2>
             </div>
 
             <div className="flex flex-col gap-6 pl-9">
               {/* Récapitulatif hebdomadaire */}
-              <div className="flex items-start justify-between gap-4">
+              <div className="flex flex-col md:flex-row items-start justify-between gap-4">
                 <div className="flex-1">
-                  <p className="text-base font-semibold text-dark font-inclusive mb-1">
+                  <p className="text-base text-dark font-inclusive mb-1">
                     Recevoir un récapitulatif hebdomadaire
                   </p>
                   <p className="text-sm text-gray-4 font-inclusive">
@@ -134,9 +134,9 @@ export default function NotificationsPage() {
               </div>
 
               {/* Offres partenaires */}
-              <div className="flex items-start justify-between gap-4">
+              <div className="flex flex-col md:flex-row items-start justify-between gap-4">
                 <div className="flex-1">
-                  <p className="text-base font-semibold text-dark font-inclusive mb-1">
+                  <p className="text-base text-dark font-inclusive mb-1">
                     Recevoir des offres partenaires
                   </p>
                   <p className="text-sm text-gray-4 font-inclusive">

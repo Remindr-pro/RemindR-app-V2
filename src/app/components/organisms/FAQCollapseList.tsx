@@ -1,6 +1,6 @@
 "use client";
 
-import FAQCollapseItem from "../molecules/FAQCollapseItem";
+import FAQCollapseItem from "@/app/components/molecules/FAQCollapseItem";
 
 interface FAQCollapseItemData {
   title: string;

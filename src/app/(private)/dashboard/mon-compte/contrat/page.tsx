@@ -23,7 +23,7 @@ export default function ContratPage() {
             </p>
           </div>
 
-          <div className="flex gap-4">
+          <div className="flex flex-wrap gap-4">
             <Button variant="green">Consultez vos garanties</Button>
             <Link href="/dashboard/mon-compte/contact">
               <Button

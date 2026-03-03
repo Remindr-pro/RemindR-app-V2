@@ -1,7 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { AuthService, RegisterData } from "./auth-service";
+import { AuthService, RegisterData } from "@/lib/auth-service";
 
 export interface User {
   id: string;
@@ -15,6 +15,9 @@ export interface User {
   genderBirth?: string | null;
   genderActual?: string | null;
   profilePictureUrl?: string | null;
+  profileLink?: string | null;
+  profileColor?: string | null;
+  profileCompleted?: boolean;
 }
 
 interface AuthContextType {
@@ -42,7 +45,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       } catch (error) {
         console.error(
           "Erreur lors de la vérification de l'authentification:",
-          error
+          error,
         );
       } finally {
         setLoading(false);

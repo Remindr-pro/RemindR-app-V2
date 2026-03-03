@@ -1,5 +1,5 @@
 import QuestionnaireStepNavigation from "@/app/components/molecules/QuestionnaireStepNavigation";
-import { BASE_PATH } from "../constants";
+import { BASE_PATH } from "@/app/(private)/mon-questionnaire-sante/constants";
 
 export default function QuestionnaireHabitudesPage() {
   return (

@@ -1,4 +1,4 @@
-import IconCheck from "./icons/Check";
+import IconCheck from "@/app/components/atoms/icons/Check";
 
 interface StepIndicatorProps {
   currentStep: number;

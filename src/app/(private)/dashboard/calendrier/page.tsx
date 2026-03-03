@@ -12,13 +12,17 @@ export default function CalendarPage() {
     { id: "milo", name: "Milo", color: "orange" },
   ];
 
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = today.getMonth();
+
   const events: CalendarEvent[] = [
-    // Événements du 4 novembre
+    // Événements du 4
     {
       id: "1",
       title: "Mammographie...",
-      startDate: new Date(2025, 10, 4),
-      endDate: new Date(2025, 10, 4),
+      startDate: new Date(year, month, 4),
+      endDate: new Date(year, month, 4),
       userId: "camille",
       color: "purple",
       isReminder: true,
@@ -27,17 +31,17 @@ export default function CalendarPage() {
     {
       id: "2",
       title: "RDV médecin",
-      startDate: new Date(2025, 10, 4),
-      endDate: new Date(2025, 10, 4),
+      startDate: new Date(year, month, 4),
+      endDate: new Date(year, month, 4),
       userId: "alice",
       color: "pink",
     },
-    // Événements du 6 novembre
+    // Événements du 6
     {
       id: "3",
       title: "M'T dents tous les ans !",
-      startDate: new Date(2025, 10, 6),
-      endDate: new Date(2025, 10, 6),
+      startDate: new Date(year, month, 6),
+      endDate: new Date(year, month, 6),
       userId: "alice",
       color: "pink",
       isReminder: true,
@@ -48,19 +52,28 @@ export default function CalendarPage() {
     {
       id: "4",
       title: "RDV médecin",
-      startDate: new Date(2025, 10, 6, 10, 0),
-      endDate: new Date(2025, 10, 6, 10, 30),
+      startDate: new Date(year, month, 6, 10, 0),
+      endDate: new Date(year, month, 6, 10, 30),
       userId: "maxime",
       color: "blue",
     },
     {
       id: "5",
       title: "RDV psychologue",
-      startDate: new Date(2025, 10, 6, 18, 0),
-      endDate: new Date(2025, 10, 6, 19, 0),
+      startDate: new Date(year, month, 6, 18, 0),
+      endDate: new Date(year, month, 6, 19, 0),
       userId: "camille",
       color: "purple",
       address: "14 rue Paul Fort - 29200 Brest",
+    },
+    // Événement d'aujourd'hui pour tester DayView
+    {
+      id: "6",
+      title: "Réunion test",
+      startDate: new Date(year, month, today.getDate(), 14, 0),
+      endDate: new Date(year, month, today.getDate(), 15, 0),
+      userId: "maxime",
+      color: "blue",
     },
   ];
 

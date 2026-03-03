@@ -1,7 +1,7 @@
 "use client";
 
 import { SelectHTMLAttributes } from "react";
-import IconChevron from "./icons/Chevron";
+import IconChevron from "@/app/components/atoms/icons/Chevron";
 
 interface SelectOption {
   value: string;

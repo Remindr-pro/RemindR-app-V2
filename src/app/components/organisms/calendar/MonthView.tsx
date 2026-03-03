@@ -24,28 +24,51 @@ const MonthView = ({ currentDate, events, onDayClick }: MonthViewProps) => {
 
   const getColorClasses = (event: CalendarEvent) => {
     const color = event.color || event.userId;
-    const colorMap: Record<string, { bg: string; text: string }> = {
-      purple: { bg: "bg-purple/20", text: "text-purple" },
-      blue: { bg: "bg-blue/20", text: "text-blue" },
-      pink: { bg: "bg-pink-1/20", text: "text-pink-1" },
-      orange: { bg: "bg-orange/20", text: "text-orange" },
-      camille: { bg: "bg-purple/20", text: "text-purple" },
-      maxime: { bg: "bg-blue/20", text: "text-blue" },
-      alice: { bg: "bg-pink-1/20", text: "text-pink-1" },
-      milo: { bg: "bg-orange/20", text: "text-orange" },
+    const colorMap: Record<
+      string,
+      { bg: string; text: string; border: string }
+    > = {
+      purple: {
+        bg: "bg-purple/10",
+        text: "text-purple",
+        border: "border-purple",
+      },
+      blue: { bg: "bg-blue/10", text: "text-blue", border: "border-blue" },
+      pink: { bg: "bg-pink-1/10", text: "text-pink-1", border: "border-pink-1" },
+      orange: {
+        bg: "bg-orange/10",
+        text: "text-orange",
+        border: "border-orange",
+      },
+      camille: {
+        bg: "bg-purple/10",
+        text: "text-purple",
+        border: "border-purple",
+      },
+      maxime: { bg: "bg-blue/10", text: "text-blue", border: "border-blue" },
+      alice: {
+        bg: "bg-pink-1/10",
+        text: "text-pink-1",
+        border: "border-pink-1",
+      },
+      milo: {
+        bg: "bg-orange/10",
+        text: "text-orange",
+        border: "border-orange",
+      },
     };
 
     return colorMap[color] || colorMap.blue;
   };
 
   return (
-    <div className="bg-light rounded-2xl p-6">
-      <div className="grid grid-cols-7 gap-2">
+    <div className="bg-light rounded-2xl overflow-hidden border border-gray-2">
+      <div className="grid grid-cols-7">
         {/* Day headers */}
         {weekDays.map((day) => (
           <div
             key={day}
-            className="text-sm font-semibold text-gray-5 text-center py-2 font-inclusive"
+            className="text-sm font-semibold text-gray-5 text-center py-3 font-inclusive bg-gray-1 border-b border-gray-2"
           >
             {day}
           </div>
@@ -61,40 +84,45 @@ const MonthView = ({ currentDate, events, onDayClick }: MonthViewProps) => {
             <div
               key={index}
               onClick={() => onDayClick?.(day)}
-              className={`min-h-[100px] border border-gray-2 rounded-lg p-2 flex flex-col cursor-pointer hover:bg-gray-1 transition-colors ${
-                !isCurrentMonth ? "opacity-40" : ""
-              } ${
-                isTodayDate ? "bg-greenMain/5 border-greenMain" : "bg-light"
+              className={`min-h-[140px] border-b border-r border-gray-2 p-2 flex flex-col cursor-pointer hover:bg-gray-1 transition-colors relative ${
+                (index + 1) % 7 === 0 ? "border-r-0" : ""
+              } ${!isCurrentMonth ? "bg-gray-1/50" : "bg-light"} ${
+                isTodayDate ? "bg-greenMain/5" : ""
               }`}
             >
-              <div
-                className={`text-sm font-inclusive mb-1 ${
-                  isTodayDate ? "text-greenMain font-bold" : "text-dark"
-                }`}
-              >
-                {day.getDate()}
-              </div>
-              <div className="flex-1 flex flex-col gap-1 overflow-hidden">
-                {dayEvents.slice(0, 2).map((event) => {
+              <div className="flex-1 flex flex-col gap-1.5 overflow-hidden mb-6">
+                {dayEvents.slice(0, 3).map((event) => {
                   const colors = getColorClasses(event);
                   return (
                     <div
                       key={event.id}
-                      className={`${colors.bg} ${colors.text} rounded px-2 py-1 text-xs font-inclusive truncate flex items-center gap-1`}
+                      className={`${colors.bg} ${colors.text} ${colors.border} rounded-lg border-l-4 px-2 py-1.5 text-[11px] font-inclusive truncate flex items-center gap-1.5 shadow-sm`}
                     >
                       {event.isReminder && (
-                        <IconBell size={12} className={colors.text} />
+                        <div className={`p-1 rounded-md bg-light shadow-sm`}>
+                          <IconBell size={12} className={colors.text} />
+                        </div>
                       )}
-                      <span className="truncate">{event.title}</span>
+                      <span className="truncate font-medium">
+                        {event.title}
+                      </span>
                     </div>
                   );
                 })}
-                {dayEvents.length > 2 && (
-                  <div className="text-xs text-gray-5 font-inclusive">
-                    +{dayEvents.length - 2} autre
-                    {dayEvents.length - 2 > 1 ? "s" : ""}
+                {dayEvents.length > 3 && (
+                  <div className="text-[10px] text-gray-5 font-inclusive px-1">
+                    +{dayEvents.length - 3} autre
+                    {dayEvents.length - 3 > 1 ? "s" : ""}
                   </div>
                 )}
+              </div>
+
+              <div
+                className={`text-xs font-inclusive absolute bottom-2 right-2 ${
+                  isTodayDate ? "text-greenMain font-bold" : "text-gray-5"
+                } ${!isCurrentMonth ? "opacity-40" : ""}`}
+              >
+                {day.getDate()}
               </div>
             </div>
           );

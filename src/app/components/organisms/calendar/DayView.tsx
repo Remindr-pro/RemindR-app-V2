@@ -28,34 +28,30 @@ const DayView = ({ currentDate, events }: DayViewProps) => {
       { bg: string; text: string; border: string }
     > = {
       purple: {
-        bg: "bg-purple/20",
+        bg: "bg-purple/10",
         text: "text-purple",
         border: "border-purple",
       },
-      blue: { bg: "bg-blue/20", text: "text-blue", border: "border-blue" },
-      pink: {
-        bg: "bg-pink-1/20",
-        text: "text-pink-1",
-        border: "border-pink-1",
-      },
+      blue: { bg: "bg-blue/10", text: "text-blue", border: "border-blue" },
+      pink: { bg: "bg-pink-1/10", text: "text-pink-1", border: "border-pink-1" },
       orange: {
-        bg: "bg-orange/20",
+        bg: "bg-orange/10",
         text: "text-orange",
         border: "border-orange",
       },
       camille: {
-        bg: "bg-purple/20",
+        bg: "bg-purple/10",
         text: "text-purple",
         border: "border-purple",
       },
-      maxime: { bg: "bg-blue/20", text: "text-blue", border: "border-blue" },
+      maxime: { bg: "bg-blue/10", text: "text-blue", border: "border-blue" },
       alice: {
-        bg: "bg-pink-1/20",
+        bg: "bg-pink-1/10",
         text: "text-pink-1",
         border: "border-pink-1",
       },
       milo: {
-        bg: "bg-orange/20",
+        bg: "bg-orange/10",
         text: "text-orange",
         border: "border-orange",
       },
@@ -72,17 +68,20 @@ const DayView = ({ currentDate, events }: DayViewProps) => {
 
   const currentTimePosition = getCurrentTimePosition();
 
+  // Find biggest reminder to display on the side if any
+  const reminderEvent = events.find((e) => e.isReminder && e.details);
+
   return (
-    <div className="bg-light rounded-2xl p-6 relative">
-      <div className="flex">
+    <div className="bg-light rounded-2xl p-8 relative overflow-hidden border border-gray-2 shadow-sm min-h-[800px]">
+      <div className="flex gap-8">
         {/* Time column */}
-        <div className="w-20 flex-shrink-0">
+        <div className="w-16 flex-shrink-0">
           {hours.map((hour) => (
             <div
               key={hour}
-              className="h-[60px] flex items-start justify-end pr-2 text-sm text-gray-5 font-inclusive"
+              className="h-[60px] flex items-start justify-center text-[13px] font-bold text-gray-5 font-inclusive"
             >
-              {hour.toString().padStart(2, "0")}:00
+              {hour}
             </div>
           ))}
         </div>
@@ -92,19 +91,18 @@ const DayView = ({ currentDate, events }: DayViewProps) => {
           {/* Current time indicator */}
           {currentTimePosition !== null && (
             <div
-              className="absolute left-0 right-0 z-10 pointer-events-none"
+              className="absolute left-0 right-0 z-20 pointer-events-none flex items-center"
               style={{ top: `${currentTimePosition}px` }}
             >
-              <div className="flex items-center">
-                <div className="h-0.5 bg-red-1 flex-1"></div>
-                <div className="w-3 h-3 bg-red-1 rounded-full"></div>
-              </div>
+              <div className="w-2 h-2 bg-red-1 rounded-full shrink-0"></div>
+              <div className="h-0.5 bg-red-1 flex-1"></div>
+              <div className="w-2 h-2 bg-red-1 rounded-full shrink-0"></div>
             </div>
           )}
 
           {/* Hour slots */}
-          <div className="relative">
-            {hours.map((hour, index) => {
+          <div className="relative border-t border-gray-2">
+            {hours.map((hour) => {
               const hourEvents = getEventsForTimeSlot(
                 events,
                 hour,
@@ -121,47 +119,27 @@ const DayView = ({ currentDate, events }: DayViewProps) => {
                     const startTime = formatTime(new Date(event.startDate));
                     const endTime = formatTime(new Date(event.endDate));
 
+                    // Don't show the reminder again if it's the one displayed on the side
+                    if (event.id === reminderEvent?.id) return null;
+
                     return (
                       <div
                         key={event.id}
-                        className={`${colors.bg} ${colors.text} rounded-lg p-3 border-l-4 ${colors.border} w-full max-w-md flex flex-col gap-1`}
+                        className={`${colors.bg} ${colors.text} ${colors.border} rounded-xl p-3 border-l-4 shadow-sm flex flex-col gap-2 w-full max-w-[80%]`}
                       >
-                        {event.isReminder ? (
-                          <>
-                            <div className="flex items-center gap-2">
-                              <IconBell size={16} className={colors.text} />
-                              <span className="font-semibold text-sm font-inclusive">
-                                {event.reminderTitle || event.title}
-                              </span>
-                            </div>
-                            {event.details && (
-                              <p className="text-xs opacity-80">
-                                {event.details}
-                              </p>
-                            )}
-                            <div className="flex gap-2 mt-2">
-                              <button className="text-xs px-3 py-1 bg-light rounded border border-gray-2 hover:bg-gray-1 transition-colors">
-                                Prendre rendez-vous
-                              </button>
-                              <button className="text-xs underline">
-                                En savoir plus
-                              </button>
-                            </div>
-                          </>
-                        ) : (
-                          <>
-                            <div className="text-xs font-semibold">
-                              {startTime} - {endTime}
-                            </div>
-                            <div className="font-semibold text-sm font-inclusive">
-                              {event.title}
-                            </div>
-                            {event.address && (
-                              <div className="text-xs opacity-80 mt-1">
-                                {event.address}
-                              </div>
-                            )}
-                          </>
+                        <div className="flex items-center gap-3">
+                          <span className="font-bold text-xs font-inclusive">
+                            {event.title}
+                          </span>
+                          <span className="text-[10px] opacity-60 font-medium">
+                            {startTime} - {endTime}
+                          </span>
+                        </div>
+                        {event.address && (
+                          <div className="flex items-center gap-1.5 opacity-60 text-[10px] font-inclusive">
+                            <span className="shrink-0">📍</span>
+                            <span className="truncate">{event.address}</span>
+                          </div>
                         )}
                       </div>
                     );
@@ -171,6 +149,36 @@ const DayView = ({ currentDate, events }: DayViewProps) => {
             })}
           </div>
         </div>
+
+        {/* Reminder Sidebar (if applicable as per mockup) */}
+        {reminderEvent && (
+          <div className="w-72 shrink-0">
+            <div className="bg-pink-1/10 rounded-2xl p-5 border border-pink-1/30 flex flex-col gap-4 shadow-sm relative overflow-hidden group">
+              <div className="absolute top-0 left-0 w-1.5 h-full bg-pink-1"></div>
+              <div className="flex items-start gap-4">
+                <div className="p-2.5 rounded-xl bg-light shadow-md">
+                  <IconBell size={20} className="text-pink-1" />
+                </div>
+                <div className="flex flex-col gap-1">
+                  <h3 className="font-bold text-sm text-pink-1 font-inclusive leading-tight">
+                    {reminderEvent.reminderTitle || reminderEvent.title}
+                  </h3>
+                  <p className="text-[11px] text-pink-1/80 font-inclusive leading-relaxed mt-1">
+                    {reminderEvent.details}
+                  </p>
+                </div>
+              </div>
+              <div className="flex flex-col gap-2 mt-2">
+                <button className="w-full py-2 px-4 bg-light text-pink-1 text-[11px] font-bold rounded-full border border-pink-1/20 hover:bg-pink-1 hover:text-light transition-all shadow-sm">
+                  Prendre rendez-vous
+                </button>
+                <button className="text-[11px] font-bold text-pink-1 underline hover:opacity-70 transition-opacity text-center">
+                  En savoir plus
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

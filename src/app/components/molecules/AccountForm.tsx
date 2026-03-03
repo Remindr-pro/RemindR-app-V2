@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, FormEvent, useMemo } from "react";
-import Input from "../atoms/Input";
-import Button from "../atoms/Button";
+import Input from "@/app/components/atoms/Input";
+import Button from "@/app/components/atoms/Button";
 
 interface AccountFormProps {
   onSubmit?: (data: {

@@ -2,11 +2,11 @@
 
 import React, { useMemo } from "react";
 import { usePathname } from "next/navigation";
-import IconPlus from "../atoms/icons/Plus";
-import IconFilter from "../atoms/icons/Filter";
-import IconBell from "../atoms/icons/Bell";
-import Button from "../atoms/Button";
-import SearchInput from "../atoms/SearchInput";
+import IconPlus from "@/app/components/atoms/icons/Plus";
+import IconFilter from "@/app/components/atoms/icons/Filter";
+import IconBell from "@/app/components/atoms/icons/Bell";
+import Button from "@/app/components/atoms/Button";
+import SearchInput from "@/app/components/atoms/SearchInput";
 import { IconLayoutSidebarRightCollapseFilled } from "@tabler/icons-react";
 
 interface TopBarProps {
@@ -22,8 +22,8 @@ const TopBar = ({ onMenuClick }: TopBarProps) => {
         return "Tableau de bord";
       case "/dashboard/calendrier":
         return "Calendrier";
-      case "/dashboard/mes-proches-et-moi":
-        return "Mes proches & moi";
+      case "/dashboard/membres":
+        return "Mes proches et moi";
       case "/dashboard/mon-magazine":
         return "Mon magazine prévention santé";
       default:
@@ -31,7 +31,7 @@ const TopBar = ({ onMenuClick }: TopBarProps) => {
     }
   }, [pathName]);
 
-  const isFamilyPage = pathName === "/dashboard/mes-proches-et-moi";
+  const isFamilyPage = pathName === "/dashboard/membres";
   const isCalendarPage = pathName === "/dashboard/calendrier";
 
   return (

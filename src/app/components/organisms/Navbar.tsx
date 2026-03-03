@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
-import Button from "../atoms/Button";
+import Button from "@/app/components/atoms/Button";
 import { useAuth } from "@/lib/auth-provider";
 
 export default function Navbar() {
@@ -60,10 +60,10 @@ export default function Navbar() {
 
             {/* Desktop CTA Button */}
             <div className="hidden lg:flex items-center space-x-3">
-              <Button href="#" variant="green">
+              <Button href="/professionnels/contact" variant="green">
                 Demander une démo
               </Button>
-              <Button href="#" variant="dark">
+              <Button href="/professionnels/contact" variant="dark">
                 Contacter un commercial
               </Button>
             </div>
@@ -124,14 +124,14 @@ export default function Navbar() {
 
               <div className="flex flex-col space-y-2 mt-4 pt-4 border-t border-gray-2">
                 <Button
-                  href="#"
+                  href="/professionnels/contact"
                   variant="green"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   Demander une démo
                 </Button>
                 <Button
-                  href="#"
+                  href="/professionnels/contact"
                   variant="dark"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
@@ -207,6 +207,9 @@ export default function Navbar() {
               <>
                 <Button href="/connexion" variant="green">
                   Se connecter
+                </Button>
+                <Button href="/connexion" variant="dark">
+                  S&apos;inscrire
                 </Button>
               </>
             )}
@@ -289,6 +292,13 @@ export default function Navbar() {
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
                       Se connecter
+                    </Button>
+                    <Button
+                      href="/connexion"
+                      variant="dark"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      S&apos;inscrire
                     </Button>
                   </>
                 )}

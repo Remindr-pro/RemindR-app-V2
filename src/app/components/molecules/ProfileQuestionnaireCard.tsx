@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import IconX from "../atoms/icons/X";
-import Button from "../atoms/Button";
+import IconX from "@/app/components/atoms/icons/X";
+import Button from "@/app/components/atoms/Button";
 
 export interface ProfileQuestionnaireCardProps {
   name: string;
@@ -10,11 +10,27 @@ export interface ProfileQuestionnaireCardProps {
   birthdate: string;
   gender: "Femme" | "Homme" | "Non précisé";
   avatarUrl?: string;
+  color?: string;
   onComplete: () => void;
   onRemove?: () => void;
 }
 
 const defaultAvatar = "/images/illustrations/avatar.png";
+const DEFAULT_BORDER_COLOR = "#1aa484";
+
+function resolveBorderColor(color?: string): string {
+  if (!color) return DEFAULT_BORDER_COLOR;
+
+  const normalized = color.trim().toLowerCase();
+
+  if (normalized === "green") return "#1aa484";
+  if (normalized === "purple") return "#ab7dfa";
+  if (normalized === "blue") return "#4a90e2";
+  if (normalized === "pink") return "#a31b39";
+  if (normalized === "orange") return "#f4a261";
+
+  return color;
+}
 
 export default function ProfileQuestionnaireCard({
   name,
@@ -22,11 +38,15 @@ export default function ProfileQuestionnaireCard({
   birthdate,
   gender,
   avatarUrl,
+  color,
   onComplete,
   onRemove,
 }: ProfileQuestionnaireCardProps) {
   return (
-    <div className="bg-light rounded-2xl p-6 border-2 border-purple shadow-sm hover:shadow-md transition-shadow flex flex-col relative min-w-[240px]">
+    <div
+      className="bg-light rounded-2xl p-6 border-2 shadow-sm hover:shadow-md transition-shadow flex flex-col relative min-w-[240px]"
+      style={{ borderColor: resolveBorderColor(color) }}
+    >
       {onRemove && (
         <button
           type="button"

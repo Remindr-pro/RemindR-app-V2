@@ -2,25 +2,32 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import Button from "../atoms/Button";
+import Button from "@/app/components/atoms/Button";
 
 const PREVIEW_IMAGES = {
   "Tableau de bord familial": {
     image: "/images/illustrations/dashboard.png",
-    color: "#4A90E2",
-    text: "Tableau de bord familial",
+    alt: "Tableau de bord familial",
+    width: 1140,
+    height: 662,
   },
   "Tableau de bord individuel": {
-    color: "#50C878",
-    text: "Tableau de bord individuel",
+    image: "/images/illustrations/dashboard-indi.png",
+    alt: "Tableau de bord individuel",
+    width: 1140,
+    height: 662,
   },
   "Calendrier partagé": {
-    color: "#FF6B6B",
-    text: "Calendrier partagé",
+    image: "/images/illustrations/dashboard-calendrier-mois.png",
+    alt: "Calendrier partagé",
+    width: 1140,
+    height: 662,
   },
   "Recommandations personnalisées": {
-    color: "#9B59B6",
-    text: "Recommandations personnalisées",
+    image: "/images/illustrations/dashboard-magazine.png",
+    alt: "Recommandations personnalisées",
+    width: 1140,
+    height: 662,
   },
 };
 
@@ -39,25 +46,14 @@ export default function Preview() {
     <div className="w-full h-full flex flex-col items-center justify-center gap-4 sm:gap-6 px-4 sm:px-6 lg:px-8">
       {/* Image ou placeholder */}
       <div className="bg-light border-6 md:border-8 border-gray-2 w-full max-w-[1140px] rounded-lg sm:rounded-xl overflow-hidden shadow-md transition-all duration-300">
-        {"image" in currentImage && currentImage.image ? (
-          <Image
-            src={currentImage.image}
-            alt={currentImage.text}
-            width={1140}
-            height={662}
-            className="w-full h-auto block"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1140px"
-          />
-        ) : (
-          <div
-            className="w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[660px] flex items-center justify-center"
-            style={{ backgroundColor: currentImage.color }}
-          >
-            <span className="text-white text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-medium text-center px-4 sm:px-6 md:px-8 leading-tight">
-              {currentImage.text}
-            </span>
-          </div>
-        )}
+        <Image
+          src={currentImage.image}
+          alt={currentImage.alt}
+          width={currentImage.width}
+          height={currentImage.height}
+          className="w-full h-auto block"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1140px"
+        />
       </div>
 
       {/* Nav */}
