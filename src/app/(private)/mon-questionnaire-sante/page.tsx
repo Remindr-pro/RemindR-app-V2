@@ -244,9 +244,13 @@ export default function MonQuestionnaireSanteProfilsPage() {
           genderActual: genderActual || undefined,
           profileLink: data.link || undefined,
           profileColor: data.color || undefined,
-          email: shouldCreateConnectedAccount ? data.email || undefined : undefined,
+          email: shouldCreateConnectedAccount
+            ? data.email || undefined
+            : undefined,
           createLogin: shouldCreateConnectedAccount,
-          password: shouldCreateConnectedAccount ? data.password || undefined : undefined,
+          password: shouldCreateConnectedAccount
+            ? data.password || undefined
+            : undefined,
         };
 
         try {
@@ -299,7 +303,9 @@ export default function MonQuestionnaireSanteProfilsPage() {
               ),
             );
             const normalizedToastGender = (
-              data.genderActual || data.genderBirth || ""
+              data.genderActual ||
+              data.genderBirth ||
+              ""
             ).toLowerCase();
             const addedLabel =
               normalizedToastGender === "femme"
@@ -336,6 +342,7 @@ export default function MonQuestionnaireSanteProfilsPage() {
     if (!pendingDeletion) return;
 
     const id = pendingDeletion.id;
+    const deletedProfile = profiles.find((profile) => profile.id === id);
 
     if (mainProfile?.id === id) {
       setPendingDeletion(null);
@@ -347,12 +354,22 @@ export default function MonQuestionnaireSanteProfilsPage() {
         await AuthService.deleteFamilyMember(id);
       }
       setAdditionalProfiles((prev) => prev.filter((p) => p.id !== id));
+      const deletedLabel =
+        deletedProfile?.gender === "Femme"
+          ? "supprimée"
+          : deletedProfile?.gender === "Homme"
+            ? "supprimé"
+            : "supprimé(e)";
+
+      sileo.success({
+        title: `${pendingDeletion.name} a bien été ${deletedLabel} des profils.`,
+      });
     } catch {
       // Si suppression API impossible, on conserve la carte.
     } finally {
       setPendingDeletion(null);
     }
-  }, [mainProfile?.id, pendingDeletion]);
+  }, [mainProfile?.id, pendingDeletion, profiles]);
 
   const handleAddProfile = useCallback(() => {
     const newId = String(Date.now());
@@ -401,7 +418,9 @@ export default function MonQuestionnaireSanteProfilsPage() {
             </h3>
             <p className="text-sm text-gray-4 font-inclusive mb-6">
               Etes-vous sur de vouloir supprimer le profil{" "}
-              <span className="font-semibold text-dark">{pendingDeletion.name}</span>{" "}
+              <span className="font-semibold text-dark">
+                {pendingDeletion.name}
+              </span>{" "}
               ?
             </p>
             <div className="flex items-center justify-end gap-3">
@@ -412,7 +431,11 @@ export default function MonQuestionnaireSanteProfilsPage() {
               >
                 Annuler
               </Button>
-              <Button type="button" variant="green" onClick={handleConfirmDeletion}>
+              <Button
+                type="button"
+                variant="green"
+                onClick={handleConfirmDeletion}
+              >
                 Confirmer
               </Button>
             </div>
