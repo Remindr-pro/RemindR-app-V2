@@ -33,8 +33,8 @@ const pageConfigs: Record<string, PageConfig> = {
   },
   [`${BASE_PATH}/maladies`]: {
     step: 3,
-    title: "Maladies",
-    description: "Contenu à venir.",
+    title: "Je renseigne mes maladies et mes allergies pour avoir des conseils et des rappels personnalisés.",
+    description: "",
   },
   [`${BASE_PATH}/habitudes`]: {
     step: 4,

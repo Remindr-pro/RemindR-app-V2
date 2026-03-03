@@ -18,6 +18,9 @@ export interface HealthProfilePayload {
 export interface HealthProfileData {
   id: string;
   userId: string;
+  allergies?: string[];
+  chronicConditions?: string[];
+  medications?: string[];
   height: number | null;
   heightMeasuredAt?: string | null;
   weight: number | null;
