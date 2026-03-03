@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import IconEnvelope from "../atoms/icons/Envelope";
-import Button from "../atoms/Button";
-import Input from "../atoms/Input";
+import IconEnvelope from "@/app/components/atoms/icons/Envelope";
+import Button from "@/app/components/atoms/Button";
+import Input from "@/app/components/atoms/Input";
 
 export default function NewsletterSection() {
   const [email, setEmail] = useState("");

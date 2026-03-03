@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, FormEvent } from "react";
-import Input from "../atoms/Input";
-import Button from "../atoms/Button";
+import Input from "@/app/components/atoms/Input";
+import Button from "@/app/components/atoms/Button";
 import Link from "next/link";
 
 interface IdentificationFormProps {

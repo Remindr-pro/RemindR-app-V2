@@ -1,9 +1,9 @@
-import IconBell from "../atoms/icons/Bell";
-import IconCheck from "../atoms/icons/Check";
-import IconX from "../atoms/icons/X";
-import IconArrowRight from "../atoms/icons/ArrowRight";
+import IconBell from "@/app/components/atoms/icons/Bell";
+import IconCheck from "@/app/components/atoms/icons/Check";
+import IconX from "@/app/components/atoms/icons/X";
+import IconArrowRight from "@/app/components/atoms/icons/ArrowRight";
 import Link from "next/link";
-import IconBellHeart from "../atoms/icons/BellHeart";
+import IconBellHeart from "@/app/components/atoms/icons/BellHeart";
 
 interface ReminderItem {
   id: string;

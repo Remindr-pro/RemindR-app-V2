@@ -1,4 +1,4 @@
-import { CalendarDay, CalendarEvent } from "@/app/types/calendar";
+import { CalendarEvent } from "@/app/types/calendar";
 
 export const getDaysInMonth = (date: Date): Date[] => {
   const year = date.getFullYear();

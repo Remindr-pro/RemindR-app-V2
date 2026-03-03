@@ -2,11 +2,11 @@
 
 import { useState } from "react";
 import { usePathname } from "next/navigation";
-import Navbar from "../components/organisms/Navbar";
-import Footer from "../components/organisms/Footer";
-import ChatIcon from "../components/atoms/icons/Chat";
-import Chat from "../components/molecules/Chat";
-import ToggleRoundedButton from "../components/atoms/ToggleRoundedButton";
+import Navbar from "@/app/components/organisms/Navbar";
+import Footer from "@/app/components/organisms/Footer";
+import ChatIcon from "@/app/components/atoms/icons/Chat";
+import Chat from "@/app/components/molecules/Chat";
+import ToggleRoundedButton from "@/app/components/atoms/ToggleRoundedButton";
 
 export default function PublicLayout({
   children,

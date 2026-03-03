@@ -1,7 +1,7 @@
 "use client";
 
-import Logo from "./components/atoms/Logo";
-import Button from "./components/atoms/Button";
+import Logo from "@/app/components/atoms/Logo";
+import Button from "@/app/components/atoms/Button";
 import { useAuth } from "@/lib/auth-provider";
 
 export default function NotFound() {

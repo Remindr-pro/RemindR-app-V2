@@ -2,9 +2,9 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import Input from "../atoms/Input";
-import Button from "../atoms/Button";
-import IconHelp from "../atoms/icons/Help";
+import Input from "@/app/components/atoms/Input";
+import Button from "@/app/components/atoms/Button";
+import IconHelp from "@/app/components/atoms/icons/Help";
 
 export interface MeasurementFormData {
   height: string;

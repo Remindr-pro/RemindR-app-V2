@@ -102,7 +102,7 @@ const DayView = ({ currentDate, events }: DayViewProps) => {
 
           {/* Hour slots */}
           <div className="relative border-t border-gray-2">
-            {hours.map((hour, index) => {
+            {hours.map((hour) => {
               const hourEvents = getEventsForTimeSlot(
                 events,
                 hour,

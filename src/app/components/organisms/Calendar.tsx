@@ -1,17 +1,17 @@
 "use client";
 
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo } from "react";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import {
   CalendarView,
   CalendarEvent,
   CalendarUser,
 } from "@/app/types/calendar";
-import MonthView from "./calendar/MonthView";
-import WeekView from "./calendar/WeekView";
-import DayView from "./calendar/DayView";
-import CalendarHeader from "./calendar/CalendarHeader";
-import UserFilters from "./calendar/UserFilters";
+import MonthView from "@/app/components/organisms/calendar/MonthView";
+import WeekView from "@/app/components/organisms/calendar/WeekView";
+import DayView from "@/app/components/organisms/calendar/DayView";
+import CalendarHeader from "@/app/components/organisms/calendar/CalendarHeader";
+import UserFilters from "@/app/components/organisms/calendar/UserFilters";
 
 interface CalendarProps {
   events?: CalendarEvent[];
@@ -22,9 +22,29 @@ const Calendar = ({ events = [], users = [] }: CalendarProps) => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
-  const [currentDate, setCurrentDate] = useState(new Date()); // Current date
-  const [view, setView] = useState<CalendarView>("month");
   const [selectedUsers, setSelectedUsers] = useState<string[]>([]);
+
+  const currentDate = useMemo(() => {
+    const dateParam = searchParams.get("date");
+    if (!dateParam) return new Date();
+
+    const parsedDate = new Date(dateParam);
+    return Number.isNaN(parsedDate.getTime()) ? new Date() : parsedDate;
+  }, [searchParams]);
+
+  const view = useMemo<CalendarView>(() => {
+    const viewParam = searchParams.get("view");
+
+    if (viewParam === "month" || viewParam === "week" || viewParam === "day") {
+      return viewParam;
+    }
+
+    if (searchParams.get("date") && !viewParam) {
+      return "day";
+    }
+
+    return "month";
+  }, [searchParams]);
 
   // Helper to update URL with both date and view
   const syncUrl = (date: Date, newView: CalendarView) => {
@@ -39,26 +59,6 @@ const Calendar = ({ events = [], users = [] }: CalendarProps) => {
 
     router.push(`${pathname}?${params.toString()}`, { scroll: false });
   };
-
-  // Listen for changes in URL to update internal state
-  useEffect(() => {
-    const dateParam = searchParams.get("date");
-    const viewParam = searchParams.get("view") as CalendarView;
-
-    if (dateParam) {
-      const parsedDate = new Date(dateParam);
-      if (!isNaN(parsedDate.getTime())) {
-        setCurrentDate(parsedDate);
-      }
-    }
-
-    if (viewParam && ["month", "week", "day"].includes(viewParam)) {
-      setView(viewParam);
-    } else if (dateParam && !viewParam) {
-      // If date is provided but no view, default to 'day' view as per user request
-      setView("day");
-    }
-  }, [searchParams]);
 
   // Filter events by selected users
   const filteredEvents = useMemo(() => {

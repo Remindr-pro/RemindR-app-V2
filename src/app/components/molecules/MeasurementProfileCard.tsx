@@ -1,9 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import Button from "../atoms/Button";
-import IconSize from "../atoms/icons/Size";
-import IconWeight from "../atoms/icons/Weight";
+import Button from "@/app/components/atoms/Button";
+import IconSize from "@/app/components/atoms/icons/Size";
+import IconWeight from "@/app/components/atoms/icons/Weight";
 
 interface MeasurementProfileCardProps {
   name: string;

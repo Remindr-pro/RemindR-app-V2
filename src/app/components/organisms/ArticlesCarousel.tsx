@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import ArticleCard, { ArticleCardProps } from "../molecules/ArticleCard";
-import ArticlePin from "../molecules/ArticlePin";
+import ArticleCard, { ArticleCardProps } from "@/app/components/molecules/ArticleCard";
+import ArticlePin from "@/app/components/molecules/ArticlePin";
 
 interface ArticlesCarouselProps {
   articles: ArticleCardProps[];

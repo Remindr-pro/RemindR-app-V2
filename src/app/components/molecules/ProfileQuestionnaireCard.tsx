@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import IconX from "../atoms/icons/X";
-import Button from "../atoms/Button";
+import IconX from "@/app/components/atoms/icons/X";
+import Button from "@/app/components/atoms/Button";
 
 export interface ProfileQuestionnaireCardProps {
   name: string;

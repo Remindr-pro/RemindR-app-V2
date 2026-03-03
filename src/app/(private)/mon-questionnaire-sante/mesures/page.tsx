@@ -23,7 +23,7 @@ import {
 import { useAuth } from "@/lib/auth-provider";
 import type { User } from "@/lib/auth-provider";
 import { sileo } from "sileo";
-import { BASE_PATH } from "../constants";
+import { BASE_PATH } from "@/app/(private)/mon-questionnaire-sante/constants";
 
 function userToMeasureProfile(user: User): MeasureProfileItem {
   return {

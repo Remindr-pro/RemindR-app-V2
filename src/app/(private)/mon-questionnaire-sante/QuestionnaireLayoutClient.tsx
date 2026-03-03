@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import IconX from "@/app/components/atoms/icons/X";
 import StepIndicator from "@/app/components/atoms/StepIndicator";
-import { BASE_PATH } from "./constants";
+import { BASE_PATH } from "@/app/(private)/mon-questionnaire-sante/constants";
 
 const QUESTIONNAIRE_STEP_LABELS = [
   "Profil(s)",

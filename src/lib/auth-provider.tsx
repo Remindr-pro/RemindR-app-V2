@@ -1,7 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { AuthService, RegisterData } from "./auth-service";
+import { AuthService, RegisterData } from "@/lib/auth-service";
 
 export interface User {
   id: string;

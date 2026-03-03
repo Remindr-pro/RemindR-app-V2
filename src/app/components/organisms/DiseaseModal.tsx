@@ -2,12 +2,12 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import Button from "../atoms/Button";
-import AddItemButton from "../atoms/AddItemButton";
-import IconHelp from "../atoms/icons/Help";
-import Select from "../atoms/Select";
-import Input from "../atoms/Input";
-import Checkbox from "../molecules/Checkbox";
+import Button from "@/app/components/atoms/Button";
+import AddItemButton from "@/app/components/atoms/AddItemButton";
+import IconHelp from "@/app/components/atoms/icons/Help";
+import Select from "@/app/components/atoms/Select";
+import Input from "@/app/components/atoms/Input";
+import Checkbox from "@/app/components/molecules/Checkbox";
 import { sileo } from "sileo";
 
 export interface DiseaseFormData {

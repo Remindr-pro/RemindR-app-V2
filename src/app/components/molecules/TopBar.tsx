@@ -2,11 +2,11 @@
 
 import React, { useMemo } from "react";
 import { usePathname } from "next/navigation";
-import IconPlus from "../atoms/icons/Plus";
-import IconFilter from "../atoms/icons/Filter";
-import IconBell from "../atoms/icons/Bell";
-import Button from "../atoms/Button";
-import SearchInput from "../atoms/SearchInput";
+import IconPlus from "@/app/components/atoms/icons/Plus";
+import IconFilter from "@/app/components/atoms/icons/Filter";
+import IconBell from "@/app/components/atoms/icons/Bell";
+import Button from "@/app/components/atoms/Button";
+import SearchInput from "@/app/components/atoms/SearchInput";
 import { IconLayoutSidebarRightCollapseFilled } from "@tabler/icons-react";
 
 interface TopBarProps {

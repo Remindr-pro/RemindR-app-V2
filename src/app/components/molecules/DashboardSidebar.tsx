@@ -2,14 +2,13 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import IconBell from "../atoms/icons/Bell";
-import IconArrowRight from "../atoms/icons/ArrowRight";
-import IconChevron from "../atoms/icons/Chevron";
-import IconPin from "../atoms/icons/Pin";
-import IconContract from "../atoms/icons/Contract";
-import Button from "../atoms/Button";
-import IconPlus from "../atoms/icons/Plus";
+import IconBell from "@/app/components/atoms/icons/Bell";
+import IconArrowRight from "@/app/components/atoms/icons/ArrowRight";
+import IconChevron from "@/app/components/atoms/icons/Chevron";
+import IconPin from "@/app/components/atoms/icons/Pin";
+import IconContract from "@/app/components/atoms/icons/Contract";
+import Button from "@/app/components/atoms/Button";
+import IconPlus from "@/app/components/atoms/icons/Plus";
 
 interface Appointment {
   id: string;
@@ -29,7 +28,6 @@ interface Reminder {
 }
 
 export default function DashboardSidebar() {
-  const router = useRouter();
   const [viewDate, setViewDate] = useState(new Date());
   const [expandedId, setExpandedId] = useState<string | null>(null);
 

@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
-import Button from "../atoms/Button";
+import Button from "@/app/components/atoms/Button";
 import { useAuth } from "@/lib/auth-provider";
 
 export default function Navbar() {

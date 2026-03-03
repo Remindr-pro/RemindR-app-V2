@@ -1,11 +1,11 @@
 "use client";
 
 import { useState, FormEvent } from "react";
-import Input from "../atoms/Input";
-import Select from "../atoms/Select";
-import Textarea from "../atoms/Textarea";
-import Button from "../atoms/Button";
-import Checkbox from "../molecules/Checkbox";
+import Input from "@/app/components/atoms/Input";
+import Select from "@/app/components/atoms/Select";
+import Textarea from "@/app/components/atoms/Textarea";
+import Button from "@/app/components/atoms/Button";
+import Checkbox from "@/app/components/molecules/Checkbox";
 import Link from "next/link";
 
 export interface ContactFormData {

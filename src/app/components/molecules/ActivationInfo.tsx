@@ -1,6 +1,6 @@
 "use client";
 
-import Button from "../atoms/Button";
+import Button from "@/app/components/atoms/Button";
 
 interface ActivationInfoProps {
   onSwitchToLogin?: () => void;

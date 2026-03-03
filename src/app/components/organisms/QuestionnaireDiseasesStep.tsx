@@ -1,6 +1,6 @@
 "use client";
 
-import DiseaseProfileCard from "../molecules/DiseaseProfileCard";
+import DiseaseProfileCard from "@/app/components/molecules/DiseaseProfileCard";
 
 export interface DiseaseProfileItem {
   id: string;

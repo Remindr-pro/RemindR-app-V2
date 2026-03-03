@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import CollapseList from "./CollapseList";
+import CollapseList from "@/app/components/organisms/CollapseList";
 
 const COLLAPSE_IMAGES = {
   0: {

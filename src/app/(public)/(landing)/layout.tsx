@@ -1,8 +1,8 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import BannerCta from "../../components/organisms/BannerCta";
-import NewsletterSection from "../../components/organisms/NewsletterSection";
+import BannerCta from "@/app/components/organisms/BannerCta";
+import NewsletterSection from "@/app/components/organisms/NewsletterSection";
 import { useAuth } from "@/lib/auth-provider";
 
 export default function LandingLayout({

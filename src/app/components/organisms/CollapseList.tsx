@@ -1,6 +1,6 @@
 "use client";
 
-import CollapseItem from "../molecules/CollapseItem";
+import CollapseItem from "@/app/components/molecules/CollapseItem";
 
 interface CollapseItemData {
   title: string;

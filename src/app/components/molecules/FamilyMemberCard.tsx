@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
-import IconPeopleLink from "../atoms/icons/PeopleLink";
-import ProgressBar from "../atoms/ProgressBar";
+import IconPeopleLink from "@/app/components/atoms/icons/PeopleLink";
+import ProgressBar from "@/app/components/atoms/ProgressBar";
 
 interface FamilyMemberCardProps {
   name: string;

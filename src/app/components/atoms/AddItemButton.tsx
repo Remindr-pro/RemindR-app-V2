@@ -1,6 +1,6 @@
 "use client";
 
-import IconPlus from "./icons/Plus";
+import IconPlus from "@/app/components/atoms/icons/Plus";
 
 interface AddItemButtonProps {
   onClick: () => void;

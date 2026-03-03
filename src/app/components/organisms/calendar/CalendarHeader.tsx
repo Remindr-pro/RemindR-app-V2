@@ -37,15 +37,6 @@ const CalendarHeader = ({
     }
   };
 
-  const getViewLabel = () => {
-    const labels = {
-      month: "Mois",
-      week: "Semaine",
-      day: "Jour",
-    };
-    return labels[view];
-  };
-
   return (
     <div className="flex flex-wrap items-center justify-center lg:justify-between">
       <div className="flex items-center gap-4">

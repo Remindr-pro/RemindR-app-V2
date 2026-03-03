@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import FeedbackCard from "../molecules/FeedbackCard";
+import FeedbackCard from "@/app/components/molecules/FeedbackCard";
 
 interface Feedback {
   name: string;

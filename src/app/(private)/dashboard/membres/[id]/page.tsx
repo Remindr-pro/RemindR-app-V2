@@ -1,4 +1,4 @@
-import DashboardPageContent from "../../DashboardPageContent";
+import DashboardPageContent from "@/app/(private)/dashboard/DashboardPageContent";
 
 interface MemberDashboardPageProps {
   params: Promise<{ id: string }>;

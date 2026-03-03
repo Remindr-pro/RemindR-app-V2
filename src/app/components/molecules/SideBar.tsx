@@ -10,17 +10,17 @@ import {
 } from "@tabler/icons-react";
 import { useAuth } from "@/lib/auth-provider";
 
-import IconLayout from "../atoms/icons/Layout";
-import IconCalendar from "../atoms/icons/Calendar2";
-import IconHouse from "../atoms/icons/House";
-import IconHeart from "../atoms/icons/Heart";
-import IconContract from "../atoms/icons/Contract";
-import IconNotification from "../atoms/icons/Notification";
-import IconGear from "../atoms/icons/Gear";
-import IconHelp from "../atoms/icons/Help";
-import IconPerson from "../atoms/icons/Person";
-import AccountMenu from "../atoms/AccountMenu";
-import UserProfile from "./UserProfile";
+import IconLayout from "@/app/components/atoms/icons/Layout";
+import IconCalendar from "@/app/components/atoms/icons/Calendar2";
+import IconHouse from "@/app/components/atoms/icons/House";
+import IconHeart from "@/app/components/atoms/icons/Heart";
+import IconContract from "@/app/components/atoms/icons/Contract";
+import IconNotification from "@/app/components/atoms/icons/Notification";
+import IconGear from "@/app/components/atoms/icons/Gear";
+import IconHelp from "@/app/components/atoms/icons/Help";
+import IconPerson from "@/app/components/atoms/icons/Person";
+import AccountMenu from "@/app/components/atoms/AccountMenu";
+import UserProfile from "@/app/components/molecules/UserProfile";
 
 // Types
 type IconComponent = (props: {

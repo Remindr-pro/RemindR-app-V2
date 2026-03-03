@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import Button from "../atoms/Button";
+import Button from "@/app/components/atoms/Button";
 
 interface DiseaseProfileCardProps {
   name: string;

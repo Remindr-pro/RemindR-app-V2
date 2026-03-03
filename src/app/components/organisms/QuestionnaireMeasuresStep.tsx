@@ -1,6 +1,6 @@
 "use client";
 
-import MeasurementProfileCard from "../molecules/MeasurementProfileCard";
+import MeasurementProfileCard from "@/app/components/molecules/MeasurementProfileCard";
 
 export interface MeasureProfileItem {
   id: string;

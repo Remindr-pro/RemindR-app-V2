@@ -1,7 +1,7 @@
 "use client";
 
-import ProfileQuestionnaireCard from "../molecules/ProfileQuestionnaireCard";
-import AddProfileButton from "../atoms/AddProfileButton";
+import ProfileQuestionnaireCard from "@/app/components/molecules/ProfileQuestionnaireCard";
+import AddProfileButton from "@/app/components/atoms/AddProfileButton";
 
 export interface ProfileItem {
   id: string;

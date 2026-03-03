@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import ArticleCard, { ArticleCardProps } from "./ArticleCard";
-import IconChevron from "../atoms/icons/Chevron";
+import ArticleCard, { ArticleCardProps } from "@/app/components/molecules/ArticleCard";
+import IconChevron from "@/app/components/atoms/icons/Chevron";
 
 interface BlogCarouselCardProps {
   articles: ArticleCardProps[];

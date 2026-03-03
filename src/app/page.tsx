@@ -1,5 +1,5 @@
-import Logo from "./components/atoms/Logo";
-import UserTypeCard from "./components/molecules/UserTypeCard";
+import Logo from "@/app/components/atoms/Logo";
+import UserTypeCard from "@/app/components/molecules/UserTypeCard";
 
 export default function Home() {
   return (

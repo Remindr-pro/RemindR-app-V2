@@ -1,6 +1,6 @@
 import React from "react";
 import { Metadata } from "next";
-import DashboardLayoutClient from "./DashboardLayoutClient";
+import DashboardLayoutClient from "@/app/(private)/dashboard/DashboardLayoutClient";
 
 interface IProps {
   children: React.ReactNode;

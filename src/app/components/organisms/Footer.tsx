@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import Logo from "../atoms/Logo";
+import Logo from "@/app/components/atoms/Logo";
 
 export default function Footer() {
   const pathname = usePathname();

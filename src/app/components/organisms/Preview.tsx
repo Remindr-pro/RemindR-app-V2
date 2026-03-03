@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import Button from "../atoms/Button";
+import Button from "@/app/components/atoms/Button";
 
 const PREVIEW_IMAGES = {
   "Tableau de bord familial": {

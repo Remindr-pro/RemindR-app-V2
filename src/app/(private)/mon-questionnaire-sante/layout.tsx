@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import QuestionnaireLayoutClient from "./QuestionnaireLayoutClient";
+import QuestionnaireLayoutClient from "@/app/(private)/mon-questionnaire-sante/QuestionnaireLayoutClient";
 
 export const metadata: Metadata = {
   title: "Mon questionnaire santé - RemindR",
