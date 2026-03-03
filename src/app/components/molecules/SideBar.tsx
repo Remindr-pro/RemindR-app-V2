@@ -100,7 +100,15 @@ const ACCOUNT_NAV_ITEMS: NavItem[] = [
 // Utility functions
 const isPathActive = (pathname: string, href: string): boolean => {
   if (href === "/dashboard") {
-    return pathname === "/dashboard" || pathname === "/dashboard/";
+    return (
+      pathname === "/dashboard" ||
+      pathname === "/dashboard/" ||
+      /^\/dashboard\/membres\/[^/]+\/?$/.test(pathname)
+    );
+  }
+
+  if (href === "/dashboard/membres") {
+    return pathname === "/dashboard/membres" || pathname === "/dashboard/membres/";
   }
 
   return pathname === href || pathname.startsWith(`${href}/`);
