@@ -45,27 +45,27 @@ export default async function ArticlePage({
         <div className="absolute inset-0 bg-dark/20" />
 
         {/* === White overlay card === */}
-        <div className="absolute inset-0 flex items-center justify-center px-4">
-          <div className="bg-light/60 backdrop-blur-sm rounded-2xl px-8 py-8 max-w-md w-full text-center shadow-xl">
+        <div className="absolute inset-0 flex items-center justify-center px-3 sm:px-4">
+          <div className="bg-light/60 backdrop-blur-sm rounded-xl sm:rounded-2xl px-4 py-5 sm:px-6 sm:py-6 md:px-8 md:py-8 max-w-md w-full text-center shadow-xl">
             {/* Category */}
-            <span className="bg-light inline-block border border-gray-1 rounded-lg px-4 py-1.5 text-xs font-inclusive font-medium text-dark mb-4">
+            <span className="bg-light inline-block border border-gray-1 rounded-lg px-3 py-1.5 text-xs font-inclusive font-medium text-dark mb-3 sm:mb-4">
               {article.category}
             </span>
 
             {/* Title */}
-            <h1 className="text-2xl font-inclusive font-bold text-dark leading-tight mb-3">
+            <h1 className="text-xl sm:text-2xl font-inclusive font-bold text-dark leading-tight mb-2 sm:mb-3">
               {article.title}
             </h1>
 
             {/* Description */}
             {article.description && (
-              <p className="text-sm font-inclusive text-gray-4 mb-4 leading-relaxed">
+              <p className="text-sm font-inclusive text-gray-4 mb-3 sm:mb-4 leading-relaxed">
                 {article.description}
               </p>
             )}
 
             {/* Date */}
-            <div className="flex items-center justify-center gap-2 text-gray-4 text-sm font-inclusive">
+            <div className="flex items-center justify-center gap-2 text-gray-4 text-xs sm:text-sm font-inclusive">
               <IconCalendar size={14} fill="text-gray-4" />
               <span>{article.date}</span>
             </div>
