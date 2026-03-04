@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import IconCalendar from "@/app/components/atoms/icons/Calendar";
 
 export type ArticleVariant = "spotlight" | "advice";
@@ -12,6 +13,7 @@ export interface ArticleCardProps {
   variant?: ArticleVariant;
   position?: ArticlePosition;
   isForward?: boolean;
+  href?: string;
 }
 
 export default function ArticleCard({
@@ -22,6 +24,7 @@ export default function ArticleCard({
   variant = "advice",
   position = "vertical",
   isForward = false,
+  href,
 }: ArticleCardProps) {
   // Styles conditionnels selon les props
   const containerClasses = [
@@ -91,7 +94,7 @@ export default function ArticleCard({
     .filter(Boolean)
     .join(" ");
 
-  return (
+  const cardContent = (
     <div className={containerClasses}>
       <div className={imageContainerClasses}>
         <Image
@@ -151,4 +154,14 @@ export default function ArticleCard({
       </div>
     </div>
   );
+
+  if (href) {
+    return (
+      <Link href={href} className="block h-full">
+        {cardContent}
+      </Link>
+    );
+  }
+
+  return cardContent;
 }

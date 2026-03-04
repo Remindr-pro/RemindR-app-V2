@@ -116,12 +116,13 @@ export default function MagazinePage() {
 
         {/* === Article Pin === */}
         <ArticlePin
-          category="Prévention"
+          category="Prévention au quotidien"
           imageSrc="/images/articles/article-octobre-rose.jpg"
           imageAlt="Article Octobre Rose"
           title="Octobre Rose : dépister tôt pour mieux se protéger"
           date="01 octobre 2025"
           description="Les gestes simples recommandés pour anticiper et agir face au cancer du sein."
+          href="/particuliers/magazine/prevention-au-quotidien/octobre-rose"
         />
       </section>
 

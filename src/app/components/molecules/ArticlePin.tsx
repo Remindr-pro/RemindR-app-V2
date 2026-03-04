@@ -1,6 +1,7 @@
 import Button from "@/app/components/atoms/Button";
 import IconPin from "@/app/components/atoms/icons/Pin";
 import Image from "next/image";
+import Link from "next/link";
 
 interface ArticlePinProps {
   category: string;
@@ -10,6 +11,7 @@ interface ArticlePinProps {
   date: string;
   description?: string;
   priority?: boolean;
+  href?: string;
 }
 
 export default function ArticlePin({
@@ -20,10 +22,37 @@ export default function ArticlePin({
   date,
   description,
   priority = true,
+  href,
 }: ArticlePinProps) {
+  const imageContent = (
+    <div className={`relative w-full aspect-3/4 md:aspect-[2.2/1] ${href ? "cursor-pointer" : ""}`}>
+      <Image
+        src={imageSrc}
+        alt={imageAlt}
+        fill
+        className={`object-cover transition-transform duration-500 ${href ? "group-hover:scale-[1.02]" : ""}`}
+        priority={priority}
+        loading={priority ? undefined : "lazy"}
+      />
+
+      {/* Overlay Gradient */}
+      <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/30 to-transparent md:from-black/60 md:via-black/20" />
+
+      {/* Article info */}
+      <div className="absolute top-1/2 -translate-y-1/2 md:top-auto md:translate-y-0 bottom-0 left-0 right-0 p-4 md:p-8 lg:p-12 flex flex-col justify-center md:justify-end">
+        <h2 className="text-xl md:text-4xl lg:text-5xl font-inclusive font-bold text-light mb-2 md:mb-3 leading-tight md:leading-normal">
+          {title}
+        </h2>
+        <p className="text-sm md:text-base lg:text-lg font-inclusive font-medium text-light/95 md:text-light/90 leading-snug">
+          {description ? `${date} / ${description}` : date}
+        </p>
+      </div>
+    </div>
+  );
+
   return (
     <div className="w-full max-w-5xl mx-auto mt-4 md:mt-8 px-4 md:px-0">
-      <div className="relative bg-pink-0 rounded-xl md:rounded-2xl overflow-hidden">
+      <div className="relative bg-pink-0 rounded-xl md:rounded-2xl overflow-hidden group">
         <div className="absolute top-3 left-3 md:top-6 md:left-6 z-10 flex items-center gap-1.5 md:gap-2">
           <span className="bg-light rounded-lg px-1.5 py-1.5 md:px-2 md:py-2 flex items-center justify-center">
             <span className="md:hidden">
@@ -43,30 +72,14 @@ export default function ArticlePin({
           </Button>
         </div>
 
-        {/* Image Container */}
-        <div className="relative w-full aspect-3/4 md:aspect-[2.2/1]">
-          <Image
-            src={imageSrc}
-            alt={imageAlt}
-            fill
-            className="object-cover"
-            priority={priority}
-            loading={priority ? undefined : "lazy"}
-          />
-
-          {/* Overlay Gradient */}
-          <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/30 to-transparent md:from-black/60 md:via-black/20" />
-
-          {/* Article info */}
-          <div className="absolute top-1/2 -translate-y-1/2 md:top-auto md:translate-y-0 bottom-0 left-0 right-0 p-4 md:p-8 lg:p-12 flex flex-col justify-center md:justify-end">
-            <h2 className="text-xl md:text-4xl lg:text-5xl font-inclusive font-bold text-light mb-2 md:mb-3 leading-tight md:leading-normal">
-              {title}
-            </h2>
-            <p className="text-sm md:text-base lg:text-lg font-inclusive font-medium text-light/95 md:text-light/90 leading-snug">
-              {description ? `${date} / ${description}` : date}
-            </p>
-          </div>
-        </div>
+        {/* Image Container — clickable if href provided */}
+        {href ? (
+          <Link href={href} className="block">
+            {imageContent}
+          </Link>
+        ) : (
+          imageContent
+        )}
       </div>
     </div>
   );
