@@ -111,9 +111,8 @@ export default function ParticuliersPage() {
         id="fonctionnalites"
       >
         <div
-          className="absolute left-0 right-0 w-full z-0"
+          className="absolute left-0 right-0 w-full z-0 top-[-70px] md:top-[-200px]"
           style={{
-            top: "-200px",
             bottom: 0,
             backgroundColor: "var(--color-gray-1)",
             backgroundImage: "url('/images/bg/bg-with-cross-fullwidth.png')",
@@ -170,9 +169,8 @@ export default function ParticuliersPage() {
         id="faq"
       >
         <div
-          className="absolute left-0 right-0 w-full z-0"
+          className="absolute left-0 right-0 w-full z-0 top-[-70px] md:top-[-200px]"
           style={{
-            top: "-200px",
             bottom: 0,
             backgroundColor: "var(--color-gray-1)",
             backgroundImage: "url('/images/bg/bg-with-cross-fullwidth.png')",
