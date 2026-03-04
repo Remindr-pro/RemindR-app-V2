@@ -68,12 +68,24 @@ export default function ProfessionnelsPage() {
         </div>
       </section>
 
-      {/* === Section Explaination === */}
+      {/* === Section Explaination (avec background qui déborde en haut) === */}
       <section
-        className="min-h-screen flex flex-col items-center justify-center py-0 md:py-24"
+        className="min-h-screen flex flex-col items-center justify-center py-0 md:py-24 relative overflow-visible"
         id="pourquoi-remindr"
       >
-        <div className="w-full h-full flex flex-col items-center justify-center gap-4 sm:gap-6 px-4 sm:px-6 lg:px-8">
+        <div
+          className="absolute left-0 right-0 w-full z-0"
+          style={{
+            top: "-200px",
+            bottom: 0,
+            backgroundColor: "var(--color-gray-1)",
+            backgroundImage: "url('/images/bg/bg-with-cross-fullwidth.png')",
+            backgroundSize: "fit-content",
+            backgroundPosition: "top",
+            backgroundRepeat: "no-repeat",
+          }}
+        />
+        <div className="w-full h-full flex flex-col items-center justify-center gap-4 sm:gap-6 px-4 sm:px-6 lg:px-8 relative z-10">
           <h2 className="text-3xl md:text-5xl font-inclusive font-bold text-center">
             Une solution pensée pour la{" "}
             <span className="text-greenMain">prévention santé</span>… et la{" "}
@@ -99,12 +111,24 @@ export default function ProfessionnelsPage() {
         </div>
       </section>
 
-      {/* === Section Presentation === */}
+      {/* === Section Presentation (avec background centré qui déborde en haut) === */}
       <section
-        className="min-h-screen flex flex-col items-center justify-center gap-20 py-24 px-4 sm:px-6 lg:px-8"
+        className="min-h-screen flex flex-col items-center justify-center gap-20 py-24 px-4 sm:px-6 lg:px-8 relative overflow-visible"
         id="nos-fonctionnalites"
       >
-        <div className="max-w-7xl mx-auto flex flex-col gap-10 text-center">
+        <div
+          className="absolute left-0 right-0 w-full z-0"
+          style={{
+            top: "-200px",
+            bottom: 0,
+            backgroundColor: "var(--color-gray-1)",
+            backgroundImage: "url('/images/bg/bg-with-cross-fullwidth.png')",
+            backgroundSize: "fit-content",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+          }}
+        />
+        <div className="max-w-7xl mx-auto flex flex-col gap-10 text-center relative z-10">
           <h2 className="text-3xl md:text-5xl font-inclusive font-bold">
             Comment nous <span className="text-greenMain">fonctionnons</span>.
           </h2>
@@ -116,7 +140,7 @@ export default function ProfessionnelsPage() {
         </div>
 
         {/* Étapes */}
-        <div className="w-full max-w-7xl mx-auto flex flex-col gap-16 md:gap-24">
+        <div className="w-full max-w-7xl mx-auto flex flex-col gap-16 md:gap-24 relative z-10">
           <StepCard
             number={1}
             title="Analyse intelligente & segmentation santé personnalisée."
@@ -137,7 +161,7 @@ export default function ProfessionnelsPage() {
           />
         </div>
 
-        <div className="flex flex-col md:flex-row items-center justify-center gap-4">
+        <div className="flex flex-col md:flex-row items-center justify-center gap-4 relative z-10">
           <Button
             href="/pdf/La_solution_Remindr.pdf"
             variant="dark"
@@ -151,12 +175,24 @@ export default function ProfessionnelsPage() {
         </div>
       </section>
 
-      {/* === Section Companies === */}
+      {/* === Section Companies (avec background qui déborde en haut) === */}
       <section
-        className="min-h-screen flex flex-col items-center justify-center gap-20 py-24"
+        className="min-h-screen flex flex-col items-center justify-center gap-20 py-24 relative overflow-visible"
         id="nos-sources"
       >
-        <div className="max-w-3xl w-full mx-auto flex flex-col gap-16 text-center">
+        <div
+          className="absolute left-0 right-0 w-full z-0"
+          style={{
+            top: "-200px",
+            bottom: 0,
+            backgroundColor: "var(--color-gray-1)",
+            backgroundImage: "url('/images/bg/bg-with-cross-fullwidth.png')",
+            backgroundSize: "fit-content",
+            backgroundPosition: "top",
+            backgroundRepeat: "no-repeat",
+          }}
+        />
+        <div className="max-w-3xl w-full mx-auto flex flex-col gap-16 text-center relative z-10">
           <h2 className="text-3xl md:text-6xl font-inclusive font-bold">
             Des sources <span className="text-greenMain">fiables</span> pour une
             santé au top.
@@ -167,7 +203,9 @@ export default function ProfessionnelsPage() {
           </p>
         </div>
 
-        <Companies />
+        <div className="relative z-10">
+          <Companies />
+        </div>
       </section>
     </>
   );
