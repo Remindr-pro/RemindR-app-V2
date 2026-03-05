@@ -74,9 +74,8 @@ export default function ProfessionnelsPage() {
         id="pourquoi-remindr"
       >
         <div
-          className="absolute left-0 right-0 w-full z-0"
+          className="absolute left-0 right-0 w-full z-0 top-[-200px] sm:top-[-90px]"
           style={{
-            top: "-200px",
             bottom: 0,
             backgroundColor: "var(--color-gray-1)",
             backgroundImage: "url('/images/bg/bg-with-cross-fullwidth.png')",
