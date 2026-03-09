@@ -1,9 +1,14 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import IconPeopleLink from "@/app/components/atoms/icons/PeopleLink";
 import ProgressBar from "@/app/components/atoms/ProgressBar";
+import { BASE_PATH, PROFILE_ID_SEARCH_PARAM } from "@/app/(private)/mon-questionnaire-sante/constants";
 
 interface FamilyMemberCardProps {
+  id: string;
   name: string;
   role: string;
   gender: "Femme" | "Homme" | "Non renseigné";
@@ -24,6 +29,7 @@ const borderColorClasses = {
 };
 
 export default function FamilyMemberCard({
+  id,
   name,
   role,
   gender,
@@ -35,17 +41,20 @@ export default function FamilyMemberCard({
   borderColor,
 }: FamilyMemberCardProps) {
   const defaultAvatar = "/images/illustrations/avatar.png";
+  const questionnaireHref = `${BASE_PATH}?${PROFILE_ID_SEARCH_PARAM}=${encodeURIComponent(id)}`;
 
   return (
-    <div
+    <Link
+      href={questionnaireHref}
       className={`bg-light rounded-2xl p-6 border-2 ${borderColorClasses[borderColor]} shadow-sm hover:shadow-md transition-shadow flex flex-col relative`}
     >
       {/* Icône PeopleLink en haut à droite */}
       {showPeopleLink && (
         <button
           type="button"
-          className="absolute top-6 right-6 text-gray-4 hover:text-dark transition-colors"
+          className="absolute top-6 right-6 text-gray-4 hover:text-dark transition-colors z-10"
           aria-label="Lien du profil"
+          onClick={(e) => { e.preventDefault(); e.stopPropagation(); }}
         >
           <IconPeopleLink size={18} fill="currentColor" />
         </button>
@@ -90,6 +99,6 @@ export default function FamilyMemberCard({
           />
         </div>
       </div>
-    </div>
+    </Link>
   );
 }

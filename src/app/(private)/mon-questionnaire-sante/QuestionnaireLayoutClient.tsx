@@ -113,6 +113,12 @@ export default function QuestionnaireLayoutClient({
             <StepIndicator
               currentStep={config.step}
               stepLabels={QUESTIONNAIRE_STEP_LABELS}
+              stepHrefs={[
+                BASE_PATH,
+                `${BASE_PATH}/mesures`,
+                `${BASE_PATH}/maladies`,
+                `${BASE_PATH}/habitudes`,
+              ]}
             />
 
             <h2 className="text-2xl md:text-3xl font-inclusive font-bold text-dark text-center mb-4 w-full">
