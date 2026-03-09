@@ -418,8 +418,7 @@ function ProfileEditFormContent({
           </p>
           <Input
             id="profile-birthdate"
-            type="text"
-            placeholder="Date de naissance"
+            type="date"
             value={formData.birthdate}
             onChange={(e) =>
               setFormData((prev) => ({
