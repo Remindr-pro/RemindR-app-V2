@@ -28,18 +28,21 @@ const pageConfigs: Record<string, PageConfig> = {
   },
   [`${BASE_PATH}/mesures`]: {
     step: 2,
-    title: "Je renseigne mon poids et ma taille pour avoir des conseils personnalisés et suivre mon évolution.",
+    title:
+      "Je renseigne mon poids et ma taille pour avoir des conseils personnalisés et suivre mon évolution.",
     description: "",
   },
   [`${BASE_PATH}/maladies`]: {
     step: 3,
-    title: "Je renseigne mes maladies et mes allergies pour avoir des conseils et des rappels personnalisés.",
+    title:
+      "Je renseigne mes maladies et mes allergies pour avoir des conseils et des rappels personnalisés.",
     description: "",
   },
   [`${BASE_PATH}/habitudes`]: {
     step: 4,
-    title: "Habitudes",
-    description: "Contenu à venir.",
+    title:
+      "Je renseigne mes habitudes pour avoir des conseils et des rappels personnalisés.",
+    description: "",
   },
 };
 

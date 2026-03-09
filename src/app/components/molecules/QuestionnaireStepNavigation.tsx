@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import Button from "@/app/components/atoms/Button";
 
 interface QuestionnaireStepNavigationProps {
@@ -9,6 +10,7 @@ interface QuestionnaireStepNavigationProps {
   previousLabel?: string;
   nextLabel?: string;
   quitterLabel?: string;
+  onNextClick?: () => Promise<void> | void;
 }
 
 export default function QuestionnaireStepNavigation({
@@ -18,7 +20,10 @@ export default function QuestionnaireStepNavigation({
   previousLabel = "Précédent",
   nextLabel = "Suivant",
   quitterLabel = "Quitter",
+  onNextClick,
 }: QuestionnaireStepNavigationProps) {
+  const router = useRouter();
+
   const leftButton = previousHref ? (
     <Button variant="outline" href={previousHref} className="min-w-[120px]">
       {previousLabel}
@@ -35,12 +40,21 @@ export default function QuestionnaireStepNavigation({
     <span className="min-w-[120px]" />
   );
 
+  const handleNextClick = async () => {
+    if (onNextClick) await onNextClick();
+    if (nextHref) router.push(nextHref);
+  };
+
   return (
     <div className="fixed bottom-0 left-0 md:left-32 right-0 z-30 bg-light border-t border-gray-2 py-4">
       <div className="max-w-4xl mx-auto px-6 xl:px-10 flex items-center justify-center gap-4">
         {leftButton}
         {nextHref ? (
-          <Button variant="green" href={nextHref} className="min-w-[120px]">
+          <Button
+            variant="green"
+            onClick={handleNextClick}
+            className="min-w-[120px]"
+          >
             {nextLabel}
           </Button>
         ) : null}

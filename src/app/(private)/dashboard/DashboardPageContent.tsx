@@ -240,7 +240,7 @@ export default function DashboardPageContent({
     <div className="w-full mx-auto bg-gray-1 rounded-2xl">
       {isOwnDashboard && (
         <WelcomeProfileModal
-          isOpen={showWelcomeModal}
+          isOpen={showWelcomeModal && !user?.profileCompleted}
           onClose={() => setShowWelcomeModal(false)}
           userName={userName}
           onCompleteProfile={() => {
