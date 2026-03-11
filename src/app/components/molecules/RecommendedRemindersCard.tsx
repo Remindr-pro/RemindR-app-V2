@@ -10,7 +10,6 @@ interface ReminderItem {
   title: string;
   person: string;
   date: string;
-  source: string;
   color: "green" | "orange" | "purple" | "blue" | "pink";
   learnMoreUrl?: string;
 }
@@ -95,13 +94,10 @@ export default function RecommendedRemindersCard({
                 >
                   {reminder.title}
                 </p>
-                <p className="text-xs xl:text-sm text-gray-4 font-inclusive mb-2">
-                  Source: {reminder.source}
-                </p>
                 {reminder.learnMoreUrl && (
                   <Link
                     href={reminder.learnMoreUrl}
-                    className="text-xs xl:text-sm text-greenMain hover:underline font-inclusive inline-flex items-center gap-1"
+                    className={`text-xs xl:text-sm ${colorClasses[reminder.color].text} hover:underline font-inclusive inline-flex items-center gap-1`}
                   >
                     En savoir plus
                     <IconArrowRight size={12} />

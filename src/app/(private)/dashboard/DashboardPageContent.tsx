@@ -66,7 +66,6 @@ export default function DashboardPageContent({
       title: string;
       person: string;
       date: string;
-      source: string;
       color: "green" | "orange" | "purple" | "blue" | "pink";
       learnMoreUrl?: string;
     }[]
@@ -193,7 +192,6 @@ export default function DashboardPageContent({
                 month: "short",
                 year: "numeric",
               }),
-              source: "RemindR",
               color,
               learnMoreUrl: "#",
             };

@@ -1,6 +1,6 @@
 export type CalendarView = "month" | "week" | "day";
 
-export type UserColor = "purple" | "blue" | "pink" | "orange";
+export type UserColor = "green" | "purple" | "blue" | "pink" | "orange";
 
 export interface CalendarUser {
   id: string;

@@ -1,85 +1,155 @@
 "use client";
 
+import { useEffect, useState, useMemo } from "react";
+import { useSearchParams } from "next/navigation";
 import Calendar from "@/app/components/organisms/Calendar";
 import { CalendarEvent, CalendarUser } from "@/app/types/calendar";
+import type { UserColor } from "@/app/types/calendar";
+import { getMyFamilyMembers } from "@/app/actions/family";
+import { getCalendarReminders } from "@/app/actions/reminders";
+import { mapCalendarRemindersToEvents } from "@/app/utils/calendarReminders";
+
+function mapFamilyMembersToCalendarUsers(
+  members: Awaited<ReturnType<typeof getMyFamilyMembers>>,
+): CalendarUser[] {
+  return members.map((m) => ({
+    id: m.id,
+    name: m.firstName,
+    color: m.borderColor as UserColor,
+  }));
+}
+
+function getRangeForDate(date: Date, view: "month" | "week" | "day") {
+  let start: Date;
+  let end: Date;
+  if (view === "month") {
+    start = new Date(date.getFullYear(), date.getMonth(), 1);
+    end = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+  } else if (view === "week") {
+    const day = date.getDay();
+    const diff = date.getDate() - day + (day === 0 ? -6 : 1);
+    start = new Date(date);
+    start.setDate(diff);
+    start.setHours(0, 0, 0, 0);
+    end = new Date(start);
+    end.setDate(end.getDate() + 6);
+    end.setHours(23, 59, 59, 999);
+  } else {
+    start = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+    end = new Date(start);
+    end.setHours(23, 59, 59, 999);
+  }
+  return {
+    startIso: start.toISOString(),
+    endIso: end.toISOString(),
+  };
+}
 
 export default function CalendarPage() {
-  // Données d'exemple basées sur les images
-  const users: CalendarUser[] = [
-    { id: "camille", name: "Camille", color: "purple" },
-    { id: "maxime", name: "Maxime", color: "blue" },
-    { id: "alice", name: "Alice", color: "pink" },
-    { id: "milo", name: "Milo", color: "orange" },
-  ];
+  const searchParams = useSearchParams();
+  const [users, setUsers] = useState<CalendarUser[]>([]);
+  const [usersLoading, setUsersLoading] = useState(true);
+  const [usersError, setUsersError] = useState<string | null>(null);
+  const [events, setEvents] = useState<CalendarEvent[]>([]);
+  const [eventsLoading, setEventsLoading] = useState(true);
+  const [eventsError, setEventsError] = useState<string | null>(null);
 
-  const today = new Date();
-  const year = today.getFullYear();
-  const month = today.getMonth();
+  const currentDate = useMemo(() => {
+    const dateParam = searchParams.get("date");
+    if (!dateParam) return new Date();
+    const parsed = new Date(dateParam);
+    return Number.isNaN(parsed.getTime()) ? new Date() : parsed;
+  }, [searchParams]);
 
-  const events: CalendarEvent[] = [
-    // Événements du 4
-    {
-      id: "1",
-      title: "Mammographie...",
-      startDate: new Date(year, month, 4),
-      endDate: new Date(year, month, 4),
-      userId: "camille",
-      color: "purple",
-      isReminder: true,
-      reminderTitle: "Mammographie...",
-    },
-    {
-      id: "2",
-      title: "RDV médecin",
-      startDate: new Date(year, month, 4),
-      endDate: new Date(year, month, 4),
-      userId: "alice",
-      color: "pink",
-    },
-    // Événements du 6
-    {
-      id: "3",
-      title: "M'T dents tous les ans !",
-      startDate: new Date(year, month, 6),
-      endDate: new Date(year, month, 6),
-      userId: "alice",
-      color: "pink",
-      isReminder: true,
-      reminderTitle: "M'T dents tous les ans !",
-      details:
-        "Aujourd'hui, Alice fête ses 7 ans ! 🎉 Grâce au programme M'T Dents, vous bénéficiez d'un rendez-vous gratuit chez le dentiste pour elle, pris en charge à 100% par l'Assurance Maladie.",
-    },
-    {
-      id: "4",
-      title: "RDV médecin",
-      startDate: new Date(year, month, 6, 10, 0),
-      endDate: new Date(year, month, 6, 10, 30),
-      userId: "maxime",
-      color: "blue",
-    },
-    {
-      id: "5",
-      title: "RDV psychologue",
-      startDate: new Date(year, month, 6, 18, 0),
-      endDate: new Date(year, month, 6, 19, 0),
-      userId: "camille",
-      color: "purple",
-      address: "14 rue Paul Fort - 29200 Brest",
-    },
-    // Événement d'aujourd'hui pour tester DayView
-    {
-      id: "6",
-      title: "Réunion test",
-      startDate: new Date(year, month, today.getDate(), 14, 0),
-      endDate: new Date(year, month, today.getDate(), 15, 0),
-      userId: "maxime",
-      color: "blue",
-    },
-  ];
+  const view = useMemo<"month" | "week" | "day">(() => {
+    const v = searchParams.get("view");
+    if (v === "month" || v === "week" || v === "day") return v;
+    return "month";
+  }, [searchParams]);
+
+  const { startIso, endIso } = useMemo(
+    () => getRangeForDate(currentDate, view),
+    [currentDate, view]
+  );
+
+  useEffect(() => {
+    let cancelled = false;
+    getMyFamilyMembers()
+      .then((members) => {
+        if (!cancelled) {
+          setUsers(mapFamilyMembersToCalendarUsers(members));
+        }
+      })
+      .catch(() => {
+        if (!cancelled) {
+          setUsersError("Impossible de charger les profils.");
+        }
+      })
+      .finally(() => {
+        if (!cancelled) {
+          setUsersLoading(false);
+        }
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  useEffect(() => {
+    const cancelled = { current: false };
+    getCalendarReminders(startIso, endIso)
+      .then((reminders) => {
+        if (cancelled.current) return;
+        const userColorMap: Record<string, UserColor> = {};
+        users.forEach((u) => {
+          userColorMap[u.id] = u.color;
+        });
+        setEvents(mapCalendarRemindersToEvents(reminders, userColorMap));
+      })
+      .catch(() => {
+        if (!cancelled.current) {
+          setEventsError("Impossible de charger les rappels.");
+        }
+      })
+      .finally(() => {
+        if (!cancelled.current) {
+          setEventsLoading(false);
+        }
+      });
+    return () => {
+      cancelled.current = true;
+    };
+  }, [startIso, endIso, users]);
+
+  if (usersError) {
+    return (
+      <div className="w-full mx-auto bg-gray-1 rounded-2xl p-8">
+        <p className="text-red-500 font-inclusive">{usersError}</p>
+      </div>
+    );
+  }
 
   return (
     <div className="w-full mx-auto bg-gray-1 rounded-2xl p-8">
-      <Calendar events={events} users={users} />
+      {usersLoading ? (
+        <div className="flex items-center justify-center min-h-[200px] text-gray-4 font-inclusive">
+          Chargement des profils…
+        </div>
+      ) : (
+        <>
+          {eventsError && (
+            <p className="text-red-500 font-inclusive text-sm mb-4">
+              {eventsError}
+            </p>
+          )}
+          {eventsLoading && !events.length && (
+            <p className="text-gray-4 font-inclusive text-sm mb-4">
+              Chargement des rappels…
+            </p>
+          )}
+          <Calendar events={events} users={users} />
+        </>
+      )}
     </div>
   );
 }
