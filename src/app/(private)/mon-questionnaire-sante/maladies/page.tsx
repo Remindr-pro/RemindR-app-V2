@@ -167,8 +167,8 @@ export default function QuestionnaireMaladiesPage() {
       chronicConditions: data.chronicConditions.length ? data.chronicConditions : [""],
       allergyTreatments: data.medications.length ? data.medications : [""],
       diseaseTreatments: data.medications.length ? data.medications : [""],
-      noAllergy: data.allergies.length === 0,
-      noDisease: data.chronicConditions.length === 0,
+      noAllergy: false,
+      noDisease: false,
     };
   }, [profileBeingEdited, diseasesByProfileId]);
 
