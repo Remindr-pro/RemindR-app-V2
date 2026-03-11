@@ -11,9 +11,15 @@ import { IconLayoutSidebarRightCollapseFilled } from "@tabler/icons-react";
 
 interface TopBarProps {
   onMenuClick?: () => void;
+  onAddMemberClick?: () => void;
+  onAddEventClick?: () => void;
 }
 
-const TopBar = ({ onMenuClick }: TopBarProps) => {
+const TopBar = ({
+  onMenuClick,
+  onAddMemberClick,
+  onAddEventClick,
+}: TopBarProps) => {
   const pathName = usePathname();
 
   const dynamicTitle = useMemo(() => {
@@ -57,6 +63,13 @@ const TopBar = ({ onMenuClick }: TopBarProps) => {
                 size="sm"
                 icon={<IconPlus size={16} />}
                 className="px-4 py-2"
+                onClick={
+                  isFamilyPage
+                    ? onAddMemberClick
+                    : isCalendarPage
+                      ? onAddEventClick
+                      : undefined
+                }
               >
                 {isFamilyPage ? "Ajouter un proche" : "Ajouter"}
               </Button>

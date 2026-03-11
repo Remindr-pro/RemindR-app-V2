@@ -105,7 +105,7 @@ const Chat = ({ onClose, variant = "particuliers" }: ChatProps) => {
   const handleSuggestedClick = (question: string) => sendQuestion(question);
 
   return (
-    <div className="z-9999 animate-fade-in ease-out duration-300 fixed bottom-25 mobileLandscape:bottom-28 right-2 mobileLandscape:w-[95vw] md:w-[450px] bg-light rounded-xl p-4 sm:p-6 md:pt-4 md:mb-0 mobileLandscape:p-2 flex flex-col shadow-lg border border-gray-2 min-h-2/3">
+    <div className="z-9999 animate-fade-in ease-out duration-300 fixed bottom-25 mobileLandscape:bottom-28 right-1 md:right-4 mobileLandscape:w-[95vw] md:w-[450px] bg-light rounded-xl p-4 sm:p-6 md:pt-4 md:mb-0 mobileLandscape:p-2 flex flex-col shadow-lg border border-gray-2 min-h-2/3">
       <div className="flex items-center justify-between mb-4 pb-2 border-b border-gray-2">
         <h2 className="font-inclusive font-bold text-lg text-dark">
           Discussion

@@ -105,12 +105,23 @@ export default function ParticuliersPage() {
         <Preview />
       </section>
 
-      {/* === Section Prevention === */}
+      {/* === Section Prevention  === */}
       <section
-        className="min-h-screen flex items-center justify-center py-24"
+        className="min-h-screen flex items-center justify-center py-24 relative overflow-visible"
         id="fonctionnalites"
       >
-        <div className="w-full max-w-7xl mx-auto flex flex-col gap-16">
+        <div
+          className="absolute left-0 right-0 w-full z-0 top-[-70px] md:top-[-200px]"
+          style={{
+            bottom: 0,
+            backgroundColor: "var(--color-gray-1)",
+            backgroundImage: "url('/images/bg/bg-with-cross-fullwidth.png')",
+            backgroundSize: "fit-content",
+            backgroundPosition: "top",
+            backgroundRepeat: "no-repeat",
+          }}
+        />
+        <div className="w-full max-w-7xl mx-auto flex flex-col gap-16 relative z-10">
           <div className="w-full lg:w-1/2">
             <h2 className="text-3xl md:text-5xl font-inclusive font-bold text-dark mb-4">
               La santé <span className="text-greenMain">regroupée</span> pour
@@ -154,10 +165,21 @@ export default function ParticuliersPage() {
 
       {/* === Section FAQ === */}
       <section
-        className="min-h-screen flex flex-col items-center justify-center gap-20 py-24"
+        className="min-h-screen flex flex-col items-center justify-center gap-20 py-24 relative overflow-visible"
         id="faq"
       >
-        <div className="max-w-7xl mx-auto flex flex-col gap-16 text-center">
+        <div
+          className="absolute left-0 right-0 w-full z-0 top-[-70px] md:top-[-200px]"
+          style={{
+            bottom: 0,
+            backgroundColor: "var(--color-gray-1)",
+            backgroundImage: "url('/images/bg/bg-with-cross-fullwidth.png')",
+            backgroundSize: "fit-content",
+            backgroundPosition: "top",
+            backgroundRepeat: "no-repeat",
+          }}
+        />
+        <div className="max-w-7xl mx-auto flex flex-col gap-16 text-center relative z-10">
           <h2 className="text-3xl md:text-5xl font-inclusive font-bold">
             Une <span className="text-greenMain">question</span> ? Nous y
             répondons.
@@ -169,12 +191,26 @@ export default function ParticuliersPage() {
           </p>
         </div>
 
-        <FAQ />
+        <div className="relative z-10">
+          <FAQ />
+        </div>
       </section>
 
       {/* === Section Companies === */}
-      <section className="min-h-screen flex flex-col items-center justify-center gap-20 py-24">
-        <div className="max-w-3xl w-full mx-auto flex flex-col gap-16 text-center">
+      <section className="min-h-screen flex flex-col items-center justify-center gap-20 py-24 relative overflow-visible">
+        <div
+          className="absolute left-0 right-0 w-full z-0"
+          style={{
+            top: "-200px",
+            bottom: 0,
+            backgroundColor: "var(--color-gray-1)",
+            backgroundImage: "url('/images/bg/bg-with-cross-fullwidth.png')",
+            backgroundSize: "fit-content",
+            backgroundPosition: "top",
+            backgroundRepeat: "no-repeat",
+          }}
+        />
+        <div className="max-w-3xl w-full mx-auto flex flex-col gap-16 text-center relative z-10">
           <h2 className="text-3xl md:text-5xl font-inclusive font-bold">
             Des sources <span className="text-greenMain">fiables</span> pour une
             santé au top.
@@ -185,7 +221,9 @@ export default function ParticuliersPage() {
           </p>
         </div>
 
-        <Companies />
+        <div className="relative z-10">
+          <Companies />
+        </div>
       </section>
     </>
   );

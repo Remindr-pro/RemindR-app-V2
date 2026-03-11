@@ -13,7 +13,7 @@ export default function Confidentiality() {
           Politique de confidentialité
         </h1>
         <span className="italic text-xs">
-          Dernière mise à jour : 12/12/2026
+          Dernière mise à jour : 03/01/2026
         </span>
         <p className="mt-4 mb-6">
           Chez Remindr, nous accordons une importance primordiale à la

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback, useMemo, useEffect } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
 import QuestionnaireProfilesStep from "@/app/components/organisms/QuestionnaireProfilesStep";
 import QuestionnaireStepNavigation from "@/app/components/molecules/QuestionnaireStepNavigation";
 import ProfileEditModal from "@/app/components/organisms/ProfileEditModal";
@@ -15,7 +16,7 @@ import { AuthService } from "@/lib/auth-service";
 import { useAuth } from "@/lib/auth-provider";
 import type { User } from "@/lib/auth-provider";
 import { sileo } from "sileo";
-import { BASE_PATH } from "@/app/(private)/mon-questionnaire-sante/constants";
+import { BASE_PATH, PROFILE_ID_SEARCH_PARAM } from "@/app/(private)/mon-questionnaire-sante/constants";
 
 function formGenderToProfileItem(
   value: string,
@@ -115,6 +116,8 @@ function familyUserToProfileItem(
 
 export default function MonQuestionnaireSanteProfilsPage() {
   const { user } = useAuth();
+  const searchParams = useSearchParams();
+  const router = useRouter();
   const mainProfile = useMemo(
     () => (user ? userToProfileItem(user) : null),
     [user],
@@ -181,6 +184,16 @@ export default function MonQuestionnaireSanteProfilsPage() {
     () => profiles.find((p) => p.id === editingProfileId) ?? null,
     [profiles, editingProfileId],
   );
+
+  useEffect(() => {
+    const profileIdFromUrl = searchParams.get(PROFILE_ID_SEARCH_PARAM);
+    if (!profileIdFromUrl || profiles.length === 0) return;
+    const exists = profiles.some((p) => p.id === profileIdFromUrl);
+    if (exists) {
+      setEditingProfileId(profileIdFromUrl);
+      router.replace(BASE_PATH, { scroll: false });
+    }
+  }, [searchParams, profiles, router]);
 
   const handleCompleteProfile = useCallback((id: string) => {
     setEditingProfileId(id);

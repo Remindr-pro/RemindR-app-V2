@@ -23,11 +23,16 @@ const WeekView = ({ currentDate, events, onDayClick }: WeekViewProps) => {
   ];
 
   const getColorClasses = (event: CalendarEvent) => {
-    const color = event.color || event.userId;
+    const color = event.color || "blue";
     const colorMap: Record<
       string,
       { bg: string; text: string; border: string }
     > = {
+      green: {
+        bg: "bg-greenMain/10",
+        text: "text-greenMain",
+        border: "border-greenMain",
+      },
       purple: {
         bg: "bg-purple/10",
         text: "text-purple",
@@ -36,22 +41,6 @@ const WeekView = ({ currentDate, events, onDayClick }: WeekViewProps) => {
       blue: { bg: "bg-blue/10", text: "text-blue", border: "border-blue" },
       pink: { bg: "bg-pink-1/10", text: "text-pink-1", border: "border-pink-1" },
       orange: {
-        bg: "bg-orange/10",
-        text: "text-orange",
-        border: "border-orange",
-      },
-      camille: {
-        bg: "bg-purple/10",
-        text: "text-purple",
-        border: "border-purple",
-      },
-      maxime: { bg: "bg-blue/10", text: "text-blue", border: "border-blue" },
-      alice: {
-        bg: "bg-pink-1/10",
-        text: "text-pink-1",
-        border: "border-pink-1",
-      },
-      milo: {
         bg: "bg-orange/10",
         text: "text-orange",
         border: "border-orange",

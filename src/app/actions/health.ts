@@ -12,6 +12,9 @@ export interface HealthProfilePayload {
   allergies?: string[];
   chronicConditions?: string[];
   medications?: string[];
+  sportRecurrence?: string | null;
+  dietType?: string | null;
+  addictions?: string[];
   preferences?: Record<string, unknown>;
 }
 
@@ -25,6 +28,9 @@ export interface HealthProfileData {
   heightMeasuredAt?: string | null;
   weight: number | null;
   weightMeasuredAt?: string | null;
+  sportRecurrence?: string | null;
+  dietType?: string | null;
+  addictions?: string[];
   preferences?: Record<string, unknown> | null;
 }
 

@@ -99,7 +99,7 @@ const ToggleRoundedButton = ({
       aria-label={tooltipContent ?? undefined}
       className={`${
         effectiveActive ? activeBackgroundColor : inactiveBackgroundColor
-      } p-4 rounded-full ease-out duration-300 ${
+      } p-1.5 md:p-4 rounded-full ease-out duration-300 ${
         isPulse ? "animate-pulse-effect" : ""
       } ${className}`}
       {...(isActiveTooltip

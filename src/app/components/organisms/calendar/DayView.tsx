@@ -22,11 +22,16 @@ const DayView = ({ currentDate, events }: DayViewProps) => {
   const isCurrentDay = isToday(currentDate);
 
   const getColorClasses = (event: CalendarEvent) => {
-    const color = event.color || event.userId;
+    const color = event.color || "blue";
     const colorMap: Record<
       string,
       { bg: string; text: string; border: string }
     > = {
+      green: {
+        bg: "bg-greenMain/10",
+        text: "text-greenMain",
+        border: "border-greenMain",
+      },
       purple: {
         bg: "bg-purple/10",
         text: "text-purple",
@@ -35,22 +40,6 @@ const DayView = ({ currentDate, events }: DayViewProps) => {
       blue: { bg: "bg-blue/10", text: "text-blue", border: "border-blue" },
       pink: { bg: "bg-pink-1/10", text: "text-pink-1", border: "border-pink-1" },
       orange: {
-        bg: "bg-orange/10",
-        text: "text-orange",
-        border: "border-orange",
-      },
-      camille: {
-        bg: "bg-purple/10",
-        text: "text-purple",
-        border: "border-purple",
-      },
-      maxime: { bg: "bg-blue/10", text: "text-blue", border: "border-blue" },
-      alice: {
-        bg: "bg-pink-1/10",
-        text: "text-pink-1",
-        border: "border-pink-1",
-      },
-      milo: {
         bg: "bg-orange/10",
         text: "text-orange",
         border: "border-orange",
@@ -150,35 +139,47 @@ const DayView = ({ currentDate, events }: DayViewProps) => {
           </div>
         </div>
 
-        {/* Reminder Sidebar (if applicable as per mockup) */}
-        {reminderEvent && (
-          <div className="w-72 shrink-0">
-            <div className="bg-pink-1/10 rounded-2xl p-5 border border-pink-1/30 flex flex-col gap-4 shadow-sm relative overflow-hidden group">
-              <div className="absolute top-0 left-0 w-1.5 h-full bg-pink-1"></div>
-              <div className="flex items-start gap-4">
-                <div className="p-2.5 rounded-xl bg-light shadow-md">
-                  <IconBell size={20} className="text-pink-1" />
+        {/* Reminder Sidebar (couleur = personne concernée) */}
+        {reminderEvent && (() => {
+          const colors = getColorClasses(reminderEvent);
+          const colorHoverMap: Record<string, string> = {
+            green: "hover:bg-greenMain hover:text-light hover:border-greenMain",
+            purple: "hover:bg-purple hover:text-light hover:border-purple",
+            blue: "hover:bg-blue hover:text-light hover:border-blue",
+            pink: "hover:bg-pink-1 hover:text-light hover:border-pink-1",
+            orange: "hover:bg-orange hover:text-light hover:border-orange",
+          };
+          const eventColor = reminderEvent.color || "blue";
+          const hoverClasses = colorHoverMap[eventColor] || colorHoverMap.blue;
+          return (
+            <div className="w-72 shrink-0">
+              <div className={`${colors.bg} rounded-2xl p-5 border ${colors.border} flex flex-col gap-4 shadow-sm relative overflow-hidden group`}>
+                <div className={`absolute top-0 left-0 w-1.5 h-full ${colors.border.replace("border-", "bg-")}`} />
+                <div className="flex items-start gap-4">
+                  <div className="p-2.5 rounded-xl bg-light shadow-md">
+                    <IconBell size={20} className={colors.text} />
+                  </div>
+                  <div className="flex flex-col gap-1">
+                    <h3 className={`font-bold text-sm ${colors.text} font-inclusive leading-tight`}>
+                      {reminderEvent.reminderTitle || reminderEvent.title}
+                    </h3>
+                    <p className={`text-[11px] ${colors.text} opacity-80 font-inclusive leading-relaxed mt-1`}>
+                      {reminderEvent.details}
+                    </p>
+                  </div>
                 </div>
-                <div className="flex flex-col gap-1">
-                  <h3 className="font-bold text-sm text-pink-1 font-inclusive leading-tight">
-                    {reminderEvent.reminderTitle || reminderEvent.title}
-                  </h3>
-                  <p className="text-[11px] text-pink-1/80 font-inclusive leading-relaxed mt-1">
-                    {reminderEvent.details}
-                  </p>
+                <div className="flex flex-col gap-2 mt-2">
+                  <button className={`w-full py-2 px-4 bg-light ${colors.text} text-[11px] font-bold rounded-full border ${colors.border} ${hoverClasses} transition-all shadow-sm`}>
+                    Prendre rendez-vous
+                  </button>
+                  <button className={`text-[11px] font-bold ${colors.text} underline hover:opacity-70 transition-opacity text-center`}>
+                    En savoir plus
+                  </button>
                 </div>
-              </div>
-              <div className="flex flex-col gap-2 mt-2">
-                <button className="w-full py-2 px-4 bg-light text-pink-1 text-[11px] font-bold rounded-full border border-pink-1/20 hover:bg-pink-1 hover:text-light transition-all shadow-sm">
-                  Prendre rendez-vous
-                </button>
-                <button className="text-[11px] font-bold text-pink-1 underline hover:opacity-70 transition-opacity text-center">
-                  En savoir plus
-                </button>
               </div>
             </div>
-          </div>
-        )}
+          );
+        })()}
       </div>
     </div>
   );

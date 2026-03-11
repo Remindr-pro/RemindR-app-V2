@@ -13,7 +13,7 @@ export default function Accessibilite() {
           Déclaration d&apos;accessibilité
         </h1>
         <span className="italic text-xs">
-          Dernière mise à jour : 12/12/2026
+          Dernière mise à jour : 03/01/2026
         </span>
         <p className="mt-4 mb-6">
           Remindr s&apos;engage à rendre son service accessible au plus grand
@@ -31,7 +31,9 @@ export default function Accessibilite() {
         utilisateurs en situation de handicap.
       </p>
 
-      <h2 className="text-2xl font-bold mb-4">Fonctionnalités d&apos;accessibilité</h2>
+      <h2 className="text-2xl font-bold mb-4">
+        Fonctionnalités d&apos;accessibilité
+      </h2>
       <p className="mb-4">
         Nous mettons en œuvre les mesures suivantes pour faciliter l&apos;accès
         à nos contenus :

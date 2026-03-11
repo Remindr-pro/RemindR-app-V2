@@ -66,7 +66,6 @@ export default function DashboardPageContent({
       title: string;
       person: string;
       date: string;
-      source: string;
       color: "green" | "orange" | "purple" | "blue" | "pink";
       learnMoreUrl?: string;
     }[]
@@ -193,7 +192,6 @@ export default function DashboardPageContent({
                 month: "short",
                 year: "numeric",
               }),
-              source: "RemindR",
               color,
               learnMoreUrl: "#",
             };
@@ -240,7 +238,7 @@ export default function DashboardPageContent({
     <div className="w-full mx-auto bg-gray-1 rounded-2xl">
       {isOwnDashboard && (
         <WelcomeProfileModal
-          isOpen={showWelcomeModal}
+          isOpen={showWelcomeModal && !user?.profileCompleted}
           onClose={() => setShowWelcomeModal(false)}
           userName={userName}
           onCompleteProfile={() => {

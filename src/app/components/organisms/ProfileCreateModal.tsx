@@ -8,7 +8,7 @@ import Toggle from "@/app/components/atoms/Toggle";
 import IconHelp from "@/app/components/atoms/icons/Help";
 import IconChevron from "@/app/components/atoms/icons/Chevron";
 import ColorPicker from "@/app/components/molecules/ColorPicker";
-import type { ProfileItem } from "@/app/components/organisms/QuestionnaireProfilesStep";
+import type { ProfileEditFormData } from "@/app/components/organisms/ProfileEditModal";
 import { sileo } from "sileo";
 
 const DEFAULT_AVATAR = "/images/illustrations/avatar.png";
@@ -16,7 +16,6 @@ const DEFAULT_COLOR = "#1aa484";
 
 const LIEN_OPTIONS = [
   { value: "", label: "Lien" },
-  { value: "moi", label: "Moi-même" },
   { value: "conjoint", label: "Conjoint(e)" },
   { value: "enfant", label: "Enfant" },
   { value: "parent", label: "Parent" },
@@ -30,96 +29,41 @@ const GENRE_OPTIONS = [
   { value: "non_precise", label: "Non précisé" },
 ];
 
-export interface ProfileEditFormData {
-  firstName: string;
-  lastName: string;
-  link: string;
-  birthdate: string;
-  genderBirth: string;
-  genderActual: string;
-  color: string;
-  email: string;
-  createLogin: boolean;
-  password: string;
-  confirmPassword: string;
-}
+const initialFormData: ProfileEditFormData = {
+  firstName: "",
+  lastName: "",
+  link: "",
+  birthdate: "",
+  genderBirth: "",
+  genderActual: "",
+  color: DEFAULT_COLOR,
+  email: "",
+  createLogin: false,
+  password: "",
+  confirmPassword: "",
+};
 
-function parseDisplayBirthdate(s: string): string {
-  if (!s || s === "--/--/----") return "";
-  return s;
-}
-
-function profileToFormData(profile: ProfileItem | null): ProfileEditFormData {
-  if (!profile) {
-    return {
-      firstName: "",
-      lastName: "",
-      link: "",
-      birthdate: "",
-      genderBirth: "",
-      genderActual: "",
-      color: DEFAULT_COLOR,
-      email: "",
-      createLogin: false,
-      password: "",
-      confirmPassword: "",
-    };
-  }
-  const [firstName = "", ...lastNameParts] = (profile.name || "").split(" ");
-  const lastName = lastNameParts.join(" ");
-  const genderValue =
-    profile.gender === "Non précisé"
-      ? "non_precise"
-      : profile.gender === "Homme"
-        ? "Homme"
-        : "Femme";
-  return {
-    firstName,
-    lastName,
-    link: profile.role === "Profil principal" ? "moi" : "",
-    birthdate: parseDisplayBirthdate(profile.birthdate),
-    genderBirth: genderValue,
-    genderActual: genderValue,
-    color: profile.color || DEFAULT_COLOR,
-    email: profile.email || "",
-    createLogin:
-      !!profile.link &&
-      profile.link !== "moi" &&
-      !!profile.email &&
-      !profile.email.endsWith("@remindr.local"),
-    password: "",
-    confirmPassword: "",
-  };
-}
-
-export interface ProfileEditModalProps {
+export interface ProfileCreateModalProps {
   isOpen: boolean;
   onClose: () => void;
-  profile: ProfileItem | null;
-  onValidate: (profileId: string, data: ProfileEditFormData) => void;
+  onValidate: (data: ProfileEditFormData) => void;
 }
 
-interface ProfileEditFormContentProps {
-  profile: ProfileItem | null;
-  onValidate: (profileId: string, data: ProfileEditFormData) => void;
-  onClose: () => void;
-}
-
-function ProfileEditFormContent({
-  profile,
+function ProfileCreateFormContent({
   onValidate,
   onClose,
-}: ProfileEditFormContentProps) {
-  const [formData, setFormData] = useState<ProfileEditFormData>(() =>
-    profileToFormData(profile),
-  );
-  const isMainProfile = profile?.role === "Profil principal";
+}: {
+  onValidate: (data: ProfileEditFormData) => void;
+  onClose: () => void;
+}) {
+  const [formData, setFormData] =
+    useState<ProfileEditFormData>(initialFormData);
+
   const canCreateConnectedAccount =
-    !isMainProfile && !!formData.link && formData.link !== "moi";
+    !!formData.link && formData.link !== "moi";
   const selectedLinkLabel =
-    LIEN_OPTIONS.find(
-      (opt) => opt.value === formData.link,
-    )?.label.toLowerCase() || "proche";
+    LIEN_OPTIONS.find((opt) => opt.value === formData.link)?.label.toLowerCase() ||
+    "proche";
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -141,10 +85,8 @@ function ProfileEditFormContent({
         return;
       }
     }
-    if (profile) {
-      onValidate(profile.id, formData);
-      onClose();
-    }
+    onValidate(formData);
+    onClose();
   };
 
   return (
@@ -156,31 +98,12 @@ function ProfileEditFormContent({
       <div className="flex flex-col items-center mb-6 shrink-0">
         <div className="relative h-24 w-24 rounded-full overflow-hidden bg-gray-2 border-2 border-dashed border-gray-3 flex items-center justify-center">
           <Image
-            src={profile?.avatarUrl || DEFAULT_AVATAR}
+            src={DEFAULT_AVATAR}
             alt="Photo de profil"
             fill
             className="object-cover"
           />
         </div>
-        <button
-          type="button"
-          className="mt-2 flex items-center gap-1.5 text-gray-4 text-sm font-inclusive hover:text-dark transition-colors"
-        >
-          <svg
-            width="14"
-            height="14"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
-            <path d="m15 5 4 4" />
-          </svg>
-          Modifier la photo
-        </button>
       </div>
 
       <div className="w-full space-y-4 shrink-0">
@@ -188,7 +111,7 @@ function ProfileEditFormContent({
         <div className="flex flex-col">
           <div className="flex items-center gap-1.5 mb-1">
             <label
-              htmlFor="profile-firstname"
+              htmlFor="profile-create-firstname"
               className="text-dark font-inclusive text-base"
             >
               Prénom
@@ -201,15 +124,12 @@ function ProfileEditFormContent({
             Ex : Prénom, pseudo
           </p>
           <Input
-            id="profile-firstname"
+            id="profile-create-firstname"
             type="text"
             placeholder="Prénom"
             value={formData.firstName}
             onChange={(e) =>
-              setFormData((prev) => ({
-                ...prev,
-                firstName: e.target.value,
-              }))
+              setFormData((prev) => ({ ...prev, firstName: e.target.value }))
             }
           />
         </div>
@@ -218,7 +138,7 @@ function ProfileEditFormContent({
         <div className="flex flex-col">
           <div className="flex items-center gap-1.5 mb-1">
             <label
-              htmlFor="profile-lastname"
+              htmlFor="profile-create-lastname"
               className="text-dark font-inclusive text-base"
             >
               Nom
@@ -228,15 +148,12 @@ function ProfileEditFormContent({
             </span>
           </div>
           <Input
-            id="profile-lastname"
+            id="profile-create-lastname"
             type="text"
             placeholder="Nom"
             value={formData.lastName}
             onChange={(e) =>
-              setFormData((prev) => ({
-                ...prev,
-                lastName: e.target.value,
-              }))
+              setFormData((prev) => ({ ...prev, lastName: e.target.value }))
             }
           />
         </div>
@@ -245,7 +162,7 @@ function ProfileEditFormContent({
         <div className="flex flex-col">
           <div className="flex items-center gap-1.5 mb-1">
             <label
-              htmlFor="profile-link"
+              htmlFor="profile-create-link"
               className="text-dark font-inclusive text-base"
             >
               Lien
@@ -256,7 +173,7 @@ function ProfileEditFormContent({
           </div>
           <div className="relative">
             <select
-              id="profile-link"
+              id="profile-create-link"
               value={formData.link}
               onChange={(e) =>
                 setFormData((prev) => ({
@@ -280,7 +197,6 @@ function ProfileEditFormContent({
                       : "",
                 }))
               }
-              disabled={isMainProfile}
               className="w-full px-4 py-3 rounded-lg border border-gray-3 bg-light text-dark font-inclusive text-base focus:outline-none focus:ring-2 focus:ring-greenMain appearance-none pr-10 cursor-pointer"
             >
               {LIEN_OPTIONS.map((opt) => (
@@ -308,7 +224,7 @@ function ProfileEditFormContent({
                 </span>
               </div>
               <Toggle
-                id="create-connected-account"
+                id="create-connected-account-create"
                 checked={formData.createLogin}
                 onChange={(checked) =>
                   setFormData((prev) => ({
@@ -327,17 +243,17 @@ function ProfileEditFormContent({
                 <div className="flex flex-col">
                   <div className="flex items-center gap-1.5 mb-1">
                     <label
-                      htmlFor="profile-email"
+                      htmlFor="profile-create-email"
                       className="text-dark font-inclusive text-base"
                     >
-                      Email du conjoint
+                      Email du proche
                     </label>
                     <span className="text-gray-4">
                       <IconHelp size={14} />
                     </span>
                   </div>
                   <Input
-                    id="profile-email"
+                    id="profile-create-email"
                     type="email"
                     placeholder="Email"
                     value={formData.email}
@@ -352,14 +268,14 @@ function ProfileEditFormContent({
                 <div className="flex flex-col">
                   <div className="flex items-center gap-1.5 mb-1">
                     <label
-                      htmlFor="profile-password"
+                      htmlFor="profile-create-password"
                       className="text-dark font-inclusive text-base"
                     >
                       Mot de passe
                     </label>
                   </div>
                   <Input
-                    id="profile-password"
+                    id="profile-create-password"
                     type="password"
                     placeholder="Mot de passe"
                     value={formData.password}
@@ -375,14 +291,14 @@ function ProfileEditFormContent({
                 <div className="flex flex-col">
                   <div className="flex items-center gap-1.5 mb-1">
                     <label
-                      htmlFor="profile-confirm-password"
+                      htmlFor="profile-create-confirm-password"
                       className="text-dark font-inclusive text-base"
                     >
                       Confirmer le mot de passe
                     </label>
                   </div>
                   <Input
-                    id="profile-confirm-password"
+                    id="profile-create-confirm-password"
                     type="password"
                     placeholder="Confirmer le mot de passe"
                     value={formData.confirmPassword}
@@ -404,7 +320,7 @@ function ProfileEditFormContent({
         <div className="flex flex-col">
           <div className="flex items-center gap-1.5 mb-1">
             <label
-              htmlFor="profile-birthdate"
+              htmlFor="profile-create-birthdate"
               className="text-dark font-inclusive text-base"
             >
               Date de naissance
@@ -417,14 +333,11 @@ function ProfileEditFormContent({
             Ex : 28/12/1999
           </p>
           <Input
-            id="profile-birthdate"
+            id="profile-create-birthdate"
             type="date"
             value={formData.birthdate}
             onChange={(e) =>
-              setFormData((prev) => ({
-                ...prev,
-                birthdate: e.target.value,
-              }))
+              setFormData((prev) => ({ ...prev, birthdate: e.target.value }))
             }
           />
         </div>
@@ -433,7 +346,7 @@ function ProfileEditFormContent({
         <div className="flex flex-col">
           <div className="flex items-center gap-1.5 mb-1">
             <label
-              htmlFor="profile-gender"
+              htmlFor="profile-create-gender"
               className="text-dark font-inclusive text-base"
             >
               Genre à la naissance
@@ -444,7 +357,7 @@ function ProfileEditFormContent({
           </div>
           <div className="relative">
             <select
-              id="profile-gender"
+              id="profile-create-gender"
               value={formData.genderBirth}
               onChange={(e) =>
                 setFormData((prev) => ({
@@ -470,7 +383,7 @@ function ProfileEditFormContent({
         <div className="flex flex-col">
           <div className="flex items-center gap-1.5 mb-1">
             <label
-              htmlFor="profile-gender-actual"
+              htmlFor="profile-create-gender-actual"
               className="text-dark font-inclusive text-base"
             >
               Genre actuel
@@ -481,7 +394,7 @@ function ProfileEditFormContent({
           </div>
           <div className="relative">
             <select
-              id="profile-gender-actual"
+              id="profile-create-gender-actual"
               value={formData.genderActual}
               onChange={(e) =>
                 setFormData((prev) => ({
@@ -506,9 +419,10 @@ function ProfileEditFormContent({
         {/* Couleur */}
         <div>
           <ColorPicker
-            key={profile?.id ?? "new"}
             defaultColor={formData.color}
-            onChange={(color) => setFormData((prev) => ({ ...prev, color }))}
+            onChange={(color) =>
+              setFormData((prev) => ({ ...prev, color }))
+            }
           />
         </div>
       </div>
@@ -525,12 +439,11 @@ function ProfileEditFormContent({
   );
 }
 
-export default function ProfileEditModal({
+export default function ProfileCreateModal({
   isOpen,
   onClose,
-  profile,
   onValidate,
-}: ProfileEditModalProps) {
+}: ProfileCreateModalProps) {
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -554,13 +467,12 @@ export default function ProfileEditModal({
       onClick={handleBackdropClick}
       role="dialog"
       aria-modal="true"
-      aria-labelledby="profile-edit-modal-title"
+      aria-labelledby="profile-create-modal-title"
     >
       <div
         className="relative w-full max-w-md max-h-[90vh] flex flex-col bg-light rounded-2xl shadow-xl pt-10 pb-8 px-6"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* En-tête : Quitter + X */}
         <div className="absolute top-5 right-5 flex items-center gap-2 z-10">
           <button
             type="button"
@@ -570,28 +482,23 @@ export default function ProfileEditModal({
           >
             <span>Quitter</span>
             <span className="w-9 h-9 rounded-full bg-greenMain text-light flex items-center justify-center hover:bg-greenMain-2 transition-colors shrink-0">
-            <svg
-              width="18"
-              height="18"
-              viewBox="0 0 15 15"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M12.8536 2.85355C13.0488 2.65829 13.0488 2.34171 12.8536 2.14645C12.6583 1.95118 12.3417 1.95118 12.1464 2.14645L7.5 6.79289L2.85355 2.14645C2.65829 1.95118 2.34171 1.95118 2.14645 2.14645C1.95118 2.34171 1.95118 2.65829 2.14645 2.85355L6.79289 7.5L2.14645 12.1464C1.95118 12.3417 1.95118 12.6583 2.14645 12.8536C2.34171 13.0488 2.65829 13.0488 2.85355 12.8536L7.5 8.20711L12.1464 12.8536C12.3417 13.0488 12.6583 13.0488 12.8536 12.8536C13.0488 12.6583 13.0488 12.3417 12.8536 12.1464L8.20711 7.5L12.8536 2.85355Z"
-                fill="currentColor"
-              />
-            </svg>
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 15 15"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12.8536 2.85355C13.0488 2.65829 13.0488 2.34171 12.8536 2.14645C12.6583 1.95118 12.3417 1.95118 12.1464 2.14645L7.5 6.79289L2.85355 2.14645C2.65829 1.95118 2.34171 1.95118 2.14645 2.14645C1.95118 2.34171 1.95118 2.65829 2.14645 2.85355L6.79289 7.5L2.14645 12.1464C1.95118 12.3417 1.95118 12.6583 2.14645 12.8536C2.34171 13.0488 2.65829 13.0488 2.85355 12.8536L7.5 8.20711L12.1464 12.8536C12.3417 13.0488 12.6583 13.0488 12.8536 12.8536C13.0488 12.6583 13.0488 12.3417 12.8536 12.1464L8.20711 7.5L12.8536 2.85355Z"
+                  fill="currentColor"
+                />
+              </svg>
             </span>
           </button>
         </div>
 
-        <ProfileEditFormContent
-          key={profile?.id ?? "new"}
-          profile={profile}
-          onValidate={onValidate}
-          onClose={onClose}
-        />
+        <ProfileCreateFormContent onValidate={onValidate} onClose={onClose} />
       </div>
     </div>
   );

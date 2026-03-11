@@ -13,17 +13,19 @@ export default function ConditionsGeneralesUtilisation() {
           Conditions générales d&apos;utilisation (CGU)
         </h1>
         <span className="italic text-xs">
-          Dernière mise à jour : 12/12/2026
+          Dernière mise à jour : 03/01/2026
         </span>
         <p className="mt-4 mb-6">
           Les présentes Conditions générales d&apos;utilisation (CGU) régissent
-          l&apos;accès et l&apos;utilisation du site et des services Remindr.
-          En accédant au site ou en utilisant nos services, vous acceptez
+          l&apos;accès et l&apos;utilisation du site et des services Remindr. En
+          accédant au site ou en utilisant nos services, vous acceptez
           d&apos;être lié par ces conditions.
         </p>
       </div>
 
-      <h2 className="text-2xl font-bold mb-4">1. Objet et champ d&apos;application</h2>
+      <h2 className="text-2xl font-bold mb-4">
+        1. Objet et champ d&apos;application
+      </h2>
       <p className="mb-4">
         Les présentes CGU ont pour objet de définir les modalités et conditions
         d&apos;utilisation des services proposés par Remindr, ainsi que les
@@ -40,28 +42,32 @@ export default function ConditionsGeneralesUtilisation() {
 
       <h2 className="text-2xl font-bold mb-4">3. Description des services</h2>
       <p className="mb-4">
-        Remindr propose une plateforme de suivi et de prévention santé permettant
-        aux utilisateurs de gérer leurs rappels de santé, ceux de leurs proches
-        et d&apos;accéder à des contenus de prévention personnalisés. Les
-        fonctionnalités détaillées sont décrites sur le site.
+        Remindr propose une plateforme de suivi et de prévention santé
+        permettant aux utilisateurs de gérer leurs rappels de santé, ceux de
+        leurs proches et d&apos;accéder à des contenus de prévention
+        personnalisés. Les fonctionnalités détaillées sont décrites sur le site.
       </p>
 
-      <h2 className="text-2xl font-bold mb-4">4. Inscription et compte utilisateur</h2>
+      <h2 className="text-2xl font-bold mb-4">
+        4. Inscription et compte utilisateur
+      </h2>
       <p className="mb-4">
-        L&apos;utilisation de certains services peut nécessiter la création d&apos;un
-        compte. L&apos;utilisateur s&apos;engage à fournir des informations
-        exactes et à maintenir la confidentialité de ses identifiants. Remindr
-        se réserve le droit de suspendre ou résilier un compte en cas de
-        manquement aux présentes CGU.
+        L&apos;utilisation de certains services peut nécessiter la création
+        d&apos;un compte. L&apos;utilisateur s&apos;engage à fournir des
+        informations exactes et à maintenir la confidentialité de ses
+        identifiants. Remindr se réserve le droit de suspendre ou résilier un
+        compte en cas de manquement aux présentes CGU.
       </p>
 
-      <h2 className="text-2xl font-bold mb-4">5. Obligations de l&apos;utilisateur</h2>
+      <h2 className="text-2xl font-bold mb-4">
+        5. Obligations de l&apos;utilisateur
+      </h2>
       <p className="mb-4">
         L&apos;utilisateur s&apos;engage à utiliser le site et les services de
-        manière conforme aux lois en vigueur, aux présentes CGU et aux droits des
-        tiers. Il est notamment interdit d&apos;utiliser les services à des fins
-        illicites, de porter atteinte au fonctionnement du site ou de tenter
-        d&apos;accéder de manière non autorisée aux données d&apos;autres
+        manière conforme aux lois en vigueur, aux présentes CGU et aux droits
+        des tiers. Il est notamment interdit d&apos;utiliser les services à des
+        fins illicites, de porter atteinte au fonctionnement du site ou de
+        tenter d&apos;accéder de manière non autorisée aux données d&apos;autres
         utilisateurs.
       </p>
 
@@ -72,7 +78,9 @@ export default function ConditionsGeneralesUtilisation() {
         reproduction ou exploitation non autorisée est prohibée.
       </p>
 
-      <h2 className="text-2xl font-bold mb-4">7. Limitation de responsabilité</h2>
+      <h2 className="text-2xl font-bold mb-4">
+        7. Limitation de responsabilité
+      </h2>
       <p className="mb-4">
         Remindr met en œuvre tous les moyens pour assurer la disponibilité et la
         qualité de ses services. Toutefois, Remindr ne peut être tenu
@@ -89,7 +97,9 @@ export default function ConditionsGeneralesUtilisation() {
         acceptation des nouvelles conditions.
       </p>
 
-      <h2 className="text-2xl font-bold mb-4">9. Droit applicable et litiges</h2>
+      <h2 className="text-2xl font-bold mb-4">
+        9. Droit applicable et litiges
+      </h2>
       <p className="mb-6">
         Les présentes CGU sont régies par le droit français. Tout litige sera
         soumis aux tribunaux compétents français.
@@ -102,11 +112,17 @@ export default function ConditionsGeneralesUtilisation() {
           contact@remind-r.com
         </Link>
         . Vous pouvez également consulter nos{" "}
-        <Link href="/mentions-legales" className="text-greenMain hover:underline">
+        <Link
+          href="/mentions-legales"
+          className="text-greenMain hover:underline"
+        >
           mentions légales
         </Link>{" "}
         et notre{" "}
-        <Link href="/politique-de-confidentialite" className="text-greenMain hover:underline">
+        <Link
+          href="/politique-de-confidentialite"
+          className="text-greenMain hover:underline"
+        >
           politique de confidentialité
         </Link>
         .

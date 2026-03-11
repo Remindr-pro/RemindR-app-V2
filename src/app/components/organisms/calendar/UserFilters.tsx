@@ -1,6 +1,6 @@
 "use client";
 
-import { CalendarUser } from "@/app/types/calendar";
+import type { CalendarUser, UserColor } from "@/app/types/calendar";
 import Badge from "@/app/components/atoms/Badge";
 
 interface UserFiltersProps {
@@ -20,7 +20,7 @@ const UserFilters = ({
     <div className="flex items-center justify-center lg:justify-start gap-4 flex-wrap">
       {users.map((user) => {
         const isSelected = selectedUsers.includes(user.id);
-        const color = user.color as "purple" | "blue" | "pink" | "orange";
+        const color = user.color as UserColor;
         const variant = isSelected ? "fill" : "outline";
 
         return (

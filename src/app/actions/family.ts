@@ -60,6 +60,7 @@ interface MeApiResponse {
 
 export interface FamilyMemberViewModel {
   id: string;
+  firstName: string;
   name: string;
   role: string;
   gender: "Femme" | "Homme" | "Non renseigné";
@@ -263,6 +264,7 @@ export async function getMyFamilyMembers(): Promise<FamilyMemberViewModel[]> {
 
     return {
       id: member.id,
+      firstName: member.firstName,
       name: `${member.firstName} ${member.lastName}`,
       role: mapRole(member.role, isCurrentUser),
       gender: mapGender(member.genderActual ?? member.genderBirth),

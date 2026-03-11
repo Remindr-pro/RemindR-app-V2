@@ -4,9 +4,23 @@ import { useState, InputHTMLAttributes } from "react";
 import IconEye from "@/app/components/atoms/icons/Eye";
 import IconEyeOff from "@/app/components/atoms/icons/EyeOff";
 
-interface InputProps
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, "type"> {
-  type?: "text" | "email" | "password" | "tel" | "url" | "number";
+const DATE_PLACEHOLDER = "--/--/----";
+
+/* Formats entered digits as DD/MM/YYYY (max 8) */
+function formatDateValue(value: string): string {
+  const digits = value.replace(/\D/g, "").slice(0, 8);
+
+  if (digits.length <= 2) return digits;
+  if (digits.length <= 4) return `${digits.slice(0, 2)}/${digits.slice(2)}`;
+
+  return `${digits.slice(0, 2)}/${digits.slice(2, 4)}/${digits.slice(4)}`;
+}
+
+interface InputProps extends Omit<
+  InputHTMLAttributes<HTMLInputElement>,
+  "type"
+> {
+  type?: "text" | "email" | "password" | "tel" | "url" | "number" | "date";
   label?: string;
   hintText?: string;
   placeholder?: string;
@@ -22,12 +36,34 @@ export default function Input({
   showPasswordToggle = false,
   className = "",
   disabled,
+  onChange,
   ...props
 }: InputProps) {
   const [showPassword, setShowPassword] = useState(false);
 
-  const inputType = type === "password" && showPassword ? "text" : type;
+  const isDateType = type === "date";
+  const inputType =
+    type === "password" && showPassword ? "text" : isDateType ? "tel" : type;
   const shouldShowToggle = type === "password" && showPasswordToggle;
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (isDateType) {
+      const formatted = formatDateValue(e.target.value);
+      e = { ...e, target: { ...e.target, value: formatted } };
+    }
+
+    onChange?.(e);
+  };
+
+  const dateInputProps = isDateType
+    ? {
+        inputMode: "numeric" as const,
+        autoComplete: "bday" as const,
+        placeholder: placeholder ?? DATE_PLACEHOLDER,
+        maxLength: 10,
+        onChange: handleChange,
+      }
+    : { onChange };
 
   return (
     <div className={`w-full ${className}`}>
@@ -58,6 +94,7 @@ export default function Input({
             ${disabled ? "opacity-60 cursor-not-allowed bg-gray-2" : ""}
           `}
           {...props}
+          {...dateInputProps}
         />
         {shouldShowToggle && (
           <button

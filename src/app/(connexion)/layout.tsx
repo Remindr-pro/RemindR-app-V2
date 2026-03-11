@@ -1,19 +1,26 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ReactNode } from "react";
 
 export default function ConnexionLayout({ children }: { children: ReactNode }) {
-  return (
-    <div className="min-h-screen flex flex-col justify-center p-4 bg-gray-1 text-dark relative">
-      {/* Background pattern */}
-      <div
-        className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat opacity-30"
-        style={{
-          backgroundImage: "url('/images/bg/bg-with-cross.png')",
-        }}
-      />
+  const pathname = usePathname();
+  const isConnexionPage = pathname?.startsWith("/connexion");
 
+  return (
+    <div
+      className="min-h-screen flex flex-col justify-center p-4 text-dark relative"
+      style={{
+        backgroundColor: "var(--color-gray-1)",
+        ...(isConnexionPage && {
+          backgroundImage: "url('/images/bg/bg-with-cross-fullwidth.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }),
+      }}
+    >
       <main className="flex items-center justify-center pb-32 sm:pb-24 md:pb-20 relative z-10">
         {children}
       </main>
