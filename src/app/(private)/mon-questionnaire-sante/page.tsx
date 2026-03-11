@@ -414,7 +414,7 @@ export default function MonQuestionnaireSanteProfilsPage() {
         name: "Nouveau profil",
         role: "Profil à compléter",
         birthdate: "--/--/----",
-        gender: "Femme",
+        gender: "Non précisé",
         color: "#1aa484",
         link: "",
         email: "",
