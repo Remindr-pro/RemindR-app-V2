@@ -67,16 +67,22 @@ function profileToFormData(profile: ProfileItem | null): ProfileEditFormData {
   }
   const [firstName = "", ...lastNameParts] = (profile.name || "").split(" ");
   const lastName = lastNameParts.join(" ");
-  const genderValue =
-    profile.gender === "Non précisé"
+  const genderValue = !profile.gender
+    ? ""
+    : profile.gender === "Non précisé"
       ? "non_precise"
       : profile.gender === "Homme"
         ? "Homme"
-        : "Femme";
+        : profile.gender === "Femme"
+          ? "Femme"
+          : "";
   return {
     firstName,
     lastName,
-    link: profile.role === "Profil principal" ? "moi" : "",
+    link:
+      profile.role === "Profil principal"
+        ? "moi"
+        : (profile.link || ""),
     birthdate: parseDisplayBirthdate(profile.birthdate),
     genderBirth: genderValue,
     genderActual: genderValue,
