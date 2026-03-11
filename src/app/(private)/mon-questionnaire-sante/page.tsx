@@ -72,13 +72,35 @@ function isUuid(value: string): boolean {
   );
 }
 
+const PROFILE_LINK_LABELS: Record<string, string> = {
+  moi: "Moi-même",
+  conjoint: "Conjoint(e)",
+  enfant: "Enfant",
+  parent: "Parent",
+  autre: "Autre",
+};
+
+function mapProfileLinkToLabel(profileLink: string | null | undefined): string | null {
+  if (!profileLink || typeof profileLink !== "string") return null;
+  const key = profileLink.trim().toLowerCase();
+  return PROFILE_LINK_LABELS[key] ?? null;
+}
+
+function mapRoleToProfileLabel(role: string): string {
+  if (role === "family_member") return "Proche";
+  if (role === "professional") return "Professionnel";
+  if (role === "admin") return "Administrateur";
+  return "Proche";
+}
+
 function userToProfileItem(user: User): ProfileItem {
   return {
     id: user.id,
     name:
       [user.firstName, user.lastName].filter(Boolean).join(" ") ||
       "Profil principal",
-    role: "Profil principal",
+    role:
+      mapProfileLinkToLabel(user.profileLink ?? "moi") ?? "Profil principal",
     birthdate: formatBirthdate(user.dateOfBirth ?? undefined),
     gender: mapGenderToProfile(
       user.genderActual ?? user.genderBirth ?? undefined,
@@ -90,13 +112,6 @@ function userToProfileItem(user: User): ProfileItem {
   };
 }
 
-function mapRoleToProfileLabel(role: string): string {
-  if (role === "family_member") return "Proche";
-  if (role === "professional") return "Professionnel";
-  if (role === "admin") return "Administrateur";
-  return "Proche";
-}
-
 function familyUserToProfileItem(
   member: QuestionnaireFamilyMember,
 ): ProfileItem {
@@ -104,7 +119,9 @@ function familyUserToProfileItem(
     id: member.id,
     name:
       [member.firstName, member.lastName].filter(Boolean).join(" ") || "Proche",
-    role: mapRoleToProfileLabel(member.role),
+    role:
+      mapProfileLinkToLabel(member.profileLink) ??
+      mapRoleToProfileLabel(member.role),
     birthdate: formatBirthdate(member.dateOfBirth),
     gender: mapGenderToProfile(member.genderActual ?? member.genderBirth),
     avatarUrl: member.profilePictureUrl ?? undefined,
@@ -279,7 +296,9 @@ export default function MonQuestionnaireSanteProfilsPage() {
                   ? {
                       ...p,
                       id: updatedId,
-                      role: "Proche",
+                      role:
+                        mapProfileLinkToLabel(data.link) ??
+                        mapRoleToProfileLabel(p.role),
                       name: [data.firstName, data.lastName]
                         .filter(Boolean)
                         .join(" "),
@@ -302,7 +321,9 @@ export default function MonQuestionnaireSanteProfilsPage() {
                   ? {
                       ...p,
                       id: createdId,
-                      role: "Proche",
+                      role:
+                        mapProfileLinkToLabel(data.link) ??
+                        mapRoleToProfileLabel(p.role),
                       name: [data.firstName, data.lastName]
                         .filter(Boolean)
                         .join(" "),

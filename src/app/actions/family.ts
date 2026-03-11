@@ -54,6 +54,7 @@ interface MeApiResponse {
     genderBirth?: string | null;
     genderActual?: string | null;
     profilePictureUrl?: string | null;
+    profileLink?: string | null;
     profileColor?: string | null;
   } | null;
 }
@@ -176,6 +177,22 @@ function formatBirthdate(
   })}`;
 }
 
+const PROFILE_LINK_LABELS: Record<string, string> = {
+  moi: "Moi-même",
+  conjoint: "Conjoint(e)",
+  enfant: "Enfant",
+  parent: "Parent",
+  autre: "Autre",
+};
+
+function mapProfileLinkToLabel(
+  profileLink: string | null | undefined,
+): string | null {
+  if (!profileLink || typeof profileLink !== "string") return null;
+  const key = profileLink.trim().toLowerCase();
+  return PROFILE_LINK_LABELS[key] ?? null;
+}
+
 function mapRole(role: string, isCurrentUser: boolean): string {
   if (isCurrentUser) return "Profil principal";
 
@@ -242,6 +259,7 @@ export async function getMyFamilyMembers(): Promise<FamilyMemberViewModel[]> {
         genderBirth: mePayload.data.genderBirth,
         genderActual: mePayload.data.genderActual,
         profileColor: mePayload.data.profileColor,
+        profileLink: mePayload.data.profileLink ?? "moi",
       },
     ];
   }
@@ -266,7 +284,9 @@ export async function getMyFamilyMembers(): Promise<FamilyMemberViewModel[]> {
       id: member.id,
       firstName: member.firstName,
       name: `${member.firstName} ${member.lastName}`,
-      role: mapRole(member.role, isCurrentUser),
+      role:
+        mapProfileLinkToLabel(member.profileLink) ??
+        mapRole(member.role, isCurrentUser),
       gender: mapGender(member.genderActual ?? member.genderBirth),
       birthdate: formatBirthdate(
         member.dateOfBirth,

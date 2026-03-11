@@ -76,7 +76,10 @@ function profileToFormData(profile: ProfileItem | null): ProfileEditFormData {
   return {
     firstName,
     lastName,
-    link: profile.role === "Profil principal" ? "moi" : "",
+    link:
+      profile.role === "Profil principal"
+        ? "moi"
+        : (profile.link || ""),
     birthdate: parseDisplayBirthdate(profile.birthdate),
     genderBirth: genderValue,
     genderActual: genderValue,
