@@ -320,6 +320,7 @@ export default function QuestionnaireMesuresPage() {
         profiles={profiles}
         measuresByProfileId={measuresByProfileId}
         onCompleteProfile={handleOpenProfileModal}
+        loading={profiles.length === 0}
       />
 
       <MeasurementModal

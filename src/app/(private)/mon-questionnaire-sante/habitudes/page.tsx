@@ -211,6 +211,7 @@ export default function QuestionnaireHabitudesPage() {
         profiles={profiles}
         habitsByProfileId={habitsByProfileId}
         onCompleteProfile={handleOpenProfileModal}
+        loading={profiles.length === 0}
       />
 
       <HabitsModal

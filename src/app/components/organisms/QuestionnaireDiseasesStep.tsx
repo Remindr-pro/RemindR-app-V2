@@ -1,6 +1,8 @@
 "use client";
 
-import DiseaseProfileCard from "@/app/components/molecules/DiseaseProfileCard";
+import DiseaseProfileCard, {
+  DiseaseProfileCardSkeleton,
+} from "@/app/components/molecules/DiseaseProfileCard";
 
 export interface DiseaseProfileItem {
   id: string;
@@ -19,13 +21,27 @@ interface QuestionnaireDiseasesStepProps {
   profiles: DiseaseProfileItem[];
   diseasesByProfileId: Record<string, ProfileDiseaseData>;
   onCompleteProfile: (id: string) => void;
+  loading?: boolean;
 }
 
 export default function QuestionnaireDiseasesStep({
   profiles,
   diseasesByProfileId,
   onCompleteProfile,
+  loading = false,
 }: QuestionnaireDiseasesStepProps) {
+  if (loading) {
+    return (
+      <div className="flex flex-col w-full">
+        <div className="flex flex-col md:flex-row md:flex-wrap items-center md:items-start justify-center gap-4 md:gap-6">
+          {[1, 2, 3].map((i) => (
+            <DiseaseProfileCardSkeleton key={i} />
+          ))}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col w-full">
       <div className="flex flex-col md:flex-row md:flex-wrap items-center md:items-start justify-center gap-4 md:gap-6">

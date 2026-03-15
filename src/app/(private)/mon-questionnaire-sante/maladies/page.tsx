@@ -264,6 +264,7 @@ export default function QuestionnaireMaladiesPage() {
         profiles={profiles}
         diseasesByProfileId={diseasesByProfileId}
         onCompleteProfile={handleOpenProfileModal}
+        loading={profiles.length === 0}
       />
 
       <DiseaseModal

@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Button from "@/app/components/atoms/Button";
+import Skeleton from "@/app/components/atoms/Skeleton";
 
 interface DiseaseProfileCardProps {
   name: string;
@@ -72,6 +73,25 @@ export default function DiseaseProfileCard({
         >
           Compléter
         </Button>
+      </div>
+    </div>
+  );
+}
+
+const diseaseCardBaseClasses =
+  "bg-light rounded-2xl p-6 border-2 border-gray-2 shadow-sm flex flex-col relative min-w-[240px] w-[240px]";
+
+export function DiseaseProfileCardSkeleton() {
+  return (
+    <div className={diseaseCardBaseClasses}>
+      <Skeleton className="h-24 w-24 rounded-full mx-auto mb-4" />
+      <div className="flex flex-col flex-1 text-center">
+        <Skeleton className="h-6 w-28 mx-auto mb-1" />
+        <div className="flex flex-col items-start gap-1 mb-4">
+          <Skeleton className="h-4 w-20 mb-1" />
+          <Skeleton className="h-4 w-16" />
+        </div>
+        <Skeleton className="h-10 w-full rounded-md mt-auto" />
       </div>
     </div>
   );

@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Button from "@/app/components/atoms/Button";
+import Skeleton from "@/app/components/atoms/Skeleton";
 import IconSport from "@/app/components/atoms/icons/Sport";
 import IconFood from "@/app/components/atoms/icons/Food";
 import IconAddiction from "@/app/components/atoms/icons/Addiction";
@@ -92,6 +93,26 @@ export default function HabitsProfileCard({
         >
           Compléter
         </Button>
+      </div>
+    </div>
+  );
+}
+
+const habitsCardBaseClasses =
+  "bg-light rounded-2xl p-6 border-2 border-gray-2 shadow-sm flex flex-col relative min-w-[240px] w-[240px]";
+
+export function HabitsProfileCardSkeleton() {
+  return (
+    <div className={habitsCardBaseClasses}>
+      <Skeleton className="h-24 w-24 rounded-full mx-auto mb-4" />
+      <div className="flex flex-col flex-1 text-center">
+        <Skeleton className="h-6 w-32 mx-auto mb-1" />
+        <div className="flex items-start justify-center gap-4 mb-4">
+          {[1, 2, 3].map((i) => (
+            <Skeleton key={i} className="h-6 w-6 rounded mx-auto" />
+          ))}
+        </div>
+        <Skeleton className="h-10 w-full rounded-md mt-auto" />
       </div>
     </div>
   );

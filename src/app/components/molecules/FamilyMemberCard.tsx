@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import IconPeopleLink from "@/app/components/atoms/icons/PeopleLink";
 import ProgressBar from "@/app/components/atoms/ProgressBar";
+import Skeleton from "@/app/components/atoms/Skeleton";
 import { BASE_PATH, PROFILE_ID_SEARCH_PARAM } from "@/app/(private)/mon-questionnaire-sante/constants";
 
 interface FamilyMemberCardProps {
@@ -100,5 +101,28 @@ export default function FamilyMemberCard({
         </div>
       </div>
     </Link>
+  );
+}
+
+export function FamilyMemberCardSkeleton() {
+  return (
+    <div className="bg-light rounded-2xl p-6 border-2 border-gray-2 shadow-sm flex flex-col relative">
+      <Skeleton className="h-24 w-24 rounded-full mb-4" />
+      <div className="flex flex-col flex-1">
+        <div className="mb-4 text-left flex-1">
+          <Skeleton className="h-6 w-32 mb-1" />
+          <Skeleton className="h-4 w-24 mb-2" />
+          <div className="flex flex-col gap-1">
+            <Skeleton className="h-4 w-20" />
+            <Skeleton className="h-4 w-28" />
+            <Skeleton className="h-4 w-36 min-h-5" />
+          </div>
+        </div>
+        <div className="mt-auto">
+          <div className="border-t border-gray-2 mb-4" />
+          <Skeleton className="h-3 w-full rounded-full" />
+        </div>
+      </div>
+    </div>
   );
 }

@@ -1,6 +1,8 @@
 "use client";
 
-import HabitsProfileCard from "@/app/components/molecules/HabitsProfileCard";
+import HabitsProfileCard, {
+  HabitsProfileCardSkeleton,
+} from "@/app/components/molecules/HabitsProfileCard";
 
 export interface HabitsProfileItem {
   id: string;
@@ -19,13 +21,27 @@ interface QuestionnaireHabitudesStepProps {
   profiles: HabitsProfileItem[];
   habitsByProfileId: Record<string, ProfileHabitsData>;
   onCompleteProfile: (id: string) => void;
+  loading?: boolean;
 }
 
 export default function QuestionnaireHabitudesStep({
   profiles,
   habitsByProfileId,
   onCompleteProfile,
+  loading = false,
 }: QuestionnaireHabitudesStepProps) {
+  if (loading) {
+    return (
+      <div className="flex flex-col w-full">
+        <div className="flex flex-col md:flex-row md:flex-wrap items-center md:items-start justify-center gap-4 md:gap-6">
+          {[1, 2, 3].map((i) => (
+            <HabitsProfileCardSkeleton key={i} />
+          ))}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col w-full">
       <div className="flex flex-col md:flex-row md:flex-wrap items-center md:items-start justify-center gap-4 md:gap-6">

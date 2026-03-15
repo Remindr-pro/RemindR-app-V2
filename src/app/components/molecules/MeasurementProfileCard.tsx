@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Button from "@/app/components/atoms/Button";
+import Skeleton from "@/app/components/atoms/Skeleton";
 import IconSize from "@/app/components/atoms/icons/Size";
 import IconWeight from "@/app/components/atoms/icons/Weight";
 
@@ -88,6 +89,31 @@ export default function MeasurementProfileCard({
         >
           Compléter
         </Button>
+      </div>
+    </div>
+  );
+}
+
+const cardBaseClasses =
+  "bg-light rounded-2xl p-6 border-2 border-gray-2 shadow-sm flex flex-col relative min-w-[240px] w-[240px]";
+
+export function MeasurementProfileCardSkeleton() {
+  return (
+    <div className={cardBaseClasses}>
+      <Skeleton className="h-24 w-24 rounded-full mx-auto mb-4" />
+      <div className="flex flex-col flex-1 text-center">
+        <Skeleton className="h-6 w-32 mx-auto mb-1" />
+        <div className="flex items-start justify-center gap-6 mb-4">
+          <div className="flex flex-col items-center">
+            <Skeleton className="h-6 w-6 rounded mx-auto mb-1" />
+            <Skeleton className="h-4 w-14" />
+          </div>
+          <div className="flex flex-col items-center">
+            <Skeleton className="h-6 w-6 rounded mx-auto mb-1" />
+            <Skeleton className="h-4 w-12" />
+          </div>
+        </div>
+        <Skeleton className="h-10 w-full rounded-md mt-auto" />
       </div>
     </div>
   );

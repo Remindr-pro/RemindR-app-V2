@@ -1,6 +1,8 @@
 "use client";
 
-import MeasurementProfileCard from "@/app/components/molecules/MeasurementProfileCard";
+import MeasurementProfileCard, {
+  MeasurementProfileCardSkeleton,
+} from "@/app/components/molecules/MeasurementProfileCard";
 
 export interface MeasureProfileItem {
   id: string;
@@ -20,13 +22,27 @@ interface QuestionnaireMeasuresStepProps {
   profiles: MeasureProfileItem[];
   measuresByProfileId: Record<string, ProfileMeasureData>;
   onCompleteProfile: (id: string) => void;
+  loading?: boolean;
 }
 
 export default function QuestionnaireMeasuresStep({
   profiles,
   measuresByProfileId,
   onCompleteProfile,
+  loading = false,
 }: QuestionnaireMeasuresStepProps) {
+  if (loading) {
+    return (
+      <div className="flex flex-col w-full">
+        <div className="flex flex-col md:flex-row md:flex-wrap items-center md:items-start justify-center gap-4 md:gap-6">
+          {[1, 2, 3].map((i) => (
+            <MeasurementProfileCardSkeleton key={i} />
+          ))}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col w-full">
       <div className="flex flex-col md:flex-row md:flex-wrap items-center md:items-start justify-center gap-4 md:gap-6">
