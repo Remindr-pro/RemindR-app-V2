@@ -2,7 +2,9 @@ import { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Remindr - Aide et Contact",
+  title: "Aide et Contact | Remindr",
+  description:
+    "Une question, un problème technique ou besoin d'accompagnement ? Contactez l'équipe Remindr.",
 };
 
 export default function AideContact() {

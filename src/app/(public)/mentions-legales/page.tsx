@@ -2,7 +2,9 @@ import { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Remindr - Mentions légales",
+  title: "Mentions légales | Remindr",
+  description:
+    "Mentions légales du site Remindr : éditeur, hébergeur, conditions d'utilisation et informations juridiques.",
 };
 
 export default function MentionsLegales() {

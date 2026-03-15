@@ -2,7 +2,9 @@ import { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Remindr - Gestion des cookies",
+  title: "Gestion des cookies | Remindr",
+  description:
+    "Informations sur l'utilisation des cookies sur Remindr et les moyens de les gérer.",
 };
 
 export default function GestionDesCookies() {

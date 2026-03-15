@@ -1,5 +1,13 @@
+import type { Metadata } from "next";
 import Logo from "@/app/components/atoms/Logo";
 import UserTypeCard from "@/app/components/molecules/UserTypeCard";
+
+// Titre complet ici : le template du layout racine ne s'applique pas aux pages du même segment (comportement Next.js)
+export const metadata: Metadata = {
+  title: "Accueil | Remindr",
+  description:
+    "Simplifions la santé du quotidien, pour tous. Choisissez votre espace : particuliers ou professionnels de santé.",
+};
 
 export default function Home() {
   return (

@@ -7,7 +7,9 @@ interface IProps {
 }
 
 export const metadata: Metadata = {
-  title: "Remindr - Dashboard",
+  title: "Tableau de bord | Remindr",
+  description:
+    "Votre tableau de bord Remindr : rappels santé, calendrier, proches et recommandations personnalisées.",
 };
 
 const DashboardLayout = ({ children }: IProps) => {

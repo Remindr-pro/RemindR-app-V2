@@ -1,7 +1,14 @@
+import type { Metadata } from "next";
 import ArticlePin from "@/app/components/molecules/ArticlePin";
 import ArticlesCarousel from "@/app/components/organisms/ArticlesCarousel";
 import ArticlesGrid from "@/app/components/organisms/ArticlesGrid";
 import { ArticleCardProps } from "@/app/components/molecules/ArticleCard";
+
+export const metadata: Metadata = {
+  title: "Magazine Santé | Remindr",
+  description:
+    "Conseils prévention, bien-être et santé pour vous et vos proches. Articles et dossiers par les équipes Remindr.",
+};
 
 const articles: ArticleCardProps[] = [
   {

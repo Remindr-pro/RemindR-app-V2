@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import {
@@ -17,6 +18,24 @@ export async function generateStaticParams() {
     category: item.category,
     slug: item.slug,
   }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ category: string; slug: string }>;
+}): Promise<Metadata> {
+  const { category, slug } = await params;
+  const article = getArticleBySlug(category, slug);
+  if (!article)
+    return {
+      title: "Article | Remindr",
+      description: "Article du magazine Remindr.",
+    };
+  return {
+    title: `${article.title} | Remindr`,
+    description: article.description || undefined,
+  };
 }
 
 export default async function ArticlePage({

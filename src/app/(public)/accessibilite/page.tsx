@@ -2,7 +2,9 @@ import { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Remindr - Accessibilité",
+  title: "Accessibilité | Remindr",
+  description:
+    "Déclaration d'accessibilité de Remindr : engagement pour un service accessible au plus grand nombre.",
 };
 
 export default function Accessibilite() {

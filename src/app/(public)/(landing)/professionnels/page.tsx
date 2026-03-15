@@ -1,8 +1,15 @@
+import type { Metadata } from "next";
 import Button from "@/app/components/atoms/Button";
 import Companies from "@/app/components/organisms/Companies";
 import FeatureCard from "@/app/components/molecules/FeatureCard";
 import StepCard from "@/app/components/molecules/StepCard";
 import Image from "next/image";
+
+export const metadata: Metadata = {
+  title: "Espace Professionnels | Remindr",
+  description:
+    "La prévention familiale réinventée pour vos adhérents : rappels automatisés, dashboard B2B et communication ciblée. Demandez une démo.",
+};
 
 export default function ProfessionnelsPage() {
   const features = [

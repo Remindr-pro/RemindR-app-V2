@@ -16,8 +16,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "RemindR - Votre assistant de rappels intelligent",
-  description: "RemindR - Votre assistant de rappels intelligent",
+  title: "Remindr - Votre assistant de rappels santé intelligent",
+  description:
+    "Remindr vous aide à ne rien oublier : rappels de vaccins, examens, dépistages et prévention. Pour vous et vos proches.",
 };
 
 export default function RootLayout({

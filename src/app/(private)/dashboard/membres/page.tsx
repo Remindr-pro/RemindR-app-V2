@@ -1,6 +1,13 @@
+import type { Metadata } from "next";
 import FamilyMemberCard from "@/app/components/molecules/FamilyMemberCard";
 import { getMyFamilyMembers } from "@/app/actions/family";
 import type { FamilyMemberViewModel } from "@/app/actions/family";
+
+export const metadata: Metadata = {
+  title: "Mes proches | Remindr",
+  description:
+    "Gérez les profils santé de vos proches et suivez leurs rappels depuis votre tableau de bord Remindr.",
+};
 
 export default async function FamilyPage() {
   let errorMessage: string | null = null;

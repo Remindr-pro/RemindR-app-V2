@@ -2,7 +2,9 @@ import { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Remindr - Conditions générales d'utilisation",
+  title: "Conditions générales d'utilisation | Remindr",
+  description:
+    "Conditions générales d'utilisation (CGU) du site et des services Remindr.",
 };
 
 export default function ConditionsGeneralesUtilisation() {

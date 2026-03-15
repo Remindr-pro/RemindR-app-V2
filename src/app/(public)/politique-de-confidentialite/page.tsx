@@ -2,7 +2,9 @@ import { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Remindr - Politique de confidentialité",
+  title: "Politique de confidentialité | Remindr",
+  description:
+    "Comment Remindr collecte, utilise et protège vos données personnelles. Vos droits et nos engagements.",
 };
 
 export default function Confidentiality() {

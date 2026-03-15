@@ -1,5 +1,12 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Button from "@/app/components/atoms/Button";
+
+export const metadata: Metadata = {
+  title: "Mon contrat | Remindr",
+  description:
+    "Consultez les informations de votre contrat de prévoyance santé et les options associées.",
+};
 
 export default function ContratPage() {
   return (
