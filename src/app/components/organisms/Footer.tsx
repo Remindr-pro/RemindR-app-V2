@@ -16,7 +16,7 @@ export default function Footer() {
   return (
     <footer className="w-full bg-dark text-light">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-12 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           {/* Logo */}
           <div className="lg:col-span-1">
             <Logo size={50} />
@@ -74,45 +74,6 @@ export default function Footer() {
                   style={{ fontFamily: "var(--font-inclusive)" }}
                 >
                   Aide et Contact
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Notre entreprise */}
-          <div>
-            <h3
-              className="font-semibold mb-6 text-light text-base"
-              style={{ fontFamily: "var(--font-inclusive)" }}
-            >
-              Notre entreprise
-            </h3>
-            <ul className="space-y-3">
-              <li>
-                <Link
-                  href="/mission"
-                  className="text-gray-2 hover:text-light transition-colors text-sm block"
-                  style={{ fontFamily: "var(--font-inclusive)" }}
-                >
-                  Notre mission
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/presse"
-                  className="text-gray-2 hover:text-light transition-colors text-sm block"
-                  style={{ fontFamily: "var(--font-inclusive)" }}
-                >
-                  Espace presse
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/carrieres"
-                  className="text-gray-2 hover:text-light transition-colors text-sm block"
-                  style={{ fontFamily: "var(--font-inclusive)" }}
-                >
-                  Rejoindre l&apos;aventure
                 </Link>
               </li>
             </ul>
@@ -340,7 +301,7 @@ export default function Footer() {
               <IconLinkedIn size={24} className="w-6 h-6" />
             </Link>
             <Link
-              href="/rss"
+              href="/particuliers/magazine"
               className="text-light hover:text-greenMain transition-colors"
               aria-label="RSS"
             >
